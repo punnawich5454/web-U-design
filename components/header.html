@@ -16,15 +16,21 @@
         }
 
         header {
-            background-color: white;
+            background-color: rgb(255, 255, 255);
             display: flex;
             justify-content: space-around;
         }
 
-        .left-container, .right-container {
+        .left-container {
             display: flex;
             align-items: center;
             gap: 35px;
+        }
+
+        .right-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo {
@@ -45,12 +51,15 @@
                 color: black;
                 font-weight: 500;
                 text-decoration: none;
+                &:hover {
+                    color: rgb(180,211,55);
+                }
             }
         }
         
         .tree-keed {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             cursor: pointer;
             span {
                 color: black;
@@ -58,6 +67,10 @@
         }
 
         .search-con {
+            form {
+                display: flex;
+                align-items: center;
+            }
             input {
                 padding-left: 10px;
                 width: 250px;
@@ -65,11 +78,18 @@
                 border: none;
                 outline: black solid 1.3px;
                 border-radius: 30px;
+                transition: 0.1s ease;
+                &:hover {
+                    outline: black solid 2px;
+                }
             }
             button {
-                max-width: 20px;
-                position: absolute;
-                right: 19%;
+                background-color: white;
+                max-width: 15px;
+                position: relative;
+                right: 12%;
+                border: none;
+                cursor: pointer;
                 img {
                     width: 100%;
                     height: 100%;
@@ -78,11 +98,17 @@
         }
 
         .profile, .cart {
-            max-width: 20px;    
+            max-width: 25px;    
             img {
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
             }
+        }
+
+        .cart img {
+            margin-left: 10px;
+            transform: scale(1.2);
         }
     </style>
 </head>

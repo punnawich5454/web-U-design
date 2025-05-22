@@ -12,13 +12,15 @@
         }
 
         body {
-            background-color: rgb(152, 153, 153);
+            background-color: rgb(255, 255, 255);
         }
 
         header {
             background-color: rgb(255, 255, 255);
             display: flex;
-            justify-content: space-around;
+            padding: 0 30px;
+            justify-content: space-between;
+            box-shadow: 0 1px 0 1px rgba(239, 239, 239, 1);
         }
 
         .left-container {
@@ -40,6 +42,7 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                cursor: pointer;
                 transform: scale(1.5);
             }
         }
@@ -55,14 +58,22 @@
                     color: rgb(180,211,55);
                 }
             }
+            span {
+                font-size: 20px;
+            }
         }
         
         .tree-keed {
-            display: flex;
+            display: none;
             gap: 15px;
             cursor: pointer;
             span {
                 color: black;
+           }
+           &:hover {
+                span {
+                    color: rgb(180,211,55);
+                }
            }
         }
 
@@ -73,32 +84,46 @@
             }
             input {
                 padding-left: 10px;
-                width: 250px;
+                width: 350px;
                 height: 40px;
                 border: none;
                 outline: black solid 1.3px;
                 border-radius: 30px;
                 transition: 0.1s ease;
-                &:hover {
-                    outline: black solid 2px;
+                &:focus {
+                    outline: black 2px solid;
                 }
             }
             button {
-                background-color: white;
-                max-width: 15px;
+                background-color: rgb(255, 255, 255);
+                max-width: 25px;
+                max-height: 25px;
                 position: relative;
-                right: 12%;
+                right: 8%;
                 border: none;
+                border-radius: 50%;
                 cursor: pointer;
+                transition: 0.3s ease;
                 img {
                     width: 100%;
                     height: 100%;
+                    object-fit: cover;
+                    transform: scale(0.6);
+                }
+            }
+            &:hover {
+                input {
+                    outline: black 2px solid;
+                }
+                button {
+                    background-color: rgb(180,211,55);
+                    transform: scale(1.1);
                 }
             }
         }
 
         .profile, .cart {
-            max-width: 25px;    
+            max-width: 20px;    
             img {
                 width: 100%;
                 height: 100%;
@@ -109,6 +134,73 @@
         .cart img {
             margin-left: 10px;
             transform: scale(1.2);
+        }
+
+        .block-nav {
+            display: none;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            position: fixed;
+            top: 65px;
+            left: 0;
+
+        }
+
+        .line {
+            padding: 10px;
+            outline: rgba(0, 0, 0, 0.1) solid 1px;
+            cursor: pointer;
+            span {
+                color: black;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            &:hover {
+                background-color: rgb(222, 235, 168);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .search-con {
+                input {
+                     width: 200px;
+                }
+                button {
+                    right: 13%;
+                }
+            } 
+        }
+
+        @media (max-width: 715px) {
+            .search-con {
+                input {
+                    position: fixed;
+                    right: 25px;
+                }
+                button {
+                    transform: scale(1.5);
+                }
+            }
+        }
+
+        @media (max-width: 648px) {
+            .logo {
+                max-width: 60px;
+            }
+            .nav-container nav a{
+                display: none;
+            }
+            .tree-keed {
+                display: flex;
+            }
+            .search-con {
+                input {
+                    width :320px;
+                }
+                button {
+                    transform: scale(1.5);
+                }
+            }   
         }
     </style>
 </head>
@@ -123,9 +215,9 @@
                     <a href="">เกี่ยวกับ</a>
                     <a href="">บทความ</a>
                     <a href="">ติดต่อเรา</a>
+                    <a href="">บริการ</a>
                     <div class="tree-keed">
                         <span>☰</span>
-                        <span>บริการ</span>
                     </div>
                 </nav>
             </div>
@@ -133,19 +225,45 @@
         <div class="right-container">
             <div class="search-con">
                 <form action="">
-                    <input type="text" name="search" placeholder="ค้นหาสินค้าง่ายๆ กดเลย">
-                    <button type="submit">
-                        <img src="/assets/images/search-interface-symbol.png" alt="search-icon">
+                    <input type="text" name="search" placeholder="ค้นหาสินค้า">
+                    <button id="button-1" type="submit">
+                        <img id="search" src="/assets/images/search-interface-symbol.png" alt="search-icon">
                     </button>
                 </form>
             </div>
-            <div class="profile">
-                <img src="/assets/images/user.png" alt="user">
+        </div>
+        <div class="block-nav">
+            <div class="line">
+                <span>เกี่ยวกับ</span>
             </div>
-            <div class="cart">
-                <img src="/assets/images/cart.png" alt="cart">
+            <div class="line">
+                <span>บทความ</span>
+            </div>
+            <div class="line">
+                <span>ติดต่อเรา</span>
+            </div>
+            <div class="line">
+                <span>บริการ</span>
             </div>
         </div>
-    </header>
+    </header>   
 </body>
+<script>
+    const menuButton = document.querySelector('.tree-keed')
+    const navBlock = document.querySelector('.block-nav')
+    
+    menuButton.addEventListener('click', () => {
+       if (navBlock.style.display === 'block') {
+        navBlock.style.display = 'none';
+        } else {
+            navBlock.style.display = 'block';
+        }
+    })
+
+    if(window.innerWidth > 715) {
+        navBlock.style.display = 'none'
+    } else {
+        navBlock.style.display = 'block'
+    }
+</script>
 </html>

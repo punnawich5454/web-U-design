@@ -15,4 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
             navBlock.style.display = 'none'
         } 
     })
+
+    const header = document.getElementById('header-con')
+    let lastScrollTop = 0
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+
+        if(currentScroll > lastScrollTop) {
+            header.style.top = '-100px'
+            navBlock.style.display = 'none'
+        } else {
+            header.style.top = '0px'
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
+    })
+
+    AOS.init();
 })

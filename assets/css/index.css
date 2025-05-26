@@ -44,100 +44,95 @@ header {
     max-width: 150px;
     max-height: 60px;
     transform: scale(0.8);
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        cursor: pointer;
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
 
-    }
 }
 
 .nav-container nav {
     display: flex;
     gap: 20px;
+}
 
-    a {
-        color: black;
-        font-weight: 500;
-        text-decoration: none;
+.nav-container nav a {
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+}
 
-        &:hover {
-            color: rgb(180, 211, 55);
-        }
-    }
+.nav-container nav a:hover {
+    color: rgb(180, 211, 55);
+}
 
-    span {
-        font-size: 20px;
-    }
+.nav-container nav span {
+    font-size: 20px;
 }
 
 .tree-keed {
     display: none;
     gap: 15px;
     cursor: pointer;
-
-    span {
-        color: black;
-    }
-
-    &:hover {
-        span {
-            color: rgb(180, 211, 55);
-        }
-    }
 }
 
-.search-con {
-    form {
-        display: flex;
-        align-items: center;
-    }
+.tree-keed:hover span {
+    color: rgb(180, 211, 55);
+}
 
-    input {
-        padding-left: 10px;
-        width: 350px;
-        height: 40px;
-        border: none;
-        outline: black solid 1.3px;
-        border-radius: 30px;
-        transition: 0.1s ease;
+.tree-keed span {
+    color: black;
+}
 
-        &:focus {
-            outline: black 2px solid;
-        }
-    }
+.search-con form {
+    display: flex;
+    align-items: center;
+}
 
-    button {
-        background-color: rgb(255, 255, 255);
-        max-width: 25px;
-        max-height: 25px;
-        position: relative;
-        right: 8%;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: 0.3s ease;
+.search-con input {
+    padding-left: 10px;
+    width: 350px;
+    height: 40px;
+    border: none;
+    outline: black solid 1.3px;
+    border-radius: 30px;
+    transition: 0.1s ease;
+}
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: scale(0.6);
-        }
-    }
+.search-con input:focus {
+    outline: black 2px solid;
+}
 
-    &:hover {
-        input {
-            outline: black 2px solid;
-        }
+.search-con button {
+    background-color: rgb(255, 255, 255);
+    max-width: 25px;
+    max-height: 25px;
+    position: relative;
+    right: 8%;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
 
-        button {
-            background-color: rgb(180, 211, 55);
-            transform: scale(1.1);
-        }
-    }
+.search-con button:hover input {
+    outline: black 2px solid;
+}
+
+
+.search-con button:hover {
+    background-color: rgb(180, 211, 55);
+    transform: scale(1.1);
+}
+
+.search-con button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(0.6);
 }
 
 .block-nav {
@@ -153,73 +148,16 @@ header {
     padding: 10px 20px;
     outline: rgba(0, 0, 0, 0.1) solid 1px;
     cursor: pointer;
-
-    span {
-        color: black;
-        text-decoration: none;
-        font-size: 14px;
-    }
-
-    &:hover {
-        background-color: rgb(222, 235, 168);
-    }
 }
 
-@media (max-width: 890px) {
-    .search-con {
-        input {
-            width: 200px;
-        }
-
-        button {
-            right: 13%;
-        }
-    }
+.line:hover {
+    background-color: rgb(222, 235, 168);
 }
 
-@media (max-width: 760px) {
-    .search-con {
-        input {
-            position: fixed;
-            right: 25px;
-        }
-
-        button {
-            transform: scale(1.5);
-        }
-    }
-}
-
-@media (max-width: 740px) {
-    .logo {
-        max-width: 110px;
-    }
-
-    .nav-container nav a {
-        display: none;
-    }
-
-    .tree-keed {
-        display: flex;
-    }
-
-    .search-con {
-        input {
-            width: 320px;
-        }
-
-        button {
-            transform: scale(1.5);
-        }
-    }
-}
-
-@media (max-width: 564px) {
-    .search-con {
-        input {
-            width: 270px;
-        }
-    }
+.line span {
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 /* Header */
@@ -260,28 +198,29 @@ body {
     flex-direction: column;
     gap: 10px;
     line-height: 30px;
+}
 
-    h2 {
-        color: #B4D137;
-        font-size: 40px;
-        font-weight: 800;
-    }
+.detail-block h2 {
+    color: #B4D137;
+    font-size: 40px;
+    font-weight: 800;
+}
 
-    span {
-        font-weight: 700;
-    }
+
+.detail-block span {
+    font-weight: 700;
 }
 
 .image-block {
     width: 476px;
     height: 230px;
     min-width: 476px;
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.image-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .title {
@@ -292,16 +231,16 @@ body {
     color: #B4D137;
     font-size: 22px;
     font-weight: bold;
+}
 
-    span {
-        margin: 10px 0;
-    }
+.title span {
+    margin: 10px 0;
+}
 
-    div {
-        background-color: rgba(0, 0, 0, 0.1);
-        width: 100%;
-        height: 1px;
-    }
+.title div {
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 1px;
 }
 
 .product-item {
@@ -320,13 +259,13 @@ body {
 .image-product {
     width: 200px;
     height: 200px;
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 5px 5px 0 0;
-    }
+.image-product img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
 }
 
 .name-product {
@@ -341,19 +280,24 @@ body {
     height: 40px;
     cursor: pointer;
     transition: 0.3s ease;
+}
 
-    &:hover {
-        transform: scale(1.06);
-        background-color: #b0cf36;
-    }
+.button-product button:hover {
+    transform: scale(1.06);
+    background-color: #b0cf36;
+}
 
-    &:active {
-        background-color: #C5E642;
-    }
+.button-product button:active {
+    background-color: #C5E642;
 }
 
 .video-con {
     outline: 2px solid black;
+}
+
+.video-con iframe {
+    width: 1000px;
+    height: 560px;
 }
 
 .detail-video {
@@ -372,36 +316,36 @@ body {
     outline: 1px solid rgba(0, 0, 0, 0.1);
     margin-top: 30px;
     padding: 30px 0;
+}
 
-    div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-    }
+.button-link div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
 
-    button {
-        background: none;
-        width: 100px;
-        height: 100px;
-        border: none;
-        cursor: pointer;
-        transition: 0.3s ease;
+.button-link button {
+    background: none;
+    width: 100px;
+    height: 100px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.button-link button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        &:hover {
-            transform: scale(1.05);
-        }
+.button-link button:hover {
+    transform: scale(1.05);
+}
 
-        &:active {
-            transform: scale(1);
-        }
-    }
+.button-link button:active {
+    transform: scale(1);
 }
 
 footer {
@@ -416,12 +360,12 @@ footer {
 
 .logo-footer {
     width: 200px;
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.logo-footer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .address-block {
@@ -444,25 +388,23 @@ footer {
 .block-link {
     display: flex;
     gap: 10px;
-
-    span {
-        color: #B4D137;
-    }
-
-    a {
-        color: white;
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
 }
 
-.right-con {
-    span {
-        color: white;
-    }
+.block-link span {
+    color: #B4D137;
+}
+
+.block-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.block-link a:hover {
+    text-decoration: underline;
+}
+
+.right-con span {
+    color: white;
 }
 
 .block-button {
@@ -470,24 +412,106 @@ footer {
     display: flex;
     justify-content: right;
     gap: 30px;
+}
 
-    button {
-        background: none;
-        width: 30px;
-        height: 30px;
-        border: none;
-        cursor: pointer;
+.block-button button {
+    background: none;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
 
-        img {
-            width: 100%;
-            height: 100%;
-        }
-    }
+.block-button button img {
+    width: 100%;
+    height: 100%;
 }
 
 .credit-block {
     color: white;
     font-weight: 600;
+}
+
+@media (max-width: 890px) {
+    .search-con input {
+        width: 200px;
+    }
+
+    .search-con button {
+        right: 13%;
+    }
+
+    .detail-footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left-con {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .address-block {
+        text-align: center;
+    }
+
+    .block-button {
+        justify-content: center;
+    }
+
+    .credit-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 760px) {
+    .search-con input {
+        position: fixed;
+        right: 25px;
+    }
+
+    .search-con button {
+        transform: scale(1.5);
+    }
+}
+
+@media (max-width: 740px) {
+    .logo {
+        max-width: 110px;
+    }
+
+    .nav-container nav a {
+        display: none;
+    }
+
+    .tree-keed {
+        display: flex;
+    }
+
+    .search-con input {
+        width: 320px;
+    }
+
+    .search-con button {
+        transform: scale(1.5);
+    }
+}
+
+@media (max-width: 564px) {
+    .search-con input {
+        width: 270px;
+    }
+}
+
+@media (max-width: 400px) {
+    .search-con input {
+        width: 170px;
+    }
 }
 
 @media (max-width: 1152px) {
@@ -499,6 +523,7 @@ footer {
 @media (max-width: 1075px) {
     #section-1 {
         flex-direction: column-reverse;
+        text-align: center;
     }
 
     .image-block {
@@ -508,14 +533,145 @@ footer {
     }
 }
 
+@media (max-width: 1050px) {
+    .video-con iframe {
+        width: 600px;
+        height: 337px;
+    }
+}
+
 @media (max-width: 1000px) {
     .product-item {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
+@media (max-width: 740px) {
+    .product-item {
+        gap: 10px;
+    }
+
+    .product {
+        width: 150px;
+        height: auto;
+    }
+
+    .image-product {
+        width: 150px;
+        height: 150px;
+    }
+
+    .video-con iframe {
+        width: 470px;
+        height: 265px;
+    }
+
+    .detail-video {
+        padding: 10px 10%;
+    }
+
+    .button-link button {
+        width: 80px;
+        height: 80px;
+    }
+}
+
 @media (max-width: 673px) {
     #section-1 {
         padding: 40px 0px;
+    }
+}
+
+@media (max-width: 590px) {
+    .detail-video {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 540px) {
+    .product {
+        width: 130px;
+        height: auto;
+    }
+
+    .image-product {
+        width: 130px;
+        height: 130px;
+    }
+
+    .detail-video {
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 431px) {
+    .logo {
+        max-width: 100px;
+    }
+
+    .detail-block {
+        padding: 0 10px;
+    }
+
+    .product {
+        margin-top: 20px;
+        width: 100px;
+        height: auto;
+    }
+
+    .image-product {
+        width: 100px;
+        height: 100px;
+    }
+
+    .video-con iframe {
+        width: 360px;
+        height: 207px;
+    }
+
+    .button-link button {
+        width: 70px;
+        height: 70px;
+    }
+
+    .search-con input {
+        width: 180px;
+        height: 30px;
+    }
+
+    .search-con button {
+        transform: scale(1);
+    }
+
+    .image-block {
+        width: 360px;
+        height: 200px;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 376px) {
+    .search-con input {
+        width: 160px;
+    }
+
+    .credit-block span {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 321px) {
+    .search-con input {
+        width: 100px;
+    }
+
+    .credit-block span {
+        font-size: 10px;
+    }
+
+    .image-block {
+        width: 320px;
+        height: 200px;
+        min-width: 100px;
     }
 }

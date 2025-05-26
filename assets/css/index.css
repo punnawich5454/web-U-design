@@ -254,6 +254,13 @@ body {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.product[data-aos][data-aos][data-aos].aos-animate:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .image-product {
@@ -647,6 +654,10 @@ footer {
         width: 360px;
         height: 200px;
         min-width: 100px;
+    }
+
+    .name-product {
+        font-size: 10px;
     }
 }
 

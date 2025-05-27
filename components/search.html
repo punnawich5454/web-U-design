@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .serch-container {
+            background-color: rgb(253, 253, 253);
+            width: 100%;
+            display: flex;
+            z-index: 2;
+        }
+
+        .button-search {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            height: 100%;
+        }
+
+        .name-group {
+            width: 100%;
+        }
+
+        .line-1 {
+            height: 100%px;
+            outline: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .button-group button {
+            background: none;
+            width: 100%;
+            height: 50px;
+            border: none;
+            outline: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .button-group button:hover {
+            background-color: #f5fdd4;
+        }
+
+        .item-product {
+            padding: 20px 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+
+        .product-show {
+            background-color: #ffffff;
+            box-shadow: 0 2px 0 1px rgba(0, 0, 0, 0.1);
+            height: 190px;
+            border-radius: 10px;
+            width: 140px;
+            cursor: pointer;
+        }
+
+        .image-product-group {
+            width: 100%;
+            height: 140px;
+        }
+
+        .image-product-group img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .title-product {
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="serch-container">
+        <div class="button-search">
+            <div class="name-group">
+                <div class="button-group">
+                    <button>ป้ายไฟ</button>
+                </div>
+            </div>
+            <div class="name-group">
+                <div class="button-group">
+                    <button>ป้ายไฟ</button>
+                </div>
+            </div>
+            <div class="name-group">
+                <div class="button-group">
+                    <button>ป้ายไฟ</button>
+                </div>
+            </div>
+            <div class="name-group">
+                <div class="button-group">
+                    <button>ป้ายไฟ</button>
+                </div>
+            </div>
+        </div>
+        <div class="line-1"></div>
+        <div class="item-product">
+            <!-- <div class="product-show">
+                <div class="image-product-group">
+                    <img src="/assets/images/a9d4fd3e-6911-434e-b34c-b0d69e6c1820.jfif" alt="">
+                </div>
+                <div class="title-product">
+                    <span>ป้ายไวนิล</span>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+<script>
+    async function searchProduct() {
+        try {
+            const params = new URLSearchParams(window.location.search)
+            const query = params.get("query")
+
+            let response
+            if (!query) {
+                response = await fetch(`http://127.0.0.1:3000/api/product`)
+            } else {
+                response = await fetch(`http://127.0.0.1:3000/api/product/search?keyword=${query}`)
+            }
+            const data = await response.json()
+
+            const itemProduct = document.querySelector('.item-product')
+            itemProduct.innerHTML = ""
+
+            data.forEach(item => {
+                const div = document.createElement('div')
+                div.classList.add('product-show')
+                div.innerHTML = `
+                    <div class="image-product-group">
+                        <img src="data:image/jpeg;base64,${item.image}" alt="">
+                    </div>
+                    <div class="title-product">
+                        <span>${item.name}</span>
+                    </div>
+                `
+                itemProduct.appendChild(div)
+            })
+        } catch (err) {
+            console.error("เกิดข้อผิดพลาดในการค้นหา:", err)
+        }
+    }
+    window.addEventListener('DOMContentLoaded', searchProduct)
+</script>
+
+
+</html>

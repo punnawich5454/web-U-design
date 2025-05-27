@@ -31,7 +31,7 @@
         <div class="right-container">
             <div class="search-con">
                 <form action="">
-                    <input type="text" name="search" placeholder="ค้นหาสินค้า">
+                    <input id="search-input" type="text" name="search" placeholder="ค้นหาสินค้า">
                     <button id="button-1" type="submit">
                         <img id="search" src="/assets/images/search-interface-symbol.png" alt="search-icon">
                     </button>
@@ -52,13 +52,15 @@
                 <span>บริการ</span>
             </div>
         </div>
+        <iframe id="iframe-search" src="/components/search.html" frameborder="0"
+            style="position: fixed; width: 70%; height: 70%; top: 65px; right: 0;"></iframe>
     </header>
     <section style="margin-top: 80px;">
         <img src="/assets/images/testBanner.png" width="100%" style="max-height: 150px;" alt="">
     </section>
     <section id="section-1">
         <div class="detail-block" data-aos="fade-right" data-aos-duration="1000">
-            <h2>UDesing</h2>
+            <h2>U-Design</h2>
             <span>คุณกำลังมองหาป้ายที่ไม่เหมือนใคร สะท้อนตัวตน หรือเติมเต็มพื้นที่ให้มีสไตล์อยู่หรือเปล่า?</span>
             <p>เราขอเสนอ บริการออกแบบป้ายโฆษณา ทุกชนิด
                 ทั้งงานป้ายไวนิล งานป้ายบิลบอร์ด แบนเนอร์ สติ๊กเกอร์
@@ -85,8 +87,8 @@
             <span>เพราะเราเป็นมากกว่าป้ายโฆษณา</span>
         </div>
         <div class="video-con" data-aos="fade-up" data-aos-duration="1000">
-            <iframe src="https://www.youtube.com/embed/bJDuQi7gVMU?si=mYcy5neLWQlY1Gi_"
-                title="YouTube video player" frameborder="0"
+            <iframe src="https://www.youtube.com/embed/bJDuQi7gVMU?si=mYcy5neLWQlY1Gi_" title="YouTube video player"
+                frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>

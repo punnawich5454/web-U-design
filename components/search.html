@@ -48,8 +48,8 @@
         .item-product {
             padding: 20px 40px;
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            justify-content: center;
+            grid-template-columns: repeat(8, 1fr);
+            margin: auto;
             gap: 30px;
         }
 
@@ -79,6 +79,24 @@
             padding: 10px 0;
         }
 
+        @media (max-width: 1435px) {
+            .item-product {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 1089px) {
+            .item-product {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 925px) {
+            .item-product {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
         @media (max-width: 769px) {
             .serch-container {
                 flex-direction: column;
@@ -99,7 +117,7 @@
                 display: none;
             }
 
-            .item-product { 
+            .item-product {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
                 padding: 10px 40px;
@@ -136,16 +154,16 @@
 
             let response
             if (!query) {
-                response = await fetch(`http://127.0.0.1:3000/api/product`)
+                response = await fetch(`http://192.168.1.44:3000/api/product`)
             } else {
-                response = await fetch(`http://127.0.0.1:3000/api/product/search?keyword=${query}`)
+                response = await fetch(`http://192.168.1.44:3000/api/product/search?keyword=${query}`)
             }
-            
+
             const data = await response.json()
 
             const itemProduct = document.querySelector('.item-product')
             itemProduct.innerHTML = ""
-            
+
             data.forEach(item => {
                 const div = document.createElement('div')
                 div.classList.add('product-show')

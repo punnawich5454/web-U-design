@@ -210,6 +210,11 @@ header {
 
 /* Header */
 
+#section-4 {
+    z-index: 10;
+    margin-bottom: 40px;
+}
+
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -326,7 +331,6 @@ header {
 #section-2 {
     z-index: 10;
     padding-bottom: 30px;
-    height: 100vh;
     background-color: #FBFFE9;
     outline: 1px solid rgba(0, 0, 0, 0.20);
     display: flex;
@@ -455,27 +459,54 @@ header {
     gap: 40px;
 }
 
-.button-link button {
-    background: none;
-    width: 100px;
-    height: 100px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease;
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
-.button-link button img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2.5rem;
+    background: white;
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
-.button-link button:hover {
-    transform: scale(1.05);
+.contact-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    color: var(--text-primary);
 }
 
-.button-link button:active {
-    transform: scale(1);
+.contact-btn.facebook:hover {
+    border-color: #1877f2;
+    background: #1877f2;
+    color: white;
+}
+
+.contact-btn.line:hover {
+    border-color: #00b900;
+    background: #00b900;
+    color: white;
+}
+
+.contact-btn.email:hover {
+    border-color: #ea4335;
+    background: #ea4335;
+    color: white;
+}
+
+.contact-btn i {
+    font-size: 24px;
 }
 
 footer {
@@ -598,6 +629,10 @@ footer {
         justify-content: center;
         align-items: center;
     }
+
+    .hero-content {
+        max-width: 50%;
+    }
 }
 
 @media (max-width: 760px) {
@@ -632,11 +667,19 @@ footer {
     .search-con button {
         transform: scale(1.5);
     }
+
+    .hero-content {
+        max-width: 70%;
+    }
 }
 
 @media (max-width: 564px) {
     .search-con input {
         width: 270px;
+    }
+    
+    .hero-content {
+        max-width: 100%;
     }
 }
 
@@ -668,8 +711,9 @@ footer {
         font-size: 40px;
     }
 
-    .title span {
-        font-size: 20px;
+    .title h2 {
+        font-size: 40px;
+        text-align: center;
     }
 }
 
@@ -684,6 +728,7 @@ footer {
     .product-item {
         grid-template-columns: repeat(3, 1fr);
     }
+
 }
 
 @media (max-width: 740px) {
@@ -791,6 +836,11 @@ footer {
 
     .name-product {
         font-size: 10px;
+    }
+
+    .title h2 {
+        font-size: 30px;
+        text-align: center;
     }
 }
 

@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
 
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {
             navBlock.style.display = 'none';
@@ -34,11 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
     })
 
-    AOS.init();
-
     async function loadProduct() {
         try {
-            const response = await fetch('http://127.0.0.1:3000/api/product')
+            const response = await fetch('http://192.168.1.44:3000/api/product')
             const data = await response.json()
 
             const dataLimit = data.slice(0, 10)
@@ -123,5 +127,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createParticles();
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 })
 

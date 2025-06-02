@@ -34,35 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
     })
 
-    AOS.init();
-
-    async function loadProduct() {
-        try {
-            const response = await fetch('http://127.0.0.1:3000/api/product')
-            const data = await response.json()
-
-            const dataLimit = data.slice(0, 10)
-            const productItem = document.getElementById('product-item')
-            productItem.innerHTML = ""
-            dataLimit.forEach(item => {
-                const div = document.createElement('div')
-                div.classList.add('product')
-                div.setAttribute('data-aos', 'fade-up')
-                const html = `
-                    <div class="image-product">
-                        <img src="data:image/jpeg;base64,${item.image}" alt="img-product">
-                    </div>
-                    <div class="name-product">
-                        <span>${item.name}</span>
-                    </div>`
-                div.innerHTML += html
-                productItem.appendChild(div)
-            });
-        } catch (err) {
-            console.error(err)
-        }
-    }
-
     function search() {
         const keyword = searchInput.value
 
@@ -95,8 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         search()
     })
 
-    loadProduct()
-
     const clickLogo = document.querySelector('.logo')
     clickLogo.addEventListener('click', () => {
         window.location = '/index.html'
@@ -106,22 +75,4 @@ document.addEventListener('DOMContentLoaded', () => {
     blockAbout.addEventListener('click', () => {
         window.location = '/about.html'
     })
-
-    function createParticles() {
-        const particles = document.getElementById('particles');
-        const particleCount = 50;
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            particles.appendChild(particle);
-        }
-    }
-
-    createParticles();
 })
-

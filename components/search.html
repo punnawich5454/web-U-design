@@ -16,6 +16,7 @@
         .button-search {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             width: 150px;
             height: 100%;
@@ -26,8 +27,9 @@
         }
 
         .line-1 {
-            height: 100%px;
-            outline: 1px solid rgba(0, 0, 0, 0.1);
+            height: 100%;
+            width: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .button-group button {
@@ -46,7 +48,8 @@
         .item-product {
             padding: 20px 40px;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(10, 1fr);
+            justify-content: center;
             gap: 30px;
         }
 
@@ -75,34 +78,44 @@
             text-align: center;
             padding: 10px 0;
         }
+
+        @media (max-width: 769px) {
+            .serch-container {
+                flex-direction: column;
+            }
+
+            .button-search {
+                width: 100%;
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .button-group button {
+                width: auto;
+                padding: 10px 20px;
+            }
+
+            .line-1 {
+                display: none;
+            }
+
+            .item-product { 
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 10px 40px;
+            }
+
+            .product-show {
+                width: 100%;
+                max-width: 200px;
+                margin: auto;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="serch-container">
-        <div class="button-search">
-            <div class="name-group">
-                <div class="button-group">
-                    <button>ป้ายไฟ</button>
-                </div>
-            </div>
-            <div class="name-group">
-                <div class="button-group">
-                    <button>ป้ายไฟ</button>
-                </div>
-            </div>
-            <div class="name-group">
-                <div class="button-group">
-                    <button>ป้ายไฟ</button>
-                </div>
-            </div>
-            <div class="name-group">
-                <div class="button-group">
-                    <button>ป้ายไฟ</button>
-                </div>
-            </div>
-        </div>
-        <div class="line-1"></div>
         <div class="item-product">
             <!-- <div class="product-show">
                 <div class="image-product-group">
@@ -127,11 +140,12 @@
             } else {
                 response = await fetch(`http://127.0.0.1:3000/api/product/search?keyword=${query}`)
             }
+            
             const data = await response.json()
 
             const itemProduct = document.querySelector('.item-product')
             itemProduct.innerHTML = ""
-
+            
             data.forEach(item => {
                 const div = document.createElement('div')
                 div.classList.add('product-show')

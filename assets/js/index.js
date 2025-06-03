@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadProduct() {
         try {
-            const response = await fetch('http://192.168.1.44:3000/api/product')
+            const response = await fetch('http://192.168.1.44:3000/api/products')
             const data = await response.json()
 
             const dataLimit = data.slice(0, 10)
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.setAttribute('data-aos', 'fade-up')
                 const html = `
                     <div class="image-product">
-                        <img src="data:image/jpeg;base64,${item.image}" alt="img-product">
+                        <img src="data:image/jpeg;base64,${item.images}" alt="img-product">
                     </div>
                     <div class="name-product">
                         <span>${item.name}</span>

@@ -40,66 +40,73 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
     })
 
-    async function loadProduct() {
-        try {
-            const response = await fetch('http://192.168.1.44:3000/api/products')
-            const data = await response.json()
+    window.addEventListener('scroll', function () {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.hero-section');
+        const speed = scrolled * 0.5;
+        parallax.style.transform = `translateY(${speed}px)`;
+    });
 
-            const dataLimit = data.slice(0, 10)
-            const productItem = document.getElementById('product-item')
-            productItem.innerHTML = ""
-            dataLimit.forEach(item => {
-                const div = document.createElement('div')
-                div.classList.add('product')
-                div.setAttribute('data-aos', 'fade-up')
-                const html = `
-                    <div class="image-product">
-                        <img src="data:image/jpeg;base64,${item.images}" alt="img-product">
-                    </div>
-                    <div class="name-product">
-                        <span>${item.name}</span>
-                    </div>`
-                div.innerHTML += html
-                productItem.appendChild(div)
-            });
-        } catch (err) {
-            console.error(err)
-        }
-    }
+    // async function loadProduct() {
+    //     try {
+    //         const response = await fetch('http://1:3000/api/products')
+    //         const data = await response.json()
 
-    function search() {
-        const keyword = searchInput.value
+    //         const dataLimit = data.slice(0, 10)
+    //         const productItem = document.getElementById('product-item')
+    //         productItem.innerHTML = ""
+    //         dataLimit.forEach(item => {
+    //             const div = document.createElement('div')
+    //             div.classList.add('product')
+    //             div.setAttribute('data-aos', 'fade-up')
+    //             const html = `
+    //                 <div class="image-product">
+    //                     <img src="data:image/jpeg;base64,${item.images}" alt="img-product">
+    //                 </div>
+    //                 <div class="name-product">
+    //                     <span>${item.name}</span>
+    //                 </div>`
+    //             div.innerHTML += html
+    //             productItem.appendChild(div)
+    //         });
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // }
 
-        const result = searchInput.value.trim()
-        if (result === "") {
-            resultFrame.src = `/components/search.html`
+    // function search() {
+    //     const keyword = searchInput.value
 
-        } else {
-            resultFrame.src = `/components/search.html?query=` + encodeURIComponent(keyword)
-            resultFrame.style.display = 'block'
-        }
-    }
+    //     const result = searchInput.value.trim()
+    //     if (result === "") {
+    //         resultFrame.src = `/components/search.html`
 
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            search()
-        })
+    //     } else {
+    //         resultFrame.src = `/components/search.html?query=` + encodeURIComponent(keyword)
+    //         resultFrame.style.display = 'block'
+    //     }
+    // }
 
-        // searchInput.addEventListener('focus', () => {
-        //     resultFrame.style.width = '70%'
-        // })
+    // if (searchInput) {
+    //     searchInput.addEventListener('input', () => {
+    //         search()
+    //     })
 
-        // searchInput.addEventListener('blur', () => {
-        //     resultFrame.style.width = '0%'
-        // })
-    }
+    // searchInput.addEventListener('focus', () => {
+    //     resultFrame.style.width = '70%'
+    // })
 
-    document.getElementById('button-1').addEventListener('click', (event) => {
-        event.preventDefault()
-        search()
-    })
+    // searchInput.addEventListener('blur', () => {
+    //     resultFrame.style.width = '0%'
+    // })
+    // }
 
-    loadProduct()
+    // document.getElementById('button-1').addEventListener('click', (event) => {
+    //     event.preventDefault()
+    //     search()
+    // })
+
+    // loadProduct()
 
     const clickLogo = document.querySelector('.logo')
     clickLogo.addEventListener('click', () => {
@@ -112,21 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     function createParticles() {
-        const particles = document.getElementById('particles');
+        const particlesContainer = document.getElementById('particles');
         const particleCount = 50;
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            particles.appendChild(particle);
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particlesContainer.appendChild(particle);
         }
     }
 
-    createParticles();
+    createParticles()
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loader</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        .loader {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: url('/assets/images/logoNoColor.png') no-repeat center/contain;
+        }
+
+        .fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: #a3d400;
+            animation: fillUp 3s ease-in-out forwards;
+            clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+            z-index: -1;
+        }
+
+        @keyframes fillUp {
+            0% {
+                height: 0%;
+            }
+
+            100% {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader">
+        <div class="fill" id="fill"></div>
+    </div>
+
+    <script>
+        const fill = document.getElementById('fill');
+
+        fill.addEventListener('animationend', () => {
+            parent.postMessage({ type: 'loaderFinished' }, '*');
+        });
+    </script>
+</body>
+
+</html>

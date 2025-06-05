@@ -4,12 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
 
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
-
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {
             navBlock.style.display = 'none';
@@ -118,6 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location = '/about.html'
     })
 
+    const blockContact = document.getElementById('block-contact')
+    blockContact.addEventListener('click', () => {
+        window.location = '/contact.html'
+    })
+
     function createParticles() {
         const particlesContainer = document.getElementById('particles');
         const particleCount = 50;
@@ -148,5 +147,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    window.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'loaderFinished') {
+            document.getElementById('loader-frame').style.display = 'none';
+            document.getElementById('main-ss').style.display = 'flex';
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+        }
+    });
+
 })
 

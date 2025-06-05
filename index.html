@@ -8,278 +8,291 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/index.css" />
-    <link rel="icon" href="/assets/images/logo.png">
+    <link rel="icon" href="/assets/images/iconUdesign.png">
     <title>UDesign</title>
 </head>
-
 <body>
-    <div class="particles" id="particles"></div>
-    <header id="header-con">
-        <div class="left-container">
-            <div class="logo">
-                <img src="\assets\images\logo.png" alt="logo">
+    <iframe id="loader-frame" src="/components/loader.html" frameborder="0"></iframe>
+    <main id="main-ss">
+        <div class="particles" id="particles"></div>
+        <header id="header-con">
+            <div class="left-container">
+                <div class="logo">
+                    <img src="\assets\images\logo.png" alt="logo">
+                </div>
+                <div class="nav-container">
+                    <nav>
+                        <a href="/about.html">เกี่ยวกับ</a>
+                        <a href="">บทความ</a>
+                        <a href="/contact.html">ติดต่อเรา</a>
+                        <a href="">บริการ</a>
+                        <div class="tree-keed">
+                            <span>☰</span>
+                        </div>
+                    </nav>
+                </div>
             </div>
-            <div class="nav-container">
-                <nav>
-                    <a href="/about.html">เกี่ยวกับ</a>
-                    <a href="">บทความ</a>
-                    <a href="">ติดต่อเรา</a>
-                    <a href="">บริการ</a>
-                    <div class="tree-keed">
-                        <span>☰</span>
+            <div class="right-container">
+                <div class="search-con">
+                    <form action="">
+                        <input id="search-input" type="text" name="search" placeholder="ค้นหาสินค้า">
+                        <button id="button-1" type="submit">
+                            <img id="search" src="/assets/images/search-interface-symbol.png" alt="search-icon">
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="block-nav">
+                <div id="block-about" class="line">
+                    <span>เกี่ยวกับ</span>
+                </div>
+                <div class="line">
+                    <span>บทความ</span>
+                </div>
+                <div id="block-contact" class="line">
+                    <span>ติดต่อเรา</span>
+                </div>
+                <div class="line">
+                    <span>บริการ</span>
+                </div>
+            </div>
+            <iframe class="overflow-auto p-3 mb-3 bg-light rounded shadow" id="iframe-search"
+                src="/components/search.html" frameborder="0"
+                style="position: fixed; width: 100%; height: 100%; top: 65px; right: 0; display: none; background-color: white; transition: 0.3s ease;"></iframe>
+        </header>
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up" data-aos-duration="2000">
+                    <h1>U-Design</h1>
+                    <div class="subtitle">บริษัท เอทไซน์ มีเดีย พลัส</div>
+                    <p>คุณกำลังมองหาป้ายที่ไม่เหมือนใคร สะท้อนตัวตน หรือเติมเต็มพื้นที่ให้มีสไตล์อยู่หรือเปล่า?
+                        เราขอเสนอ บริการออกแบบป้ายโฆษณา ทุกชนิด ทั้งงานป้ายไวนิล งานป้ายบิลบอร์ด แบนเนอร์ สติ๊กเกอร์
+                        และสื่อสิ่งพิมพ์ทุกชนิด</p>
+                    <div class="hero-buttons">
+                        <a href="#section-2" class="btn-primary">
+                            <i class="fas fa-eye"></i>
+                            ดูผลงาน
+                        </a>
+                        <a href="#section-4" class="btn-secondary">
+                            <i class="fas fa-phone"></i>
+                            ติดต่อเรา
+                        </a>
                     </div>
-                </nav>
+                </div>
             </div>
-        </div>
-        <div class="right-container">
-            <div class="search-con">
-                <form action="">
-                    <input id="search-input" type="text" name="search" placeholder="ค้นหาสินค้า">
-                    <button id="button-1" type="submit">
-                        <img id="search" src="/assets/images/search-interface-symbol.png" alt="search-icon">
-                    </button>
-                </form>
+        </section>
+        <section id="section-2">
+            <div class="title" data-aos="fade-up">
+                <h2>สินค้าและบริการ</h2>
+                <p>เราให้บริการออกแบบและผลิตป้ายโฆษณาครบวงจร ด้วยคุณภาพและความใส่ใจในทุกรายละเอียด</p>
             </div>
-        </div>
-        <div class="block-nav">
-            <div id="block-about" class="line">
-                <span>เกี่ยวกับ</span>
+            <div id="product-item" class="product-item">
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/493224171_1257509799710870_3998754824460229343_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>ป้ายไวนิล</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/500407055_1285581083570408_7088848512085273310_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>ป้ายคอมโพสิท</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/494696751_1265239628937887_4656346572623055493_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>สติ๊กเกอร์</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/492220175_1256826089779241_1783074674591500354_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>ตู้ไฟ</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/490825221_1249457963849387_2321330759241189298_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>ตัวอักษร</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/493289911_1257062233088960_2944320129250187967_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>งานตกแต่งเวที</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/481107872_1207512678043916_2606869528191834944_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>ป้ายไฟวิ่ง</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/481466298_1207512928043891_925472021378887165_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>ธงปีกนก</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/488422575_1234902011971649_1724899146652943048_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>โลโก้</span>
+                    </div>
+                </div>
+                <div class="product" data-aos="fade-up">
+                    <div class="image-product">
+                        <img src="/assets/images/productImage/487298664_1231025042359346_6177375653686449751_n.jpg"
+                            alt="img-product">
+                    </div>
+                    <div class="name-product">
+                        <span>งานโครงสร้างและติดตั้ง</span>
+                    </div>
+                </div>
             </div>
-            <div class="line">
-                <span>บทความ</span>
+            <div class="button-product" data-aos="zoom-in">
+                <button class="">ดูสินค้าทั้งหมด</button>
             </div>
-            <div class="line">
-                <span>ติดต่อเรา</span>
+        </section>
+        <section id="section-3">
+            <div class="title" data-aos="fade-up">
+                <h2>เพราะเราเป็นมากกว่าป้ายโฆษณา</h2>
+                <p>ดูวิดีโอเพื่อทำความรู้จักกับเราและกระบวนการทำงานของเรามากขึ้น</p>
             </div>
-            <div class="line">
-                <span>บริการ</span>
+            <div class="video-con" data-aos="fade-up">
+                <iframe src="assets/videos/FDownloader.net-1657180421715787-(1080p).mp4" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
-        </div>
-        <iframe class="overflow-auto p-3 mb-3 bg-light rounded shadow" id="iframe-search" src="/components/search.html"
-            frameborder="0"
-            style="position: fixed; width: 100%; height: 100%; top: 65px; right: 0; display: none; background-color: white; transition: 0.3s ease;"></iframe>
-    </header>
-    <section class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text" data-aos="fade-up" data-aos-duration="2000">
-                <h1>U-Design</h1>
-                <div class="subtitle">บริษัท เอทไซน์ มีเดีย พลัส</div>
-                <p>คุณกำลังมองหาป้ายที่ไม่เหมือนใคร สะท้อนตัวตน หรือเติมเต็มพื้นที่ให้มีสไตล์อยู่หรือเปล่า?
-                    เราขอเสนอ บริการออกแบบป้ายโฆษณา ทุกชนิด ทั้งงานป้ายไวนิล งานป้ายบิลบอร์ด แบนเนอร์ สติ๊กเกอร์
-                    และสื่อสิ่งพิมพ์ทุกชนิด</p>
-                <div class="hero-buttons">
-                    <a href="#section-2" class="btn-primary">
-                        <i class="fas fa-eye"></i>
-                        ดูผลงาน
+            <div class="detail-video" data-aos="fade-up">
+                <p>ไม่ว่าจะเป็นงานเล็กหรืองานใหญ่ เราพร้อมช่วยคุณเปลี่ยนไอเดียให้กลายเป็นความจริง
+                    ด้วยงานออกแบบป้ายในสไตล์
+                    DIY ที่เน้นความใส่ใจ รายละเอียด
+                    และความเป็นเอกลักษณ์เฉพาะตัวทุกชิ้นงานผ่านกระบวนการคิดและออกแบบร่วมกับลูกค้า
+                    เพื่อให้ตรงใจและตอบโจทย์การใช้งานมากที่สุด
+                    เราสามารถปรับแต่งให้เข้ากับธีมและสไตล์ของคุณได้อย่างลงตัว
+                    ให้ป้ายของคุณเล่าเรื่องราว และสร้างความประทับใจในทุกโอกาส
+                    ติดต่อเราเพื่อเริ่มต้นสร้างสรรค์ไอเดียไปด้วยกันวันนี้!
+                </p>
+            </div>
+        </section>
+        <section id="section-4">
+            <div class="title" data-aos="zoom-in">
+                <h2>ช่องทางการติดต่อ</h2>
+                <p>พร้อมให้คำปรึกษาและบริการคุณ</p>
+            </div>
+            <div class="contact-buttons">
+                <div class="contact-buttons fade-in" data-aos="fade-up">
+                    <a href="https://www.facebook.com/udesignplus/?locale=th_TH" target="_blank"
+                        class="contact-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
                     </a>
-                    <a href="#section-4" class="btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        ติดต่อเรา
+                    <a href="https://page.line.me/myw8485r" target="_blank" class="contact-btn line">
+                        <i class="fab fa-line"></i>
+                        <span>Line</span>
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=printing01@gmail.com.com&su=หัวเรื่อง&body=เนื้อหาอีเมล"
+                        target="_blank" class="contact-btn email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="section-2">
-        <div class="title" data-aos="fade-up">
-            <h2>สินค้าและบริการ</h2>
-            <p>เราให้บริการออกแบบและผลิตป้ายโฆษณาครบวงจร ด้วยคุณภาพและความใส่ใจในทุกรายละเอียด</p>
-        </div>
-        <div id="product-item" class="product-item">
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/493224171_1257509799710870_3998754824460229343_n.jpg" alt="img-product">
+        </section>
+        <footer>
+            <div class="detail-footer">
+                <div class="left-con">
+                    <div class="logo-footer">
+                        <img src="/assets/images/logo.png" alt="logo">
+                    </div>
+                    <div class="address-block">
+                        <span>152 28 ถ. พัฒนาการคูขวาง ตำบล ท่าวัง</span>
+                        <span>อำเภอเมืองนครศรีธรรมราช นครศรีธรรมราช 80000</span>
+                        <span>LIne Phone: 0865193036 / 0982655479</span>
+                        <span>Email: u.printing01@gmail.com</span>
+                        <span>Facebook: ยู-ดีไซน์ ทำป้าย นครศรีธรรมราช</span>
+                        <span>Tel: 088-7542440 / 086-5193036 / 098-2655479</span>
+                    </div>
                 </div>
-                <div class="name-product">
-                    <span>ป้ายไวนิล</span>
+                <div class="center-con">
+                    <span style="font-size: 30px; color: white; font-weight: 700;">เมนู</span>
+                    <div class="block-link">
+                        <span>></span>
+                        <a href="/index.html">หน้าแรก</a>
+                    </div>
+                    <div class="block-link">
+                        <span>></span>
+                        <a href="/about.html">เกี่ยวกับ</a>
+                    </div>
+                    <div class="block-link">
+                        <span>></span>
+                        <a href="">บทความ</a>
+                    </div>
+                    <div class="block-link">
+                        <span>></span>
+                        <a href="/contact.html">ติดต่อเรา</a>
+                    </div>
+                    <div class="block-link">
+                        <span>></span>
+                        <a href="">บริการ</a>
+                    </div>
                 </div>
-            </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/500407055_1285581083570408_7088848512085273310_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>ป้ายคอมโพสิท</span>
-                </div>
-            </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/494696751_1265239628937887_4656346572623055493_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>สติ๊กเกอร์</span>
-                </div>
-            </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/492220175_1256826089779241_1783074674591500354_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>ตู้ไฟ</span>
-                </div>
-            </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/490825221_1249457963849387_2321330759241189298_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>ตัวอักษร</span>
+                <div class="right-con">
+                    <span style="font-size: 30px; color: white; font-weight: 700;">เวลาทำการ</span>
+                    <span>วันจันทร์ - วันเสาร์</span>
+                    <span>08:30 - 17:30</span>
+                    <span>วันอาทิตย์ ปิด</span>
                 </div>
             </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/493289911_1257062233088960_2944320129250187967_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>งานตกแต่งเวที</span>
-                </div>
+            <div class="block-button">
+                <button>
+                    <img src="/assets/images/facebook.png" alt="facebook">
+                </button>
+                <button>
+                    <img src="/assets/images/line.png" alt="line">
+                </button>
+                <button>
+                    <img src="/assets/images/gmail.png" alt="gmail">
+                </button>
+                <button>
+                    <img src="/assets/images/youtube.png" alt="youtube">
+                </button>
             </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/481107872_1207512678043916_2606869528191834944_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>ป้ายไฟวิ่ง</span>
-                </div>
+            <div class="credit-block">
+                <span>Ⓒ 2025 บริษัท เอทไซน์ มีเดีย พลัส</span>
             </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/481466298_1207512928043891_925472021378887165_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>ธงปีกนก</span>
-                </div>
-            </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/488422575_1234902011971649_1724899146652943048_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>โลโก้</span>
-                </div>
-            </div>
-            <div class="product" data-aos="fade-up">
-                <div class="image-product">
-                    <img src="/assets/images/productImage/487298664_1231025042359346_6177375653686449751_n.jpg" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>งานโครงสร้างและติดตั้ง</span>
-                </div>
-            </div>
-        </div>
-        <div class="button-product" data-aos="zoom-in">
-            <button class="">ดูสินค้าทั้งหมด</button>
-        </div>
-    </section>
-    <section id="section-3">
-        <div class="title" data-aos="fade-up">
-            <h2>เพราะเราเป็นมากกว่าป้ายโฆษณา</h2>
-            <p>ดูวิดีโอเพื่อทำความรู้จักกับเราและกระบวนการทำงานของเรามากขึ้น</p>
-        </div>
-        <div class="video-con" data-aos="fade-up">
-            <iframe src="assets/videos/FDownloader.net-1657180421715787-(1080p).mp4" title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <div class="detail-video" data-aos="fade-up">
-            <p>ไม่ว่าจะเป็นงานเล็กหรืองานใหญ่ เราพร้อมช่วยคุณเปลี่ยนไอเดียให้กลายเป็นความจริง ด้วยงานออกแบบป้ายในสไตล์
-                DIY ที่เน้นความใส่ใจ รายละเอียด
-                และความเป็นเอกลักษณ์เฉพาะตัวทุกชิ้นงานผ่านกระบวนการคิดและออกแบบร่วมกับลูกค้า
-                เพื่อให้ตรงใจและตอบโจทย์การใช้งานมากที่สุด
-                เราสามารถปรับแต่งให้เข้ากับธีมและสไตล์ของคุณได้อย่างลงตัว
-                ให้ป้ายของคุณเล่าเรื่องราว และสร้างความประทับใจในทุกโอกาส
-                ติดต่อเราเพื่อเริ่มต้นสร้างสรรค์ไอเดียไปด้วยกันวันนี้!
-            </p>
-        </div>
-    </section>
-    <section id="section-4">
-        <div class="title" data-aos="zoom-in">
-            <h2>ช่องทางการติดต่อ</h2>
-            <p>พร้อมให้คำปรึกษาและบริการคุณ</p>
-        </div>
-        <div class="contact-buttons">
-            <div class="contact-buttons fade-in" data-aos="fade-up">
-                <a href="https://www.facebook.com/udesignplus/?locale=th_TH" target="_blank"
-                    class="contact-btn facebook">
-                    <i class="fab fa-facebook-f"></i>
-                    <span>Facebook</span>
-                </a>
-                <a href="https://page.line.me/myw8485r" target="_blank" class="contact-btn line">
-                    <i class="fab fa-line"></i>
-                    <span>Line</span>
-                </a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=printing01@gmail.com.com&su=หัวเรื่อง&body=เนื้อหาอีเมล"
-                    target="_blank" class="contact-btn email">
-                    <i class="fas fa-envelope"></i>
-                    <span>Email</span>
-                </a>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <div class="detail-footer">
-            <div class="left-con">
-                <div class="logo-footer">
-                    <img src="/assets/images/logo.png" alt="logo">
-                </div>
-                <div class="address-block">
-                    <span>152 28 ถ. พัฒนาการคูขวาง ตำบล ท่าวัง</span>
-                    <span>อำเภอเมืองนครศรีธรรมราช นครศรีธรรมราช 80000</span>
-                    <span>LIne Phone: 0865193036 / 0982655479</span>
-                    <span>Email: u.printing01@gmail.com</span>
-                    <span>Facebook: ยู-ดีไซน์ ทำป้าย นครศรีธรรมราช</span>
-                    <span>Tel: 088-7542440 / 086-5193036 / 098-2655479</span>
-                </div>
-            </div>
-            <div class="center-con">
-                <span style="font-size: 30px; color: white; font-weight: 700;">เมนู</span>
-                <div class="block-link">
-                    <span>></span>
-                    <a href="">หน้าแรก</a>
-                </div>
-                <div class="block-link">
-                    <span>></span>
-                    <a href="">เกี่ยวกับ</a>
-                </div>
-                <div class="block-link">
-                    <span>></span>
-                    <a href="">บทความ</a>
-                </div>
-                <div class="block-link">
-                    <span>></span>
-                    <a href="">ติดต่อเรา</a>
-                </div>
-                <div class="block-link">
-                    <span>></span>
-                    <a href="">บริการ</a>
-                </div>
-            </div>
-            <div class="right-con">
-                <span style="font-size: 30px; color: white; font-weight: 700;">เวลาทำการ</span>
-                <span>วันจันทร์ - วันเสาร์</span>
-                <span>08:30 - 17:30</span>
-                <span>วันอาทิตย์ ปิด</span>
-            </div>
-        </div>
-        <div class="block-button">
-            <button>
-                <img src="/assets/images/facebook.png" alt="facebook">
-            </button>
-            <button>
-                <img src="/assets/images/line.png" alt="line">
-            </button>
-            <button>
-                <img src="/assets/images/gmail.png" alt="gmail">
-            </button>
-            <button>
-                <img src="/assets/images/youtube.png" alt="youtube">
-            </button>
-        </div>
-        <div class="credit-block">
-            <span>Ⓒ 2025 บริษัท เอทไซน์ มีเดีย พลัส</span>
-        </div>
-    </footer>
+        </footer>
+    </main>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>

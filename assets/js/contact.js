@@ -34,38 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
     })
 
-    function search() {
-        const keyword = searchInput.value
-
-        const result = searchInput.value.trim()
-        if (result === "") {
-            resultFrame.src = `/components/search.html`
-
-        } else {
-            resultFrame.src = `/components/search.html?query=` + encodeURIComponent(keyword)
-            resultFrame.style.display = 'block'
-        }
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            search()
-        })
-
-        // searchInput.addEventListener('focus', () => {
-        //     resultFrame.style.width = '70%'
-        // })
-
-        // searchInput.addEventListener('blur', () => {
-        //     resultFrame.style.width = '0%'
-        // })
-    }
-
-    document.getElementById('button-1').addEventListener('click', (event) => {
-        event.preventDefault()
-        search()
-    })
-
     const clickLogo = document.querySelector('.logo')
     clickLogo.addEventListener('click', () => {
         window.location = '/index.html'
@@ -80,4 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     blockContact.addEventListener('click', () => {
         window.location = '/contact.html'
     })
+
+    const buttonLine = document.querySelector('.click-button')
+    buttonLine.addEventListener('click', () => {
+        window.open("https://page.line.me/myw8485r", "_blank");
+    })
+    // function line() {
+    //     window.open("https://page.line.me/myw8485r", "_blank");
+    // }
 })

@@ -103,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // loadProduct()
 
     const clickLogo = document.querySelector('.logo')
-    clickLogo.addEventListener('click', () => {
+    clickLogo.addEventListener('click', (e) => {
+        e.preventDefault()
         window.location = '/index.html'
     })
 
@@ -148,17 +149,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+
+    const loader = document.getElementById('loader-frame');
+    const main = document.getElementById('main-ss');
+
+    const hasLoadedBefore = sessionStorage.getItem('hasLoaded');
+
+    if (!hasLoadedBefore) {
+        loader.classList.add('visible');
+    } else {
+        loader.style.display = 'none';
+        main.style.display = 'flex';
+        main.style.opacity = '1';
+
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    }
+
     window.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'loaderFinished') {
-            document.getElementById('loader-frame').style.display = 'none';
-            document.getElementById('main-ss').style.display = 'flex';
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 100
-            });
+            const loader = document.getElementById('loader-frame');
+            const main = document.getElementById('main-ss');
+
+            loader.classList.remove('visible');
+            loader.classList.add('fade-out');
+
+            loader.addEventListener('transitionend', () => {
+                loader.style.display = 'none';
+
+                main.style.display = 'flex';
+                requestAnimationFrame(() => {
+                    main.classList.add('visible');
+                });
+
+                sessionStorage.setItem('hasLoaded', 'true');
+
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                    offset: 100
+                });
+            }, { once: true });
         }
     });
+
 
 })
 

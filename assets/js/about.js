@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
 
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {
             navBlock.style.display = 'none';
@@ -79,5 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const blockContact = document.getElementById('block-contact')
     blockContact.addEventListener('click', () => {
         window.location = '/contact.html'
+    })
+
+    const blockGallery = document.getElementById('block-gallery')
+    blockGallery.addEventListener('click', () => {
+        window.location = '/gallery.html'
     })
 })

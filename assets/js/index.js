@@ -41,6 +41,27 @@ document.addEventListener('DOMContentLoaded', () => {
         parallax.style.transform = `translateY(${speed}px)`;
     });
 
+    function loadProduct() {
+        const productItem = document.getElementById('product-item')
+        productItem.innerHTML = ""
+        db.getAll()[0].product.forEach(item => {
+            const div = document.createElement('div')
+            div.classList.add('product')
+            div.setAttribute('data-aos', 'fade-up')
+            const html = `
+                <div class="image-product">
+                    <img src="${item.image}" alt="img-product">
+                </div>
+                <div class="name-product">
+                    <span>${item.name}</span>
+                </div>`
+            div.innerHTML += html
+            productItem.appendChild(div)
+        })
+    }
+
+    loadProduct()
+
     // async function loadProduct() {
     //     try {
     //         const response = await fetch('http://1:3000/api/products')
@@ -103,8 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // loadProduct()
 
     const clickLogo = document.querySelector('.logo')
-    clickLogo.addEventListener('click', (e) => {
-        e.preventDefault()
+    clickLogo.addEventListener('click', () => {
         window.location = '/index.html'
     })
 
@@ -116,6 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const blockContact = document.getElementById('block-contact')
     blockContact.addEventListener('click', () => {
         window.location = '/contact.html'
+    })
+
+    const blockGallery = document.getElementById('block-gallery')
+    blockGallery.addEventListener('click', () => {
+        window.location = '/gallery.html'
     })
 
     function createParticles() {

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แกลเลอรี่ - U-Design</title>
+    <link rel="stylesheet" href="/assets/css/gallery.css">
+    <link rel="icon" href="/assets/images/iconUdesign.png">
+</head>
+
+<body>
+    <header id="header-con">
+        <div class="left-container">
+            <div class="logo">
+                <img src="\assets\images\logo.png" alt="logo">
+            </div>
+            <div class="nav-container">
+                <nav>
+                    <a href="/about.html">เกี่ยวกับ</a>
+                    <a href="/gallery.html">แกลเลอรี่</a>
+                    <a href="/contact.html">ติดต่อเรา</a>
+                    <a href="">บริการ</a>
+                    <div class="tree-keed">
+                        <span>☰</span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="search-con">
+                <form action="">
+                    <input id="search-input" type="text" name="search" placeholder="ค้นหาสินค้า">
+                    <button id="button-1" type="submit">
+                        <img id="search" src="/assets/images/search-interface-symbol.png" alt="search-icon">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="block-nav">
+            <div id="block-about" class="line">
+                <span>เกี่ยวกับ</span>
+            </div>
+            <div id="block-gallery" class="line">
+                <span>แกลเลอรี่</span>
+            </div>
+            <div id="block-contact" class="line">
+                <span>ติดต่อเรา</span>
+            </div>
+            <div class="line">
+                <span>บริการ</span>
+            </div>
+        </div>
+        <iframe class="overflow-auto p-3 mb-3 bg-light rounded shadow" id="iframe-search" src="/components/search.html"
+            frameborder="0"
+            style="position: fixed; width: 100%; height: 100%; top: 65px; right: 0; display: none; background-color: white; transition: 0.3s ease;"></iframe>
+    </header>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-images"></i> แกลเลอรี่ผลงาน</h1>
+            <p>ชมผลงานการออกแบบและผลิตป้ายต่างๆ ของเรา พร้อมรายละเอียดและเทคนิคการทำงาน</p>
+        </div>
+
+        <!-- หมวดหมู่ -->
+
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+            <button class="filter-btn" data-filter="composite">ป้ายคอมโพสิต</button>
+            <button class="filter-btn" data-filter="vinyl">ป้ายไวนิล</button>
+            <button class="filter-btn" data-filter="acrylic">ป้ายอะคริลิค</button>
+            <button class="filter-btn" data-filter="lightbox">ป้ายกล่องไฟ</button>
+            <button class="filter-btn" data-filter="sticker">สติ๊กเกอร์</button>
+
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- ป้ายคอมโพสิต -->
+            <div class="gallery-item" data-category="composite">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/500710041_1285580956903754_6999663217168183644_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=8z5sjT6chRMQ7kNvwGZdhtF&_nc_oc=AdlItNurWeFgYW8kVkeuUJC5zooerNU3y_VDV51Ar5hPWPwspEallRl7NqONzSkcc6E&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=ZTNLr4BUI6I3oii2Irs2xA&oh=00_AfMGg6Hju3LGGdI9LygW3OABaihDgLSZob6uZ6l8X1KOww&oe=6846E821"
+                    alt="ป้ายคอมโพสิต" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>ป้ายคอมโพสิต</h3>
+                    <p>ป้ายทำจากวัสดุคอมโพสิตคุณภาพสูง ทนทานต่อสภาพอากาศ เหมาะสำหรับการติดตั้งภายนอกอาคาร</p>
+                    <div class="gallery-tags">
+                        <span class="tag">กันน้ำ</span>
+                        <span class="tag">ทนแสงแดด</span>
+                        <span class="tag">ภายนอก</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="composite">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/499373448_1281955857266264_5344614534801169637_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=f9XoAi24azYQ7kNvwFByK3-&_nc_oc=Adlt-HcGrlMWadPqfMgo4LSPK33qdk-WWQVjVo4tWMdxRISJqagcMuGBBj2wJW9g8K0&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=NfMMfenlzXeWbdUCj-FSlA&oh=00_AfPkPwO7S7q_9e_33npxGZhc6Jw_4VquyfQoL5buJAVtFw&oe=6846C813"
+                    alt="คอมโพสิตติดตัวอักษรซิงค์ทำสี" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>คอมโพสิตติดตัวอักษรซิงค์ทำสี</h3>
+                    <p>ป้ายคอมโพสิตสำหรับสำนักงาน ดีไซน์สวยงาม ทันสมัย ติดตั้งง่าย ใช้งานได้นาน</p>
+                    <div class="gallery-tags">
+                        <span class="tag">ออฟฟิศ</span>
+                        <span class="tag">ทันสมัย</span>
+                        <span class="tag">คุณภาพสูง</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ป้ายไวนิล -->
+            <div class="gallery-item" data-category="vinyl">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/498595493_1281807313947785_3106192814512562874_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=di2qDtpjID4Q7kNvwEX2ch9&_nc_oc=AdmYB_z1VWH06u1Lz6I_o-TclIKFUe-em1QXFMh2e9mjUMEbHhZLRHMOfLsSbp46iwM&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=yH7qzLQeGuSxmH_oZ8WZkQ&oh=00_AfO6Jup25zrJJvbUplTzPQpYLRLxMBBa6_koh5qYihfOOw&oe=6846B687"
+                    alt="ป้ายไวนิล" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>ป้ายไวนิลโฆษณา</h3>
+                    <p>ป้ายไวนิลคุณภาพสูง สีสดใส ทนทาน เหมาะสำหรับการโฆษณาและประชาสัมพันธ์</p>
+                    <div class="gallery-tags">
+                        <span class="tag">สีสดใส</span>
+                        <span class="tag">ราคาประหยัด</span>
+                        <span class="tag">โฆษณา</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="vinyl">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/498115066_1277108194417697_5622833762242305733_n.jpg?stp=cp6_dst-jpg_s600x600_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=FZL0PqtqUx8Q7kNvwG9X6u5&_nc_oc=AdmCszTNZffMeEBW_xhiUl3W02SpDdBhZ7OopDKpPH6b5ZLs0C7hfYNVASx5EsXvAM0&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=sNTmuoVdSkmJPASFyzl9mg&oh=00_AfOzOEwdfzI8-VpRUatBTOIfGvVjKSxKWL5xpTM1IPQJKQ&oe=6846E759"
+                    alt="ไวนิลปริ้นเกรดสีUV" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>ป้ายไวนิลปริ้นเกรดสีUV</h3>
+                    <p>ป้ายไวนิลปริ้นเกรดสีUV ทนแดด ทนน้ำ ไม่ลอก ไม่ซีด แม้ติดกลางแจ้ง</p>
+                    <div class="gallery-tags">
+                        <span class="tag">ขนาดใหญ่</span>
+                        <span class="tag">ทนแดด</span>
+                        <span class="tag">พิมพ์คมชัด</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ป้ายอะคริลิค -->
+            <div class="gallery-item" data-category="acrylic">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/498914225_1278374014291115_3483586622666389213_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=o9Ygf7M4oIwQ7kNvwEu6ZeB&_nc_oc=Adn_YQZ0qExm5HmHtJ185iSix9ifZog_BL5yG0Ss8_BqWzZ7u0rmUn1PaxKd0ZNJPWU&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=swSBTQ48yaWVbb6n5V0VPg&oh=00_AfPlkYlRAlYtg5obj6YbQz5a1VU4Xv9cUUR72XIbHZOHeA&oe=6846DB78"
+                    alt="ป้ายอะคริลิค" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>ป้ายอะคริลิคตัวอักษร</h3>
+                    <p>ป้ายอะคริลิคใสหรือสีทึบ ตัดด้วยเลเซอร์ความแม่นยำสูง ให้ความหรูหราและทันสมัย</p>
+                    <div class="gallery-tags">
+                        <span class="tag">ตัดเลเซอร์</span>
+                        <span class="tag">หรูหรา</span>
+                        <span class="tag">ทันสมัย</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="acrylic">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/492232042_1257416913053492_6202000049913899437_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=tWeo3DycXxMQ7kNvwE7gP34&_nc_oc=AdmIOZKaS_OyI0uasRlmSKa6yBzl0NNZqFILq5ytRMCFct18j07mtLr1AJsiCINlEeg&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=vY3YrhWCke7xeg3pq8cNig&oh=00_AfPQj0x6kPPei5jpJs6odt08AXciwv3NU8jeKcCtW7wFfw&oe=6846D23E"
+                    alt="ป้ายอะคริลิคไฟออกหน้า" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>ป้ายอะคริลิคไฟออกหน้า</h3>
+                    <p>ป้ายอะคริลิคสำหรับบริษัท โลโก้คมชัด ดูมีระดับ เหมาะสำหรับติดตั้งในอาคารสำนักงาน</p>
+                    <div class="gallery-tags">
+                        <span class="tag">โลโก้</span>
+                        <span class="tag">มีระดับ</span>
+                        <span class="tag">บริษัท</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ป้ายกล่องไฟ -->
+            <div class="gallery-item" data-category="lightbox">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/498950724_1278371797624670_5119045027492970426_n.jpg?stp=dst-jpg_s600x600_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hIon1ObS6OAQ7kNvwH19hC_&_nc_oc=AdnetJo4ES3IypDNJ-hxzWUuo1hCurzmSolp798iQKs6Lww2LgdUuFS2DBgQUXbJBgU&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=sNTmuoVdSkmJPASFyzl9mg&oh=00_AfN0vb9bTuM9v7uVXoGrAWewxFxbY5nkRTQuEsBFJINFmw&oe=6846E8B8"
+                    alt="ป้ายกล่องไฟโลโก้" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>ป้ายกล่องไฟโลโก้</h3>
+                    <p>ป้ายกล่องไฟ LED แบคไลท์ ให้แสงนุ่ม เด่นชัดทั้งกลางวันและกลางคืน </p>
+                    <div class="gallery-tags">
+                        <span class="tag">LED แบคไลท์</span>
+                        <span class="tag">ประหยัดไฟ</span>
+                        <span class="tag">เด่นชัด</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="lightbox">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/492098546_1256816666446850_3840858658470751217_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hYqUAsM43ccQ7kNvwFmYRfE&_nc_oc=Adn8r8fiY9WmWVt-S_oUhKJTPN6MAaQt3eQBRa-pDNdysSBv35bi59h9LtB-3upwnto&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=qonW3D8nd8hVSB84jnOdKA&oh=00_AfPDN7eO-t3RTkQzRtCl1gBLEBT3waPuEq-f68TtEHJMEg&oe=6846EAD2"
+                    alt="งานตู้ไฟ งานคมชัดสีสด" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>งานตู้ไฟ งานคมชัดสีสด</h3>
+                    <p>ป้ายกล่องไฟ งานพิมพ์ตู้ไฟ สีสด คมชัด พรีเมียม</p>
+                    <div class="gallery-tags">
+                        <span class="tag">อายุการใช้งานยาวนาน</span>
+                        <span class="tag">สีสด</span>
+                        <span class="tag">น่าสนใจ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- สติ๊กเกอร์ -->
+            <div class="gallery-item" data-category="sticker">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/492567212_1258172552977928_5922328459877725196_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=fRATMN9AbBUQ7kNvwGQbf_m&_nc_oc=Adlhd-aTEn5WUJbJn2lYGRLi9BXqdYwjHURaWKG1EZLPs5cwF0i691eAxvQvaXzqsBQ&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=9U0axXhkQHIOvJT1ZP3-Ww&oh=00_AfPtKgbEJoPKHiOQfLE8Je2ngBgAjeAQdsV3b5usMgXF1A&oe=6846C44C"
+                    alt="สติ๊กเกอร์ติดรถ" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>สติ๊กเกอร์ติดรถ</h3>
+                    <p>สติ๊กเกอร์ติดรถคุณภาพสูง ทนความร้อน กันน้ำ ไม่ซีดจาง เหมาะสำหรับการโฆษณาเคลื่อนที่</p>
+                    <div class="gallery-tags">
+                        <span class="tag">ทนความร้อน</span>
+                        <span class="tag">ไม่ซีดจาง</span>
+                        <span class="tag">โฆษณาเคลื่อนที่</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="sticker">
+                <img src="https://scontent.furt1-1.fna.fbcdn.net/v/t39.30808-6/500232227_1285226040272579_5695641663077604902_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=m4pXU17NKQEQ7kNvwEUtDGk&_nc_oc=Adkd8ILzfzv-kE2nRN4KzqOshnVnRanzIoR-x5RtCiBieF4vugCK47OCesyojvIq1sM&_nc_zt=23&_nc_ht=scontent.furt1-1.fna&_nc_gid=nouzCCpJRf6jSsaVkIIcSA&oh=00_AfP9TviHgemW8MTwWcBJDfmx0aAgiTIoFHIpsB-A3Hk_3w&oe=6846D1C3"
+                    alt="สติ๊กเกอร์ปริ้นติดกระจก" class="gallery-img"">
+                <div class="gallery-info">
+                    <h3>สติ๊กเกอร์ติดกระจก</h3>
+                    <p>สติ๊กเกอร์พิมพ์ความละเอียดสูงสำหรับติดหน้าร้าน ใสสวย ติดง่าย ไม่ทิ้งรอยกาว</p>
+                    <div class="gallery-tags">
+                        <span class="tag">ไม่ทิ้งรอยกาว</span>
+                        <span class="tag">ความละเอียดสูง</span>
+                        <span class="tag">หน้าร้าน</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-cta">
+            <h2><i class="fas fa-phone-alt"></i> สนใจสั่งทำป้าย?</h2>
+            <p>ติดต่อเราเพื่อปรึกษาและขอใบเสนอราคาฟรี ทีมงานมืออาชีพพร้อมให้คำแนะนำ</p>
+            <div class="contact-buttons">
+                <a href="https://page.line.me/myw8485r" class="contact-btn line-btn" target="_blank">
+                    <i class="fab fa-line"></i>
+                    ติดต่อผ่าน LINE
+                </a>
+                <a href="https://www.facebook.com/udesignplus" class="contact-btn facebook-btn" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                    ติดต่อผ่าน Facebook
+                </a>
+                <a href="tel:088-7542440" class="contact-btn">
+                    <i class="fas fa-phone"></i>
+                    โทรหาเรา
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for image preview -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+    <footer>
+        <div class="detail-footer">
+            <div class="left-con">
+                <div class="logo-footer">
+                    <img src="/assets/images/logo.png" alt="logo">
+                </div>
+                <div class="address-block">
+                    <span>152 28 ถ. พัฒนาการคูขวาง ตำบล ท่าวัง</span>
+                    <span>อำเภอเมืองนครศรีธรรมราช นครศรีธรรมราช 80000</span>
+                    <span>LIne Phone: 0865193036 / 0982655479</span>
+                    <span>Email: u.printing01@gmail.com</span>
+                    <span>Facebook: ยู-ดีไซน์ ทำป้าย นครศรีธรรมราช</span>
+                    <span>Tel: 088-7542440 / 086-5193036 / 098-2655479</span>
+                </div>
+            </div>
+            <div class="center-con">
+                <span style="font-size: 30px; color: white; font-weight: 700;">เมนู</span>
+                <div class="block-link">
+                    <span>></span>
+                    <a href="/index.html">หน้าแรก</a>
+                </div>
+                <div class="block-link">
+                    <span>></span>
+                    <a href="/about.html">เกี่ยวกับ</a>
+                </div>
+                <div class="block-link">
+                    <span>></span>
+                    <a href="/gallery.html">แกลเลอรี่</a>
+                </div>
+                <div class="block-link">
+                    <span>></span>
+                    <a href="/contact.html">ติดต่อเรา</a>
+                </div>
+                <div class="block-link">
+                    <span>></span>
+                    <a href="">บริการ</a>
+                </div>
+            </div>
+            <div class="right-con">
+                <span style="font-size: 30px; color: white; font-weight: 700;">เวลาทำการ</span>
+                <span>วันจันทร์ - วันเสาร์</span>
+                <span>08:30 - 17:30</span>
+                <span>วันอาทิตย์ ปิด</span>
+            </div>
+        </div>
+        <div class="block-button">
+            <button>
+                <img src="/assets/images/facebook.png" alt="facebook">
+            </button>
+            <button>
+                <img src="/assets/images/line.png" alt="line">
+            </button>
+            <button>
+                <img src="/assets/images/gmail.png" alt="gmail">
+            </button>
+            <button>
+                <img src="/assets/images/youtube.png" alt="youtube">
+            </button>
+        </div>
+        <div class="credit-block">
+            <span>Ⓒ 2025 บริษัท เอทไซน์ มีเดีย พลัส</span>
+        </div>
+    </footer>
+    <script src="/assets/js/gallery.js"></script>
+</body>
+
+</html>

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <title>เกี่ยวกับ - U-Dsign</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/about.css">
@@ -54,7 +58,8 @@
         </div>
         <iframe class="overflow-auto p-3 mb-3 bg-light rounded shadow" id="iframe-search" src="/components/search.html"
             frameborder="0"
-            style="position: fixed; width: 100%; height: 100%; top: 65px; right: 0; display: none; background-color: white; transition: 0.3s ease;"></iframe>
+            style="position: absolute; width: 100%; height: auto; max-height: 300px; top: 100%; left: 0; z-index: 9990; background-color: rgb(255, 255, 255); display: none;">
+        </iframe>
     </header>
     <main>
         <!-- section 1 -->
@@ -141,7 +146,8 @@
 
         <!-- section 5 -->
         <section class="machine-showcase-5">
-            <h1 class="text-header" data-aos="fade-up">เทคโนโลยีล้ำสมัย ผลิตงานคุณภาพ พร้อมส่งมอบตรงเวลา ทุกชิ้นงานคือมาตรฐานมืออาชีพ</h1>
+            <h1 class="text-header" data-aos="fade-up">เทคโนโลยีล้ำสมัย ผลิตงานคุณภาพ พร้อมส่งมอบตรงเวลา
+                ทุกชิ้นงานคือมาตรฐานมืออาชีพ</h1>
             <div class="machine-head">
                 <div class="machine">
                     <div class="machine-image" data-aos="fade-right">
@@ -262,5 +268,33 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="/assets/js/about.js"></script>
+<script>
+    // Sanitize user input
+    function sanitizeInput(input) {
+        return input.replace(/[&<>"']/g, function(match) {
+            const entities = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            };
+            return entities[match];
+        });
+    }
+
+    // Sanitize form submissions
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            for (let [key, value] of formData.entries()) {
+                formData.set(key, sanitizeInput(value));
+            }
+            // Continue with form submission
+            this.submit();
+        });
+    });
+</script>
 
 </html>

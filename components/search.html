@@ -1,188 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <title>Document</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
         .serch-container {
             background-color: rgb(253, 253, 253);
             width: 100%;
             display: flex;
             z-index: 2;
-        }
-
-        .button-search {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 150px;
-            height: 100%;
         }
 
-        .name-group {
+        .item-name {
             width: 100%;
-        }
-
-        .line-1 {
-            height: 100%;
-            width: 1px;
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .button-group button {
-            background: none;
-            width: 100%;
-            height: 50px;
-            border: none;
-            outline: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: flex;
+            gap: 20px;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .button-group button:hover {
-            background-color: #f5fdd4;
+        .item-name:hover {
+            background-color: #f0f0f0;
         }
 
-        .item-product {
-            padding: 20px 40px;
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            margin: auto;
-            gap: 30px;
-        }
-
-        .product-show {
-            background-color: #ffffff;
-            box-shadow: 0 2px 0 1px rgba(0, 0, 0, 0.1);
-            height: 190px;
-            border-radius: 10px;
-            width: 140px;
-            cursor: pointer;
-        }
-
-        .image-product-group {
-            width: 100%;
-            height: 140px;
-        }
-
-        .image-product-group img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px 10px 0px 0px;
-        }
-
-        .title-product {
+        .no-results {
+            padding: 20px;
             text-align: center;
-            padding: 10px 0;
-        }
-
-        @media (max-width: 1435px) {
-            .item-product {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-
-        @media (max-width: 1089px) {
-            .item-product {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-
-        @media (max-width: 925px) {
-            .item-product {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 769px) {
-            .serch-container {
-                flex-direction: column;
-            }
-
-            .button-search {
-                width: 100%;
-                flex-direction: row;
-                justify-content: center;
-            }
-
-            .button-group button {
-                width: auto;
-                padding: 10px 20px;
-            }
-
-            .line-1 {
-                display: none;
-            }
-
-            .item-product {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                padding: 10px 40px;
-            }
-
-            .product-show {
-                width: 100%;
-                max-width: 200px;
-                margin: auto;
-            }
+            color: #666;
         }
     </style>
 </head>
 
 <body>
-    <div class="serch-container">
-        <div class="item-product">
-            <div class="product-show">
-                <div class="image-product-group">
-                    <img src="/assets/images/a9d4fd3e-6911-434e-b34c-b0d69e6c1820.jfif" alt="">
-                </div>
-                <div class="title-product">
-                    <span>ป้ายไวนิล</span>
-                </div>
-            </div>
-        </div>
+    <div class="serch-container" id="search-results">
+        <!-- Results will be populated here -->
     </div>
 </body>
+<script src="/assets/js/model/database.js"></script>
 <script>
-    async function searchProduct() {
-        try {
-            const params = new URLSearchParams(window.location.search)
-            const query = params.get("query")
-
-            let response
-            if (!query) {
-                response = await fetch(`http://192.168.1.44:3000/api/products`)
-            } else {
-                response = await fetch(`http://192.168.1.44:3000/api/product/search?keyword=${query}`)
-            }
-
-            const data = await response.json()
-
-            const itemProduct = document.querySelector('.item-product')
-            itemProduct.innerHTML = ""
-
-            data.forEach(item => {
-                const div = document.createElement('div')
-                div.classList.add('product-show')
-                div.innerHTML = `
-                    <div class="image-product-group">
-                        <img src="data:image/jpeg;base64,${item.images}" alt="">
-                    </div>
-                    <div class="title-product">
-                        <span>${item.name}</span>
-                    </div>
-                `
-                itemProduct.appendChild(div)
-            })
-        } catch (err) {
-            console.error("เกิดข้อผิดพลาดในการค้นหา:", err)
+    function searchProducts(query) {
+        const searchResults = document.getElementById('search-results');
+        const products = db.getAllProducts();
+        
+        // Clear previous results
+        searchResults.innerHTML = '';
+        
+        if (!query) {
+            return;
         }
-    }
-    window.addEventListener('DOMContentLoaded', searchProduct)
-</script>
 
+        // Filter products based on search query
+        const filteredProducts = products.filter(product => 
+            product.name.toLowerCase().includes(query.toLowerCase()) ||
+            product.description.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (filteredProducts.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">ไม่พบผลการค้นหา</div>';
+            return;
+        }
+
+        // Display results
+        filteredProducts.forEach(product => {
+            const div = document.createElement('a');
+            div.href = `/gallery.html?id=${product.id}`;
+            div.className = 'item-name';
+            div.innerHTML = `
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>${product.name}</span>
+            `;
+            searchResults.appendChild(div);
+        });
+    }
+
+    // Get search query from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
+    
+    if (query) {
+        searchProducts(query);
+    }
+</script>
 
 </html>

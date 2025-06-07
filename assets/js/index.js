@@ -24,9 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
         if (currentScroll > lastScrollTop) {
-            header.style.top = '-100px'
+            header.style.top = '-300px'
             navBlock.style.display = 'none'
-            resultFrame.style.display = 'none'
             searchInput.blur()
         } else {
             header.style.top = '0px'
@@ -43,8 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadProduct() {
         const productItem = document.getElementById('product-item')
+        const isMobile = window.innerWidth <= 740;
+        const products = db.getAllProducts().slice(0, isMobile ? 6 : 10)
         productItem.innerHTML = ""
-        db.getAll()[0].product.forEach(item => {
+        products.forEach(item => {
             const div = document.createElement('div')
             div.classList.add('product')
             div.setAttribute('data-aos', 'fade-up')
@@ -62,66 +63,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadProduct()
 
-    // async function loadProduct() {
-    //     try {
-    //         const response = await fetch('http://1:3000/api/products')
-    //         const data = await response.json()
+    // Add window resize event listener to reload products when screen size changes
+    window.addEventListener('resize', () => {
+        loadProduct()
+    })
 
-    //         const dataLimit = data.slice(0, 10)
-    //         const productItem = document.getElementById('product-item')
-    //         productItem.innerHTML = ""
-    //         dataLimit.forEach(item => {
-    //             const div = document.createElement('div')
-    //             div.classList.add('product')
-    //             div.setAttribute('data-aos', 'fade-up')
-    //             const html = `
-    //                 <div class="image-product">
-    //                     <img src="data:image/jpeg;base64,${item.images}" alt="img-product">
-    //                 </div>
-    //                 <div class="name-product">
-    //                     <span>${item.name}</span>
-    //                 </div>`
-    //             div.innerHTML += html
-    //             productItem.appendChild(div)
-    //         });
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // }
+    function search() {
+        const keyword = searchInput.value.trim()
+        if (keyword === "") {
+            resultFrame.style.display = 'none'
+        } else {
+            resultFrame.src = `/components/search.html?query=${encodeURIComponent(keyword)}`
+            resultFrame.style.display = 'block'
+        }
+    }
 
-    // function search() {
-    //     const keyword = searchInput.value
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            search()
+        })
 
-    //     const result = searchInput.value.trim()
-    //     if (result === "") {
-    //         resultFrame.src = `/components/search.html`
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim() !== '') {
+                resultFrame.style.display = 'block'
+            }
+        })
 
-    //     } else {
-    //         resultFrame.src = `/components/search.html?query=` + encodeURIComponent(keyword)
-    //         resultFrame.style.display = 'block'
-    //     }
-    // }
+        searchInput.addEventListener('blur', () => {
+            // Add a small delay to allow clicking on search results
+            setTimeout(() => {
+                resultFrame.style.display = 'none'
+            }, 200)
+        })
+    }
 
-    // if (searchInput) {
-    //     searchInput.addEventListener('input', () => {
-    //         search()
-    //     })
-
-    // searchInput.addEventListener('focus', () => {
-    //     resultFrame.style.width = '70%'
-    // })
-
-    // searchInput.addEventListener('blur', () => {
-    //     resultFrame.style.width = '0%'
-    // })
-    // }
-
-    // document.getElementById('button-1').addEventListener('click', (event) => {
-    //     event.preventDefault()
-    //     search()
-    // })
-
-    // loadProduct()
+    document.getElementById('button-1').addEventListener('click', (event) => {
+        event.preventDefault()
+        search()
+    })
 
     const clickLogo = document.querySelector('.logo')
     clickLogo.addEventListener('click', () => {
@@ -174,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     const loader = document.getElementById('loader-frame');
     const main = document.getElementById('main-ss');
 
@@ -220,7 +198,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { once: true });
         }
     });
-
-
 })
 

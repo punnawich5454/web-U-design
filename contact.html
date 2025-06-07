@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <title>ติดต่อเรา - U-Dsign</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/contact.css">
@@ -54,7 +58,8 @@
         </div>
         <iframe class="overflow-auto p-3 mb-3 bg-light rounded shadow" id="iframe-search" src="/components/search.html"
             frameborder="0"
-            style="position: fixed; width: 100%; height: 100%; top: 65px; right: 0; display: none; background-color: white; transition: 0.3s ease;"></iframe>
+            style="position: absolute; width: 100%; height: auto; max-height: 300px; top: 100%; left: 0; z-index: 9990; background-color: rgb(255, 255, 255); display: none;">
+        </iframe>
     </header>
     <div class="main-container">
         <div class="background-section">
@@ -175,5 +180,40 @@
     </footer>
 </body>
 <script src="/assets/js/contact.js"></script>
+<script>
+    // Sanitize user input
+    function sanitizeInput(input) {
+        return input.replace(/[&<>"']/g, function(match) {
+            const entities = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            };
+            return entities[match];
+        });
+    }
+
+    // Sanitize form submissions
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            for (let [key, value] of formData.entries()) {
+                formData.set(key, sanitizeInput(value));
+            }
+            // Continue with form submission
+            this.submit();
+        });
+    });
+
+    // Sanitize all input fields on input
+    document.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('input', function(e) {
+            this.value = sanitizeInput(this.value);
+        });
+    });
+</script>
 
 </html>

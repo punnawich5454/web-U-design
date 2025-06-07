@@ -29,14 +29,54 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
         if (currentScroll > lastScrollTop) {
-            header.style.top = '-100px'
+            header.style.top = '-300px'
             navBlock.style.display = 'none'
-            resultFrame.style.display = 'none'
             searchInput.blur()
         } else {
             header.style.top = '0px'
         }
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
+    })
+
+    window.addEventListener('scroll', function () {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.hero-section');
+        const speed = scrolled * 0.5;
+        parallax.style.transform = `translateY(${speed}px)`;
+    });
+
+    function search() {
+        const keyword = searchInput.value.trim()
+        if (keyword === "") {
+            resultFrame.style.display = 'none'
+        } else {
+            resultFrame.src = `/components/search.html?query=${encodeURIComponent(keyword)}`
+            resultFrame.style.display = 'block'
+        }
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            search()
+        })
+
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim() !== '') {
+                resultFrame.style.display = 'block'
+            }
+        })
+
+        searchInput.addEventListener('blur', () => {
+            // Add a small delay to allow clicking on search results
+            setTimeout(() => {
+                resultFrame.style.display = 'none'
+            }, 200)
+        })
+    }
+
+    document.getElementById('button-1').addEventListener('click', (event) => {
+        event.preventDefault()
+        search()
     })
 
     const clickLogo = document.querySelector('.logo')

@@ -121,6 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location = '/gallery.html'
     })
 
+    const blockService = document.getElementById('block-service')
+    blockService.addEventListener('click', () => {
+        window.location = '/service.html'
+    })
+
     function createParticles() {
         const particlesContainer = document.getElementById('particles');
         const particleCount = 50;

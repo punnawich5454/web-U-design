@@ -99,6 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location = '/gallery.html'
     })
 
+    const blockService = document.getElementById('block-service')
+    blockService.addEventListener('click', () => {
+        window.location = '/service.html'
+    })
+
     // ฟังก์ชันสำหรับจำกัดจำนวนรูปที่แสดง
     function limitGalleryItems(filterValue) {
         const isMobile = window.innerWidth <= 768;

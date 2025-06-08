@@ -10,7 +10,7 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="/assets/images/iconUdesign.png">
-    <title> - รายละเอียดสินค้า</title>
+    <title></title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
@@ -661,7 +661,7 @@
                     <a href="/about.html">เกี่ยวกับ</a>
                     <a href="/gallery.html">แกลเลอรี่</a>
                     <a href="/contact.html">ติดต่อเรา</a>
-                    <a href="">บริการ</a>
+                    <a href="/service.html">บริการ</a>
                     <div class="tree-keed">
                         <span>☰</span>
                     </div>
@@ -688,7 +688,7 @@
             <div id="block-contact" class="line">
                 <span>ติดต่อเรา</span>
             </div>
-            <div class="line">
+            <div id="block-service" class="line">
                 <span>บริการ</span>
             </div>
         </div>
@@ -780,7 +780,7 @@
                 </div>
                 <div class="block-link">
                     <span>></span>
-                    <a href="">บริการ</a>
+                    <a href="/service.html">บริการ</a>
                 </div>
             </div>
             <div class="right-con">
@@ -860,18 +860,19 @@
 
         function search() {
             const keyword = sanitizeInput(searchInput.value.trim());
-            if (keyword === "") {
-                resultFrame.style.display = 'none';
-            } else {
-                const sanitizedQuery = encodeURIComponent(keyword);
-                resultFrame.src = sanitizeURL(`/components/search.html?query=${sanitizedQuery}`);
-                resultFrame.style.display = 'block';
+            if (keyword !== "") {
+                window.location.href = `/products.html?query=${encodeURIComponent(keyword)}`;
             }
         }
 
         if (searchInput) {
             searchInput.addEventListener('input', () => {
-                search()
+                if (searchInput.value.trim() !== '') {
+                    resultFrame.style.display = 'block';
+                    resultFrame.src = sanitizeURL(`/components/search.html?query=${encodeURIComponent(searchInput.value.trim())}`);
+                } else {
+                    resultFrame.style.display = 'none';
+                }
             })
 
             searchInput.addEventListener('focus', () => {
@@ -889,7 +890,10 @@
 
         document.getElementById('button-1').addEventListener('click', (event) => {
             event.preventDefault()
-            search()
+            const keyword = sanitizeInput(searchInput.value.trim());
+            if (keyword !== "") {
+                window.location.href = `/products.html?query=${encodeURIComponent(keyword)}`;
+            }
         })
 
         const clickLogo = document.querySelector('.logo')
@@ -911,6 +915,12 @@
         blockGallery.addEventListener('click', () => {
             window.location = '/gallery.html'
         })
+
+        const blockService = document.getElementById('block-service')
+        blockService.addEventListener('click', () => {
+            window.location = '/service.html'
+        })
+
         function changeImage(thumbnail) {
             const mainImage = document.getElementById('mainImage');
             const thumbnails = document.querySelectorAll('.thumbnail');
@@ -929,7 +939,7 @@
             if (productId && !isNaN(productId)) {
                 const product = db.getById(productId);
                 if (product) {
-                    document.title = `${sanitizeInput(product.name)} - รายละเอียดสินค้า`;
+                    document.title = `${sanitizeInput(product.name)} - U-Dsign`;
 
                     document.querySelector('.product-title').textContent = sanitizeInput(product.name);
 

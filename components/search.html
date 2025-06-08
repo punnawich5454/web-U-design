@@ -9,7 +9,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title>U-Dsign</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
@@ -82,12 +82,16 @@
 
         filteredProducts.forEach(product => {
             const div = document.createElement('a');
-            div.href = `/gallery.html?id=${product.id}`;
+            div.href = `/page/product.html?id=${product.id}`;
             div.className = 'item-name';
             div.innerHTML = `
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>${product.name}</span>
             `;
+            div.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.parent.location.href = `/page/product.html?id=${product.id}`;
+            });
             searchResults.appendChild(div);
         });
     }
@@ -98,6 +102,16 @@
     if (query) {
         searchProducts(query);
     }
+
+    // Add event listener for Enter key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const searchInput = document.querySelector('input[name="search"]');
+            if (searchInput && searchInput.value.trim()) {
+                window.location.href = `/page/product.html?id=${encodeURIComponent(searchInput.value.trim())}`;
+            }
+        }
+    });
 </script>
 
 </html>

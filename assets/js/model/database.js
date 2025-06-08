@@ -22,25 +22,18 @@ const database = {
         },
         {
             id: 5,
-            name: "ตัวอักษร",
-            subcategories: [
-                {
-                    id: 1,
-                    name: "ตัวอักษรมีไฟ",
-                    products: [17, 18, 19, 20]
-                },
-                {
-                    id: 2,
-                    name: "ตัวอักษรไม่มีไฟ",
-                    products: [20, 21]
-                }
-            ],
-            products: [17, 18, 19, 20, 21, 22]
+            name: "ตัวอักษรมีไฟ",
+            products: [17, 18, 19, 20]
         },
         {
             id: 6,
             name: "งานอื่นๆ",
             products: [24, 25, 26, 27, 28, 29]
+        },
+        {
+            id: 7,
+            name: "ตัวอักษรไม่มีไฟ",
+            products: [21, 22]
         }
     ],
     products: [

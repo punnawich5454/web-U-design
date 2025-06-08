@@ -11,9 +11,8 @@
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-    <title>ติดต่อเรา - U-Dsign</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/contact.css">
+    <title>บริการทั้งหมด - U-Dsign</title>
+    <link rel="stylesheet" href="/assets/css/service.css">
     <link rel="icon" href="/assets/images/iconUdesign.png">
 </head>
 
@@ -64,60 +63,31 @@
             style="position: absolute; width: 100%; height: 300px; max-height: 300px; top: 100%; left: 0; z-index: 9990; background-color: rgb(255, 255, 255); display: none;">
         </iframe>
     </header>
-    <div class="main-container">
-        <div class="background-section">
-            <div class="hero-section">
-                <h1 class="hero-title">ติดต่อเรา</h1>
-                <h2 class="hero-subtitle">ทำป้ายโฆษณา สื่อสิ่งพิมพ์</h2>
+    <div class="container">
+        <main>
+            <div class="main-title">
+                <h1>บริการทั้งหมด</h1>
             </div>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon phone-icon"></div>
-                    <div class="contact-details">
-                        <h3>โทรศัพท์</h3>
-                        <p>088-7542440<br>086-5193036<br>098-2655479</p>
-                    </div>
-                </div>
-                <a href="https://www.facebook.com/udesignplus" target="_blank" class="contact-item">
-                    <div class="contact-icon facebook-icon"></div>
-                    <div class="contact-details">
-                        <h3>Facebook</h3>
-                        <p>ยู-ดีไซน์</p>
-                    </div>
-                </a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=printing01@gmail.com.com&su=หัวเรื่อง&body=เนื้อหาอีเมล"
-                    target="_blank" class="contact-item">
-                    <div class="contact-icon email-icon"></div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p>printing01@gmail.com</p>
-                    </div>
-                </a>
-                <a href="https://maps.app.goo.gl/WM2DqQAKvomdmGYR8" target="_blank" class="contact-item">
-                    <div class="contact-icon location-icon"></div>
-                    <div class="contact-details">
-                        <h3>ที่ตั้งร้าน</h3>
-                        <p>Google Map</p>
-                    </div>
-                </a>
+            <!-- หมวดหมู่ -->
+            <div class="nav-menu">
+                <a href="#" class="active" data-category="all">ทั้งหมด</a>
+                <a href="#" data-category="ไวนิว">ไวนิว</a>
+                <a href="#" data-category="สดิกเกอร์">สดิกเกอร์</a>
+                <a href="#" data-category="คอมโพสิท">คอมโพสิท</a>
+                <a href="#" data-category="ดิสเพลย์">ดิสเพลย์</a>
+                <a href="#" data-category="ตัวอักษรมีไฟ">ตัวอักษรมีไฟ</a>
+                <a href="#" data-category="ตัวอักษรไม่มีไฟ">ตัวอักษรไม่มีไฟ</a>
+                <a href="#" data-category="งานอื่นๆ">งานอื่นๆ</a>
             </div>
-            <div class="contact-form">
-                <h1 class="form-head">ติดต่อเรา</h1>
-                <div class="qr-container">
-                    <div class="qr-code">
-                        <div class="qr-image"><img src="/assets/images/qrcode.jpg" width="100%" height="100%"
-                                style="object-fit: cover;"></div>
-                    </div>
-                </div>
-                <h2 class="form-title">สแกนเลย!</h2>
-                <button class="click-button">
-                    <h3 class="form-subtitle">คลิก</h3>
-                </button>
+        </main>
+
+        <section>
+            <div class="services-container">
+
             </div>
-        </div>
+        </section>
     </div>
+
     <footer>
         <div class="detail-footer">
             <div class="left-con">
@@ -181,38 +151,9 @@
             <span>Ⓒ 2025 บริษัท เอทไซน์ มีเดีย พลัส</span>
         </div>
     </footer>
+
+    <script src="assets/js/model/database.js"></script>
+    <script src="assets/js/service.js"></script>
 </body>
-<script src="/assets/js/contact.js"></script>
-<script>
-    function sanitizeInput(input) {
-        return input.replace(/[&<>"']/g, function(match) {
-            const entities = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#39;'
-            };
-            return entities[match];
-        });
-    }
-
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            for (let [key, value] of formData.entries()) {
-                formData.set(key, sanitizeInput(value));
-            }
-            this.submit();
-        });
-    });
-
-    document.querySelectorAll('input, textarea').forEach(input => {
-        input.addEventListener('input', function(e) {
-            this.value = sanitizeInput(this.value);
-        });
-    });
-</script>
 
 </html>

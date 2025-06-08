@@ -91,4 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     blockGallery.addEventListener('click', () => {
         window.location = '/gallery.html'
     })
+
+    const blockService = document.getElementById('block-service')
+    blockService.addEventListener('click', () => {
+        window.location = '/service.html'
+    })
 })

@@ -87,6 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location = '/gallery.html'
     })
 
+    const blockService = document.getElementById('block-service')
+    blockService.addEventListener('click', () => {
+        window.location = '/service.html'
+    })
+
     const buttonLine = document.querySelector('.click-button')
     buttonLine.addEventListener('click', () => {
         window.open("https://page.line.me/myw8485r", "_blank");

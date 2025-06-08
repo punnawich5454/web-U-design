@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
         if (currentScroll > lastScrollTop) {
-            header.style.top = '-300px'
+            header.style.top = '-380px'
             navBlock.style.display = 'none'
             searchInput.blur()
         } else {
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const div = document.createElement('div')
             div.classList.add('product')
             div.setAttribute('data-aos', 'fade-up')
+            div.onclick = () => window.location.href = `/page/product.html?id=${item.id}`
             const html = `
                 <div class="image-product">
                     <img src="${item.image}" alt="img-product">
@@ -63,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadProduct()
 
-    // Add window resize event listener to reload products when screen size changes
     window.addEventListener('resize', () => {
         loadProduct()
     })
@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
         searchInput.addEventListener('blur', () => {
-            // Add a small delay to allow clicking on search results
             setTimeout(() => {
                 resultFrame.style.display = 'none'
             }, 200)

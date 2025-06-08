@@ -57,7 +57,6 @@
 
 <body>
     <div class="serch-container" id="search-results">
-        <!-- Results will be populated here -->
     </div>
 </body>
 <script src="/assets/js/model/database.js"></script>
@@ -66,17 +65,14 @@
         const searchResults = document.getElementById('search-results');
         const products = db.getAllProducts();
         
-        // Clear previous results
         searchResults.innerHTML = '';
         
         if (!query) {
             return;
         }
 
-        // Filter products based on search query
         const filteredProducts = products.filter(product => 
-            product.name.toLowerCase().includes(query.toLowerCase()) ||
-            product.description.toLowerCase().includes(query.toLowerCase())
+            product.name.toLowerCase().startsWith(query.toLowerCase())
         );
 
         if (filteredProducts.length === 0) {
@@ -84,7 +80,6 @@
             return;
         }
 
-        // Display results
         filteredProducts.forEach(product => {
             const div = document.createElement('a');
             div.href = `/gallery.html?id=${product.id}`;
@@ -97,7 +92,6 @@
         });
     }
 
-    // Get search query from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');
     

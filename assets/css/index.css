@@ -62,13 +62,11 @@ main {
     pointer-events: none;
 }
 
-/* MAIN ซ่อนเริ่มต้น และกำหนด transition */
 #main-ss {
     opacity: 0;
     transition: opacity 1s ease;
 }
 
-/* เมื่อพร้อมแสดง */
 #main-ss.visible {
     opacity: 1;
 }
@@ -786,7 +784,7 @@ footer {
 }
 
 @media (max-width: 1050px) {
-    .video-con iframe {
+    .video-con video {
         width: 600px;
         height: 337px;
     }
@@ -847,7 +845,7 @@ footer {
         height: 100px;
     }
 
-    .video-con iframe {
+    .video-con video {
         width: 360px;
         height: 207px;
     }

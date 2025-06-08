@@ -8,6 +8,9 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     <title>ติดต่อเรา - U-Dsign</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/contact.css">
@@ -58,7 +61,7 @@
         </div>
         <iframe class="overflow-auto p-3 mb-3 bg-light rounded shadow" id="iframe-search" src="/components/search.html"
             frameborder="0"
-            style="position: absolute; width: 100%; height: auto; max-height: 300px; top: 100%; left: 0; z-index: 9990; background-color: rgb(255, 255, 255); display: none;">
+            style="position: absolute; width: 100%; height: 300px; max-height: 300px; top: 100%; left: 0; z-index: 9990; background-color: rgb(255, 255, 255); display: none;">
         </iframe>
     </header>
     <div class="main-container">
@@ -181,7 +184,6 @@
 </body>
 <script src="/assets/js/contact.js"></script>
 <script>
-    // Sanitize user input
     function sanitizeInput(input) {
         return input.replace(/[&<>"']/g, function(match) {
             const entities = {
@@ -195,7 +197,6 @@
         });
     }
 
-    // Sanitize form submissions
     document.querySelectorAll('form').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -203,12 +204,10 @@
             for (let [key, value] of formData.entries()) {
                 formData.set(key, sanitizeInput(value));
             }
-            // Continue with form submission
             this.submit();
         });
     });
 
-    // Sanitize all input fields on input
     document.querySelectorAll('input, textarea').forEach(input => {
         input.addEventListener('input', function(e) {
             this.value = sanitizeInput(this.value);

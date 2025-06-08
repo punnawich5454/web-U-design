@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
         if (currentScroll > lastScrollTop) {
-            header.style.top = '-100px'
+            header.style.top = '-380px'
             navBlock.style.display = 'none'
             resultFrame.style.display = 'none'
             searchInput.blur()

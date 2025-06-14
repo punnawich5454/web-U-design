@@ -384,15 +384,16 @@ const database = {
 };
 
 const db = {
-    getAll: () => database,
+    // getAll: () => database,
     
     getById: (id) => database.products.find(item => item.id === id),
     
     getCategories: () => database.categories,
-    
+
     getProductsByCategory: (categoryId) => {
         const category = database.categories.find(cat => cat.id === categoryId);
         if (!category) return [];
+        
         return database.products
             .filter(product => category.products.includes(product.id))
             .map(product => ({
@@ -429,5 +430,7 @@ const db = {
 // console.log(db.getProductsBySubcategory(5, 2))
 
 // console.log(db.getAll())
+
+// console.log(db.getAllProducts())
 
 module.exports = db; 

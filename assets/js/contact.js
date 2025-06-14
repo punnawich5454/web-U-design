@@ -18,19 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    const header = document.getElementById('header-con')
+   const header = document.getElementById('header-con')
     let lastScrollTop = 0
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+        // ทำงานเฉพาะหน้าจอเล็ก (มือถือ)
+        if (window.innerWidth <= 768) {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
-        if (currentScroll > lastScrollTop) {
-            header.style.top = '-380px'
-            navBlock.style.display = 'none'
-            searchInput.blur()
-        } else {
-            header.style.top = '0px'
+            if (currentScroll > lastScrollTop) {
+                header.style.top = '-380px'
+                navBlock.style.display = 'none'
+                resultFrame.style.display = 'none'
+                searchInput.blur()
+            } else {
+                header.style.top = '0px'
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
         }
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
     })
 
     function search() {

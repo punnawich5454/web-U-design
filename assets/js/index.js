@@ -37,13 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    window.addEventListener('scroll', function () {
-        const scrolled = window.pageYOffset;
-        const parallax = document.querySelector('.hero-section');
-        const speed = scrolled * 0.5;
-        parallax.style.transform = `translateY(${speed}px)`;
-    });
-
     function loadProduct() {
         const productItem = document.getElementById('product-item')
         const isMobile = window.innerWidth <= 740;

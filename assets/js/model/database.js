@@ -18,7 +18,7 @@ const database = {
         {
             id: 4,
             name: "ดิสเพลย์",
-            products: [12, 13, 14, 15, 16]
+            products: [12, 13, 14, 15, 16],
         },
         {
             id: 5,
@@ -110,7 +110,7 @@ const database = {
         },
         {
             id: 7,
-            name: "Wrap",
+            name: "สติ๊กเกอร์แร็ป",
             description: "Wrap สติกเกอร์คือสติกเกอร์ไวนิลคุณภาพสูงที่ใช้สำหรับพันหุ้มผิววัสดุต่าง ๆ เพื่อเปลี่ยนสีหรือเพิ่มดีไซน์ให้ดูโดดเด่น สติกเกอร์ประเภทนี้ทนทานต่อรอยขีดข่วนและสภาพอากาศ เหมาะสำหรับงานหุ้มรถยนต์ เฟอร์นิเจอร์ อุปกรณ์อิเล็กทรอนิกส์ หรือผนังตกแต่ง",
             images: [
                 "https://scontent.furt3-1.fna.fbcdn.net/v/t39.30808-6/465789496_28237544182511119_456988491051712452_n.jpg?_nc_cat=103&cb=64d46a15-5a82848f&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHrobscEy3ZP-pBnIDIXnQlqletJQqU5bSqV60lCpTltI0DeV2Eh53Ufom13DMrhHKrp_aHADu172LB4RTHyzX-&_nc_ohc=4bsahvlMqbgQ7kNvwHdyVm0&_nc_oc=Adk4YOp8zvSRtGQADZrIK3AmuSmwP1T5TRipMutxLI2ARKEUcm6j6-_yWGNUcLhYURXzHsgTyjJu4CJ8vgFpPzXV&_nc_zt=23&_nc_ht=scontent.furt3-1.fna&_nc_gid=OrjfMr9zu-66NTNo__Ua2A&oh=00_AfOKxClGt9SYPf6qnTKwWYFxXTpB9izkArtAPGMtzQgdPg&oe=6849EE7C",

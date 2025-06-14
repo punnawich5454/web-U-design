@@ -30,6 +30,7 @@ body {
 
 main {
     display: none;
+    margin-top: 100px;
     flex-direction: column;
     gap: 30px;
 }
@@ -77,7 +78,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; 
 }
 
 #particles {
@@ -909,7 +910,6 @@ footer {
 /* slider */
 
 .slideshow-container {
-    margin-top: 100px;
     position: relative;
     z-index: 1000;
 

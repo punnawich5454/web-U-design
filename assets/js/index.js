@@ -24,23 +24,23 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // Scroll event listener for header visibility and smooth scrolling
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    // window.addEventListener('scroll', () => {
+    //     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Show/hide header based on scroll direction
-        if (currentScroll > lastScrollTop && currentScroll > 100) {
-            // Scrolling down
-            header.style.transform = 'translateY(-100%)';
-            navBlock.style.display = 'none';
-            resultFrame.style.display = 'none';
-            searchInput.blur();
-        } else {
-            // Scrolling up
-            header.style.transform = 'translateY(0)';
-        }
+    //     // Show/hide header based on scroll direction
+    //     if (currentScroll > lastScrollTop && currentScroll > 100) {
+    //         // Scrolling down
+    //         header.style.transform = 'translateY(-100%)';
+    //         navBlock.style.display = 'none';
+    //         resultFrame.style.display = 'none';
+    //         searchInput.blur();
+    //     } else {
+    //         // Scrolling up
+    //         header.style.transform = 'translateY(0)';
+    //     }
         
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    })
+    //     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    // })
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

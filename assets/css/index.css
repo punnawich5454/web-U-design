@@ -779,7 +779,19 @@ footer {
     }
 
     .hero-content {
+        padding: 0 10px;
         max-width: 50%;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text .subtitle {
+        font-size: 1rem;
+    }
+    .hero-text p {
+        font-size: 1rem;
     }
 }
 

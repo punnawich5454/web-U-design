@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -15,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/contact.css">
     <link rel="icon" href="/assets/images/iconUdesign.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -45,9 +47,9 @@
                 </form>
             </div>
         </div>
-        <div class="block-nav">
-            <div id="block-about" class="line">
-                <span>เกี่ยวกับ</span>
+        <div class="block-nav" >
+            <div id="block-about" class="line" >
+                <span >เกี่ยวกับ</span>
             </div>
             <div id="block-service" class="line">
                 <span>บริการ</span>
@@ -67,12 +69,15 @@
     <div class="main-container">
         <div class="background-section">
             <div class="hero-section">
-                <h1 class="hero-title">ติดต่อเรา</h1>
-                <h2 class="hero-subtitle">ทำป้ายโฆษณา สื่อสิ่งพิมพ์</h2>
+                <h1 class="hero-title" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">ติดต่อเรา
+                </h1>
+                <h2 class="hero-subtitle" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
+                    ทำป้ายโฆษณา สื่อสิ่งพิมพ์</h2>
             </div>
         </div>
+     
         <div class="contact-grid">
-            <div class="contact-info">
+            <div class="contact-info"  data-aos="fade-right"  data-aos-duration="1200">
                 <div class="contact-item">
                     <div class="contact-icon phone-icon"></div>
                     <div class="contact-details">
@@ -116,6 +121,7 @@
                     <h3 class="form-subtitle">คลิก</h3>
                 </button>
             </div>
+        
         </div>
     </div>
     <footer>
@@ -181,11 +187,15 @@
             <span>Ⓒ 2025 บริษัท เอทไซน์ มีเดีย พลัส</span>
         </div>
     </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 <script src="/assets/js/contact.js"></script>
 <script>
     function sanitizeInput(input) {
-        return input.replace(/[&<>"']/g, function(match) {
+        return input.replace(/[&<>"']/g, function (match) {
             const entities = {
                 '&': '&amp;',
                 '<': '&lt;',
@@ -198,7 +208,7 @@
     }
 
     document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
             const formData = new FormData(this);
             for (let [key, value] of formData.entries()) {
@@ -209,7 +219,7 @@
     });
 
     document.querySelectorAll('input, textarea').forEach(input => {
-        input.addEventListener('input', function(e) {
+        input.addEventListener('input', function (e) {
             this.value = sanitizeInput(this.value);
         });
     });

@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const navBlock = document.querySelector('.block-nav')
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
+    const header = document.getElementById('header-con')
+    let lastScrollTop = 0
+
+    // Add smooth scroll behavior to the entire page
+    document.documentElement.style.scrollBehavior = 'smooth';
 
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {
@@ -18,24 +23,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-   const header = document.getElementById('header-con')
-    let lastScrollTop = 0
+    // Scroll event listener for header visibility and smooth scrolling
     window.addEventListener('scroll', () => {
-        // ทำงานเฉพาะหน้าจอเล็ก (มือถือ)
-        if (window.innerWidth <= 768) {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop
-
-            if (currentScroll > lastScrollTop) {
-                header.style.top = '-380px'
-                navBlock.style.display = 'none'
-                resultFrame.style.display = 'none'
-                searchInput.blur()
-            } else {
-                header.style.top = '0px'
-            }
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Show/hide header based on scroll direction
+        if (currentScroll > lastScrollTop && currentScroll > 100) {
+            // Scrolling down
+            header.style.transform = 'translateY(-100%)';
+            navBlock.style.display = 'none';
+            resultFrame.style.display = 'none';
+            searchInput.blur();
+        } else {
+            // Scrolling up
+            header.style.transform = 'translateY(0)';
         }
+        
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     })
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerOffset = 80; // Height of fixed header
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
     function loadProduct() {
         const productItem = document.getElementById('product-item')
@@ -141,19 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createParticles()
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
     const loader = document.getElementById('loader-frame');
     const main = document.getElementById('main-ss');
 
@@ -199,5 +209,161 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { once: true });
         }
     });
+
+    const bannerContent = document.querySelector('.banner-content');
+    const slides = document.querySelectorAll('.banner-image');
+    const dotsContainer = document.querySelector('.dots');
+    const visibleSlides = window.innerWidth <= 768 ? 1 : 3;
+    const slideCount = slides.length;
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    // Clone slides ตามจำนวนที่แสดง
+    function cloneSlides() {
+        const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
+        for (let i = 0; i < slidesToClone; i++) {
+            const clone = slides[i].cloneNode(true);
+            bannerContent.appendChild(clone);
+        }
+    }
+    cloneSlides();
+
+    // สร้าง dot เท่ากับจำนวนภาพทั้งหมด
+    for (let i = 0; i < slideCount; i++) {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active');
+        dotsContainer.appendChild(dot);
+    }
+    const dots = document.querySelectorAll('.dots span');
+
+    function updateDots(index) {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index % slideCount].classList.add('active');
+    }
+
+    // slideTo รับ index เป็นตำแหน่ง slide (0 ถึง slideCount-1)
+    function slideTo(index) {
+        const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
+        bannerContent.style.transition = 'transform 0.5s ease-in-out';
+        bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
+        currentIndex = index;
+        updateDots(index);
+    }
+
+    function nextSlide() {
+        currentIndex++;
+        slideTo(currentIndex);
+
+        if (currentIndex >= slideCount) {
+            setTimeout(() => {
+                bannerContent.style.transition = 'none';
+                bannerContent.style.transform = 'translateX(0)';
+                currentIndex = 0;
+                updateDots(currentIndex);
+            }, 500);
+        }
+    }
+
+    function prevSlide() {
+        if (currentIndex === 0) {
+            const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
+            bannerContent.style.transition = 'none';
+            bannerContent.style.transform = `translateX(-${slideCount * slideWidth}%)`;
+            currentIndex = slideCount;
+            setTimeout(() => {
+                bannerContent.style.transition = 'transform 0.5s ease-in-out';
+                currentIndex--;
+                slideTo(currentIndex);
+            }, 20);
+        } else {
+            currentIndex--;
+            slideTo(currentIndex);
+        }
+    }
+
+    // เพิ่ม event listener สำหรับการ resize
+    window.addEventListener('resize', () => {
+        const newVisibleSlides = window.innerWidth <= 768 ? 1 : 3;
+        if (newVisibleSlides !== visibleSlides) {
+            // รีเซ็ต slider เมื่อเปลี่ยนขนาดหน้าจอ
+            bannerContent.style.transition = 'none';
+            bannerContent.style.transform = 'translateX(0)';
+            currentIndex = 0;
+            updateDots(currentIndex);
+            
+            // ลบ clones เก่าและสร้างใหม่
+            const clones = bannerContent.querySelectorAll('.banner-image:nth-last-child(-n+' + visibleSlides + ')');
+            clones.forEach(clone => clone.remove());
+            cloneSlides();
+        }
+    });
+
+    dotsContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'SPAN') {
+            const index = Array.from(dotsContainer.children).indexOf(e.target);
+
+            if (index !== currentIndex) {
+                slideTo(index);     // ใช้ slideTo เดิมที่มี transition
+                stopAutoSlide();    // หยุดแล้วเริ่มใหม่
+                startAutoSlide();
+            }
+        }
+    });
+
+
+    document.querySelector('.banner-section').addEventListener('mouseenter', stopAutoSlide);
+    document.querySelector('.banner-section').addEventListener('mouseleave', startAutoSlide);
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 3000);
+    }
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    startAutoSlide();
+
+    let autoSlideTimeout = null;
+
+    // เรียกทุกครั้งที่มีการ interaction
+    function resetAutoSlideDelay() {
+        stopAutoSlide(); // หยุดก่อน
+        clearTimeout(autoSlideTimeout); // ยกเลิก timeout เก่า ถ้ามี
+        autoSlideTimeout = setTimeout(() => {
+            startAutoSlide(); // กลับมาเลื่อนใหม่
+        }, 5000); // 5 วินาที (คุณเปลี่ยนได้)
+    }
+
+    // เปลี่ยนทุกที่ที่มี interaction
+    document.querySelector('.next').addEventListener('click', () => {
+        nextSlide();
+        resetAutoSlideDelay();
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        prevSlide();
+        resetAutoSlideDelay();
+    });
+
+    dotsContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'SPAN') {
+            const index = Array.from(dotsContainer.children).indexOf(e.target);
+            slideTo(index);
+            resetAutoSlideDelay();
+        }
+    });
+
+    // หยุดเมื่อ hover
+    document.querySelector('.banner-section').addEventListener('mouseenter', () => {
+        stopAutoSlide();
+        clearTimeout(autoSlideTimeout); // หยุด timeout ด้วย
+    });
+
+    // กลับมาเลื่อนต่อเมื่อออกจาก hover
+    document.querySelector('.banner-section').addEventListener('mouseleave', () => {
+        resetAutoSlideDelay();
+    });
+
+
 })
 

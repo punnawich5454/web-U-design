@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ฟังก์ชันสำหรับจำกัดจำนวนรูปที่แสดง
     function limitGalleryItems(filterValue) {
         const isMobile = window.innerWidth <= 768;
-        const maxItems = isMobile ? 3 : 6;
+        const maxItems = isMobile ? 1 : 6; // Changed from 3 to 1 for mobile
 
         // ตรวจสอบสถานะ showAll สำหรับหมวดหมู่นี้
         const isShowingAll = showAllItems[filterValue] || false;

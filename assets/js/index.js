@@ -6,8 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header-con')
     let lastScrollTop = 0
 
-    // Add smooth scroll behavior to the entire page
     document.documentElement.style.scrollBehavior = 'smooth';
+
+    const hasHeaderAOSPlayed = sessionStorage.getItem('hasHeaderAOSPlayed');
+    const headerElements = header.querySelectorAll('[data-aos]');
+
+    if (hasHeaderAOSPlayed) {
+        headerElements.forEach(element => {
+            element.removeAttribute('data-aos');
+        });
+    } else {
+        sessionStorage.setItem('hasHeaderAOSPlayed', 'true');
+    }
 
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {
@@ -82,11 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    loadProduct()
+    // loadProduct()
 
-    window.addEventListener('resize', () => {
-        loadProduct()
-    })
+    // window.addEventListener('resize', () => {
+    //     loadProduct()
+    // })
 
     function search() {
         const keyword = searchInput.value.trim()
@@ -100,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (searchInput) {
         searchInput.addEventListener('input', () => {
-            search()
+            // search()
         })
 
         searchInput.addEventListener('focus', () => {
@@ -118,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('button-1').addEventListener('click', (event) => {
         event.preventDefault()
-        search()
+        // search()
     })
 
     const clickLogo = document.querySelector('.logo')
@@ -172,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!hasLoadedBefore) {
         loader.classList.add('visible');
     } else {
-        loader.style.display = 'none';
+        loader.style.display = 'none';  
         main.style.display = 'flex';
         main.style.opacity = '1';
 
@@ -363,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.banner-section').addEventListener('mouseleave', () => {
         resetAutoSlideDelay();
     });
-
 
 })
 

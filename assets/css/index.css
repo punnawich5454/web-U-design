@@ -309,16 +309,22 @@ header.visible {
     transform: translateY(-50%);
     padding: 0 10px;
     z-index: 2;
+    padding: 30px;
 }
   
 .controls .prev,
 .controls .next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     font-size: 24px;
     background: rgba(0,0,0,0.5);
     color: white;
     padding: 10px;
     border-radius: 50%;
+    width: 3.5vw;
+    height: 6.5vh;
 }
 
 @media (max-width: 768px) {
@@ -373,10 +379,12 @@ header.visible {
 }
 
 .hero-content {
+    position: relative;
     max-width: 40%;
     margin: 0 auto;
     padding: 0 2rem;
     z-index: 10;
+    top: -25px;
 }
 
 .hero-text {
@@ -386,6 +394,7 @@ header.visible {
 }
 
 .hero-text h1 {
+    
     font-size: 4rem;
     font-weight: 800;
     margin-bottom: 1.5rem;
@@ -408,10 +417,13 @@ header.visible {
 }
 
 .hero-buttons {
+    position: relative;
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
+    top: -25px;
+    
 }
 
 .btn-primary {

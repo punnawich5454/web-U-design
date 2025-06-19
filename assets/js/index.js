@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll event listener for header visibility and smooth scrolling
     // window.addEventListener('scroll', () => {
     //     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        
+
     //     // Show/hide header based on scroll direction
     //     if (currentScroll > lastScrollTop && currentScroll > 100) {
     //         // Scrolling down
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //         // Scrolling up
     //         header.style.transform = 'translateY(0)';
     //     }
-        
+
     //     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     // })
 
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!hasLoadedBefore) {
         loader.classList.add('visible');
     } else {
-        loader.style.display = 'none';  
+        loader.style.display = 'none';
         main.style.display = 'flex';
         main.style.opacity = '1';
 
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bannerContent = document.querySelector('.banner-content');
     const slides = document.querySelectorAll('.banner-image');
     const dotsContainer = document.querySelector('.dots');
-    const visibleSlides = window.innerWidth <= 768 ? 1 : 3;
+    let visibleSlides = window.innerWidth <= 768 ? 1 : 3;
     const slideCount = slides.length;
     let currentIndex = 0;
     let autoSlideInterval;
@@ -300,11 +300,19 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerContent.style.transform = 'translateX(0)';
             currentIndex = 0;
             updateDots(currentIndex);
+
+            // ลบ clones เก่าทั้งหมด
+            const allSlides = bannerContent.querySelectorAll('.banner-image');
+            const originalSlides = slides.length;
+            for (let i = originalSlides; i < allSlides.length; i++) {
+                allSlides[i].remove();
+            }
             
-            // ลบ clones เก่าและสร้างใหม่
-            const clones = bannerContent.querySelectorAll('.banner-image:nth-last-child(-n+' + visibleSlides + ')');
-            clones.forEach(clone => clone.remove());
+            // สร้าง clones ใหม่
             cloneSlides();
+            
+            // อัปเดตตัวแปร visibleSlides
+            visibleSlides = newVisibleSlides;
         }
     });
 

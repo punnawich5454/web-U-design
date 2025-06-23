@@ -52,6 +52,11 @@ header {
     height: 100%;
     object-fit: cover;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.05);
 }
 
 .nav-container nav {
@@ -607,8 +612,13 @@ footer {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal-content {
@@ -650,8 +660,13 @@ footer {
 }
 
 @keyframes zoomIn {
-    from { transform: translate(-50%, -50%) scale(0.8); }
-    to { transform: translate(-50%, -50%) scale(1); }
+    from {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 .close {
@@ -778,7 +793,7 @@ footer {
         max-width: 95%;
         max-height: 80%;
     }
-    
+
     .close {
         top: 10px;
         right: 20px;
@@ -786,26 +801,26 @@ footer {
         width: 40px;
         height: 40px;
     }
-    
+
     .zoom-controls {
         top: 10px;
         left: 20px;
         gap: 8px;
     }
-    
+
     .zoom-btn {
         width: 40px;
         height: 40px;
         font-size: 16px;
     }
-    
+
     .nav-btn {
         width: 50px;
         height: 50px;
         font-size: 20px;
         padding: 10px 15px;
     }
-    
+
     .modal-info {
         bottom: 10px;
         font-size: 14px;
@@ -818,22 +833,22 @@ footer {
         max-width: 98%;
         max-height: 75%;
     }
-    
+
     .nav-btn {
         width: 45px;
         height: 45px;
         font-size: 18px;
         padding: 8px 12px;
     }
-    
+
     .modal-nav {
         padding: 0 10px;
     }
-    
+
     .zoom-controls {
         gap: 5px;
     }
-    
+
     .zoom-btn {
         width: 35px;
         height: 35px;

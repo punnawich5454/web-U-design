@@ -51,7 +51,11 @@ header {
     height: 100%;
     object-fit: cover;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.logo:hover img {
+    transform: scale(1.05);
 }
 
 .nav-container nav {
@@ -173,8 +177,8 @@ header {
     background: linear-gradient(135deg, #89d641 0%, #bcdd39 100%);
     border-radius: 20px;
     margin-bottom: 50px;
-    box-shadow: 2px 2px 25px  rgba(0, 0, 0, 0.5);
-    
+    box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.5);
+
 }
 
 .header h1 {
@@ -206,7 +210,7 @@ header {
 }
 
 .filter-btn {
-     text-decoration: none;
+    text-decoration: none;
     color: #333;
     font-size: 1.1rem;
     font-weight: 500;
@@ -253,11 +257,11 @@ header {
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .gallery-item {
         margin-bottom: 20px;
     }
-    
+
     .gallery-item img {
         height: 250px;
     }
@@ -571,7 +575,23 @@ footer {
 }
 
 /* กำหนดฟอนต์ Prompt ให้กับทุก element */
-body, h1, h2, h3, h4, h5, h6, p, a, span, button, input, textarea, .tag, .filter-btn, .contact-btn, .show-more-btn {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+button,
+input,
+textarea,
+.tag,
+.filter-btn,
+.contact-btn,
+.show-more-btn {
     font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
@@ -580,33 +600,40 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, button, input, textarea, .tag, .filter
         padding: 24px 8px;
         border-radius: 10px;
     }
+
     .header h1 {
         font-size: 2rem;
         margin-bottom: 12px;
     }
+
     .header p {
         font-size: 1rem;
         margin-bottom: 18px;
     }
+
     .hero-buttons,
     .header .hero-buttons {
         flex-direction: column;
         gap: 12px;
         margin-top: 12px;
     }
+
     .filter-tabs {
         flex-wrap: wrap;
         gap: 8px;
         justify-content: center;
     }
+
     .filter-btn {
         font-size: 1rem;
         padding: 8px 16px;
     }
+
     .gallery-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
+
     .gallery-item img {
         max-width: 100%;
         height: auto;

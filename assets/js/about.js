@@ -99,4 +99,5 @@ document.addEventListener('DOMContentLoaded', () => {
     blockService.addEventListener('click', () => {
         window.location = '/service.html'
     })
+
 })

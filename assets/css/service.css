@@ -199,9 +199,6 @@ header {
     margin: 0 auto;
 }
 
-
-
-
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
@@ -212,7 +209,7 @@ header {
 .gallery-item {
     background: white;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: hidden;   
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.4s ease;
     animation: fadeInUp 0.6s ease-out;

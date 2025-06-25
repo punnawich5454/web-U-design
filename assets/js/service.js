@@ -147,45 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         manageShowMoreButton(visibleItems.length, maxItems, filterValue, isShowingAll);
     }
 
-    // ฟังก์ชันจัดการปุ่ม "ดูเพิ่มเติม"
-    function manageShowMoreButton(totalItems, maxItems, filterValue, isShowingAll) {
-        let showMoreBtn = document.getElementById('showMoreBtn');
-
-        // ลบปุ่มเก่าถ้ามี
-        if (showMoreBtn) {
-            showMoreBtn.remove();
-        }
-
-        // เช็คว่าจำนวนรูปมากกว่า maxItems หรือไม่
-        console.log(`Filter: ${filterValue}, Total: ${totalItems}, Max: ${maxItems}, ShowAll: ${isShowingAll}`); // Debug log
-
-        // สร้างปุ่มใหม่ถ้าจำเป็น (เฉพาะเมื่อมีรูปมากกว่า maxItems)
-        if (totalItems > maxItems) {
-            // ลองหา galleryGrid หรือ gallery-grid
-            let galleryGrid = document.getElementById('galleryGrid') || document.querySelector('.gallery-grid');
-            console.log('Gallery grid found:', galleryGrid); // Debug log
-
-            if (galleryGrid) {
-                showMoreBtn = document.createElement('div');
-                showMoreBtn.id = 'showMoreBtn';
-                showMoreBtn.className = 'show-more-container';
-
-                const remainingItems = totalItems - maxItems;
-                showMoreBtn.innerHTML = `
-                <button class="show-more-btn" data-filter="${filterValue}">
-                    <i class="fas fa-chevron-${isShowingAll ? 'up' : 'down'}"></i>
-                    ${isShowingAll ? 'ดูน้อยลง' : `ดูเพิ่มเติม (${remainingItems} รายการ)`}
-                </button>
-            `;
-
-                // แทรกปุ่มหลังจาก gallery-grid
-                galleryGrid.insertAdjacentElement('afterend', showMoreBtn);
-                console.log('Show more button added'); // Debug log
-            } else {
-                console.error('Gallery grid not found!'); // Debug log
-            }
-        }
-    }
+    
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -231,28 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // แทนที่โค้ดเดิมที่ใช้ onclick="openModal(...)"
-    document.querySelectorAll('.gallery-img').forEach(img => {
-        img.addEventListener('click', () => {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            if (modal && modalImage) {
-                modal.style.display = 'block';
-                modalImage.src = img.src;
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    });
-
-    // แทนที่ onclick="toggleShowMore(...)" ด้วย Event Listener
-    document.addEventListener('click', function (e) {
-        if (e.target.matches('.show-more-btn')) {
-            const filterValue = e.target.dataset.filter;
-            showAllItems[filterValue] = !showAllItems[filterValue];
-            limitGalleryItems(filterValue);
-        }
-    });
-
+   
 
     function closeModal() {
         const modal = document.getElementById('imageModal');

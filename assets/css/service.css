@@ -200,21 +200,6 @@ header {
 }
 
 
-<<<<<<< Updated upstream
-.filter-btn {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 12px 24px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    background: rgba(180, 209, 55, 0.1);
-    border: none;
-    cursor: pointer;
-}
-=======
->>>>>>> Stashed changes
 
 
 .gallery-grid {
@@ -224,38 +209,6 @@ header {
     margin-bottom: 50px;
 }
 
-<<<<<<< Updated upstream
-@media (max-width: 1200px) {
-    .gallery-grid {
-        grid-template-columns: repeat(3, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 992px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .gallery-item {
-        margin-bottom: 20px;
-    }
-
-    .gallery-item img {
-        height: 250px;
-    }
-}
-
-=======
->>>>>>> Stashed changes
 .gallery-item {
     background: white;
     border-radius: 20px;
@@ -333,7 +286,6 @@ header {
     display: flex;
     flex-direction: column;
     position: relative;
-    border: 5px solid red;
     background: linear-gradient(135deg, #6bb426 0%, #19380d 100%);
     border-radius: 20px;
     padding: 40px;

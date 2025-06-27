@@ -221,166 +221,146 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const bannerContent = document.querySelector('.banner-content');
-    const slides = document.querySelectorAll('.banner-image');
     const dotsContainer = document.querySelector('.dots');
-    let visibleSlides = window.innerWidth <= 768 ? 1 : 3;
-    const slideCount = slides.length;
+    const visibleSlides = window.innerWidth <= 768 ? 1 : 3;
     let currentIndex = 0;
     let autoSlideInterval;
+    let autoSlideTimeout;
 
-    // Clone slides ตามจำนวนที่แสดง
-    function cloneSlides() {
+    async function loadBanner() {
+        const response = await fetch('http://127.0.0.1:3000/api/banners');
+        const data = await response.json();
+
+        bannerContent.innerHTML = ''; // เคลียร์ก่อนโหลดใหม่
+        data.banners.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add('banner-image');
+            const img = document.createElement('img');
+            img.src = 'data:image/jpeg;base64,' + item.image;
+            div.appendChild(img);
+            bannerContent.appendChild(div);
+        });
+
+        setupSlider();
+    }
+
+    function setupSlider() {
+        const slides = document.querySelectorAll('.banner-image');
+        const slideCount = slides.length;
+
+        cloneSlides(slides);
+        
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < slideCount; i++) {
+            const dot = document.createElement('span');
+            if (i === 0) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = dotsContainer.querySelectorAll('span');
+
+        function updateDots(index) {
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index % slideCount].classList.add('active');
+        }
+
+        function slideTo(index) {
+            const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
+            bannerContent.style.transition = 'transform 0.5s ease-in-out';
+            bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
+            currentIndex = index;
+            updateDots(index);
+        }
+
+        function nextSlide() {
+            currentIndex++;
+            slideTo(currentIndex);
+            if (currentIndex >= slideCount) {
+                setTimeout(() => {
+                    bannerContent.style.transition = 'none';
+                    bannerContent.style.transform = 'translateX(0)';
+                    currentIndex = 0;
+                    updateDots(currentIndex);
+                }, 500);
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex === 0) {
+                const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
+                bannerContent.style.transition = 'none';
+                bannerContent.style.transform = `translateX(-${slideCount * slideWidth}%)`;
+                currentIndex = slideCount;
+                setTimeout(() => {
+                    bannerContent.style.transition = 'transform 0.5s ease-in-out';
+                    currentIndex--;
+                    slideTo(currentIndex);
+                }, 20);
+            } else {
+                currentIndex--;
+                slideTo(currentIndex);
+            }
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 3000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        function resetAutoSlideDelay() {
+            stopAutoSlide();
+            clearTimeout(autoSlideTimeout);
+            autoSlideTimeout = setTimeout(() => {
+                startAutoSlide();
+            }, 5000);
+        }
+
+        document.querySelector('.next').addEventListener('click', () => {
+            nextSlide();
+            resetAutoSlideDelay();
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            prevSlide();
+            resetAutoSlideDelay();
+        });
+
+        dotsContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'SPAN') {
+                const index = Array.from(dotsContainer.children).indexOf(e.target);
+                slideTo(index);
+                resetAutoSlideDelay();
+            }
+        });
+
+        document.querySelector('.banner-section').addEventListener('mouseenter', () => {
+            stopAutoSlide();
+            clearTimeout(autoSlideTimeout);
+        });
+
+        document.querySelector('.banner-section').addEventListener('mouseleave', () => {
+            resetAutoSlideDelay();
+        });
+
+        window.addEventListener('resize', () => {
+            loadBanner();
+        });
+
+        slideTo(0);
+        startAutoSlide();
+    }
+
+    function cloneSlides(slides) {
         const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
         for (let i = 0; i < slidesToClone; i++) {
             const clone = slides[i].cloneNode(true);
             bannerContent.appendChild(clone);
         }
     }
-    cloneSlides();
 
-    // สร้าง dot เท่ากับจำนวนภาพทั้งหมด
-    for (let i = 0; i < slideCount; i++) {
-        const dot = document.createElement('span');
-        if (i === 0) dot.classList.add('active');
-        dotsContainer.appendChild(dot);
-    }
-    const dots = document.querySelectorAll('.dots span');
-
-    function updateDots(index) {
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index % slideCount].classList.add('active');
-    }
-
-    // slideTo รับ index เป็นตำแหน่ง slide (0 ถึง slideCount-1)
-    function slideTo(index) {
-        const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
-        bannerContent.style.transition = 'transform 0.5s ease-in-out';
-        bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
-        currentIndex = index;
-        updateDots(index);
-    }
-
-    function nextSlide() {
-        currentIndex++;
-        slideTo(currentIndex);
-
-        if (currentIndex >= slideCount) {
-            setTimeout(() => {
-                bannerContent.style.transition = 'none';
-                bannerContent.style.transform = 'translateX(0)';
-                currentIndex = 0;
-                updateDots(currentIndex);
-            }, 500);
-        }
-    }
-
-    function prevSlide() {
-        if (currentIndex === 0) {
-            const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
-            bannerContent.style.transition = 'none';
-            bannerContent.style.transform = `translateX(-${slideCount * slideWidth}%)`;
-            currentIndex = slideCount;
-            setTimeout(() => {
-                bannerContent.style.transition = 'transform 0.5s ease-in-out';
-                currentIndex--;
-                slideTo(currentIndex);
-            }, 20);
-        } else {
-            currentIndex--;
-            slideTo(currentIndex);
-        }
-    }
-
-    // เพิ่ม event listener สำหรับการ resize
-    window.addEventListener('resize', () => {
-        const newVisibleSlides = window.innerWidth <= 768 ? 1 : 3;
-        if (newVisibleSlides !== visibleSlides) {
-            // รีเซ็ต slider เมื่อเปลี่ยนขนาดหน้าจอ
-            bannerContent.style.transition = 'none';
-            bannerContent.style.transform = 'translateX(0)';
-            currentIndex = 0;
-            updateDots(currentIndex);
-
-            // ลบ clones เก่าทั้งหมด
-            const allSlides = bannerContent.querySelectorAll('.banner-image');
-            const originalSlides = slides.length;
-            for (let i = originalSlides; i < allSlides.length; i++) {
-                allSlides[i].remove();
-            }
-            
-            // สร้าง clones ใหม่
-            cloneSlides();
-            
-            // อัปเดตตัวแปร visibleSlides
-            visibleSlides = newVisibleSlides;
-        }
-    });
-
-    dotsContainer.addEventListener('click', (e) => {
-        if (e.target.tagName === 'SPAN') {
-            const index = Array.from(dotsContainer.children).indexOf(e.target);
-
-            if (index !== currentIndex) {
-                slideTo(index);     // ใช้ slideTo เดิมที่มี transition
-                stopAutoSlide();    // หยุดแล้วเริ่มใหม่
-                startAutoSlide();
-            }
-        }
-    });
-
-
-    document.querySelector('.banner-section').addEventListener('mouseenter', stopAutoSlide);
-    document.querySelector('.banner-section').addEventListener('mouseleave', startAutoSlide);
-
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 3000);
-    }
-    function stopAutoSlide() {
-        clearInterval(autoSlideInterval);
-    }
-
-    startAutoSlide();
-
-    let autoSlideTimeout = null;
-
-    // เรียกทุกครั้งที่มีการ interaction
-    function resetAutoSlideDelay() {
-        stopAutoSlide(); // หยุดก่อน
-        clearTimeout(autoSlideTimeout); // ยกเลิก timeout เก่า ถ้ามี
-        autoSlideTimeout = setTimeout(() => {
-            startAutoSlide(); // กลับมาเลื่อนใหม่
-        }, 5000); // 5 วินาที (คุณเปลี่ยนได้)
-    }
-
-    // เปลี่ยนทุกที่ที่มี interaction
-    document.querySelector('.next').addEventListener('click', () => {
-        nextSlide();
-        resetAutoSlideDelay();
-    });
-
-    document.querySelector('.prev').addEventListener('click', () => {
-        prevSlide();
-        resetAutoSlideDelay();
-    });
-
-    dotsContainer.addEventListener('click', (e) => {
-        if (e.target.tagName === 'SPAN') {
-            const index = Array.from(dotsContainer.children).indexOf(e.target);
-            slideTo(index);
-            resetAutoSlideDelay();
-        }
-    });
-
-    // หยุดเมื่อ hover
-    document.querySelector('.banner-section').addEventListener('mouseenter', () => {
-        stopAutoSlide();
-        clearTimeout(autoSlideTimeout); // หยุด timeout ด้วย
-    });
-
-    // กลับมาเลื่อนต่อเมื่อออกจาก hover
-    document.querySelector('.banner-section').addEventListener('mouseleave', () => {
-        resetAutoSlideDelay();
-    });
-
+    loadBanner();
 })
 

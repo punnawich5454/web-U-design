@@ -70,67 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    function loadProduct() {
-        const productItem = document.getElementById('product-item')
-        const isMobile = window.innerWidth <= 740;
-        const products = db.getAllProducts().slice(0, isMobile ? 6 : 10)
-        productItem.innerHTML = ""
-        products.forEach(item => {
-            const div = document.createElement('div')
-            div.classList.add('product')
-            div.setAttribute('data-aos', 'fade-up')
-            div.onclick = () => window.location.href = `/page/product.html?id=${item.id}`
-            const html = `
-                <div class="image-product">
-                    <img src="${item.image}" alt="img-product">
-                </div>
-                <div class="name-product">
-                    <span>${item.name}</span>
-                </div>`
-            div.innerHTML += html
-            productItem.appendChild(div)
-        })
-    }
-
-    // loadProduct()
-
-    // window.addEventListener('resize', () => {
-    //     loadProduct()
-    // })
-
-    function search() {
-        const keyword = searchInput.value.trim()
-        if (keyword === "") {
-            resultFrame.style.display = 'none'
-        } else {
-            resultFrame.src = `/components/search.html?query=${encodeURIComponent(keyword)}`
-            resultFrame.style.display = 'block'
-        }
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', () => {
-            // search()
-        })
-
-        searchInput.addEventListener('focus', () => {
-            if (searchInput.value.trim() !== '') {
-                resultFrame.style.display = 'block'
-            }
-        })
-
-        searchInput.addEventListener('blur', () => {
-            setTimeout(() => {
-                resultFrame.style.display = 'none'
-            }, 200)
-        })
-    }
-
-    document.getElementById('button-1').addEventListener('click', (event) => {
-        event.preventDefault()
-        // search()
-    })
-
     const clickLogo = document.querySelector('.logo')
     clickLogo.addEventListener('click', () => {
         window.location = '/index.html'
@@ -249,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const slideCount = slides.length;
 
         cloneSlides(slides);
-        
+
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slideCount; i++) {
             const dot = document.createElement('span');
@@ -362,5 +301,89 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadBanner();
+
+    async function loadeVisitor() {
+        const response = await fetch('http://127.0.0.1:3000/api/visit')
+        const data = await response.json()
+
+        const counterNumber = document.querySelector('.counter-number')
+        counterNumber.textContent = data.uniqueCount
+    }
+
+    loadeVisitor()
+
+    const progressBar = document.getElementById('progressBar');
+
+    const apis = [
+        'http://127.0.0.1:3000/api/banners',
+        'http://127.0.0.1:3000/api/visit',
+        'http://127.0.0.1:3000/api/categories'
+    ];
+
+    const totalApis = apis.length;
+    let loadedApis = 0;
+
+    function updateProgress() {
+        loadedApis++;
+        const percent = (loadedApis / totalApis) * 100;
+        progressBar.style.width = percent + '%';
+
+        if (loadedApis === totalApis) {
+            progressBar.classList.add('complete');
+            setTimeout(() => {
+                progressBar.style.display = 'none'
+            }, 400);
+        }
+    }
+
+    async function loadAllAPIs() {
+        const promises = apis.map(url =>
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+                    return res.json();
+                })
+                .catch(err => {
+                    console.error('โหลด API ล้มเหลว:', url, err);
+                })
+                .finally(() => {
+                    updateProgress();
+                })
+        );
+
+        await Promise.allSettled(promises);
+    }
+
+    loadAllAPIs();
+
+    async function loadCategory() {
+        const response = await fetch('http://127.0.0.1:3000/api/categories')
+        const data = await response.json()
+
+        const productItem = document.getElementById('product-item')
+        data.categories.forEach(item => {
+            const a = document.createElement('a')
+            a.href = "/service.html"
+            a.classList.add("product-item-con")
+            a.setAttribute("data-aos", "fade-up")
+            const div = document.createElement('div')
+            div.classList.add('product-item-con-image')
+            const img = document.createElement('img')
+            img.src = `data:image/jpeg:base64, ${item.image}`
+            img.alt = item.name
+            const div1 = document.createElement('div')
+            div1.classList.add("product-item-con-text")
+            const h3 = document.createElement('h3')
+            h3.textContent = item.name
+            div1.appendChild(h3)
+            div.appendChild(img)
+            a.appendChild(div)
+            a.appendChild(div1)
+            productItem.appendChild(a)
+        })
+    }
+
+    loadCategory()
+
 })
 

@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -32,19 +31,9 @@
             width: 100%;
             height: 0%;
             background-color: #a3d400;
-            animation: fillUp 3s ease-in-out forwards;
             clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
             z-index: -1;
-        }
-
-        @keyframes fillUp {
-            0% {
-                height: 0%;
-            }
-
-            100% {
-                height: 100%;
-            }
+            transition: ease 0.3s;
         }
     </style>
 </head>
@@ -57,9 +46,54 @@
     <script>
         const fill = document.getElementById('fill');
 
-        fill.addEventListener('animationend', () => {
+        const apis = [
+            'http://127.0.0.1:3000/api/banners',
+            'http://127.0.0.1:3000/api/visit'
+        ];
+
+        const totalApis = apis.length;
+        let loadedApis = 0;
+
+        function updateFill() {
+            const percent = (loadedApis / totalApis) * 100;
+            fill.style.height = percent + '%';
+        }
+
+        function fetchWithTimeout(url, timeout = 5000) {
+            const controller = new AbortController();
+            const signal = controller.signal;
+
+            const timer = setTimeout(() => controller.abort(), timeout);
+
+            return fetch(url, { signal }).finally(() => clearTimeout(timer));
+        }
+
+        async function loadAllAPIs() {
+            const promises = apis.map(url =>
+                fetchWithTimeout(url)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        return res.json();
+                    })
+                    .catch(err => {
+                        console.error('โหลด API ล้มเหลว:', url, err);
+                    })
+                    .finally(() => {
+                        loadedApis++;
+                        updateFill();
+                    })
+            );
+
+            await Promise.allSettled(promises);
+
+            // แจ้ง parent ว่าโหลดเสร็จ
             parent.postMessage({ type: 'loaderFinished' }, '*');
-        });
+        }
+
+        loadAllAPIs();
+
+
+
     </script>
 </body>
 

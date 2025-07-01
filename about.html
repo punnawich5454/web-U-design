@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -21,6 +19,9 @@
 <body>
     <header id="header-con">
         <div class="left-container">
+            <div id="loader">
+                <div id="progressBar"></div>
+            </div>
             <div class="logo">
                 <img src="\assets\images\logo.png" alt="logo">
             </div>
@@ -107,8 +108,7 @@
             <div class="machine-head">
                 <div class="machine">
                     <div class="machine-image" data-aos="fade-right">
-                        <img src="assets/images/u-design-old.png"
-                            alt="">
+                        <img src="assets/images/u-design-old.png" alt="">
                     </div>
                     <div class="machine-t-h">
                         <div class="machine-text">
@@ -126,8 +126,7 @@
         <section class="machine-showcase-5">
             <div class="machine-re">
                 <div class="machine-image" data-aos="fade-left">
-                    <img src="assets/images/u-design-old.png"
-                        alt="">
+                    <img src="assets/images/u-design-old.png" alt="">
                 </div>
                 <div class="machine-t-h">
                     <div class="machine-text">
@@ -145,8 +144,7 @@
         <section class="machine-showcase-5">
             <div class="machine">
                 <div class="machine-image" data-aos="fade-right">
-                    <img src="assets/images/u-design-old.png"
-                        alt="">
+                    <img src="assets/images/u-design-old.png" alt="">
                 </div>
                 <div class="machine-t-h">
                     <div class="machine-text">
@@ -183,7 +181,12 @@
                     <img src="/assets/images/492004574_1251746080287242_8926551003989382569_n.jpg" alt="">
                 </div>
                 <div class="mchine-text-item">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae magnam mollitia veritatis fugit! Distinctio placeat ullam repellat sunt odit ab optio non, libero unde quos voluptate! Voluptas, corrupti ipsam? Corporis itaque ratione totam reiciendis quia quaerat sint maxime eius veniam voluptates eum cum quos architecto voluptate molestiae provident, laboriosam sunt reprehenderit excepturi enim. Numquam repellat nihil molestiae accusantium nesciunt sint eaque voluptatum! Qui minima vero est ullam ab quam voluptas.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae magnam mollitia veritatis
+                        fugit! Distinctio placeat ullam repellat sunt odit ab optio non, libero unde quos voluptate!
+                        Voluptas, corrupti ipsam? Corporis itaque ratione totam reiciendis quia quaerat sint maxime eius
+                        veniam voluptates eum cum quos architecto voluptate molestiae provident, laboriosam sunt
+                        reprehenderit excepturi enim. Numquam repellat nihil molestiae accusantium nesciunt sint eaque
+                        voluptatum! Qui minima vero est ullam ab quam voluptas.</p>
                 </div>
             </div>
         </section>

@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -19,6 +17,9 @@
 
 <body>
     <header id="header-con">
+        <div id="loader">
+            <div id="progressBar"></div>
+        </div>
         <div class="left-container">
             <div class="logo">
                 <img src="\assets\images\logo.png" alt="logo">
@@ -69,90 +70,32 @@
             <h1><i class="fas fa-br"></i> บริการทั้งหมด</h1>
             <p>ชมผลงานการออกแบบและผลิตป้ายต่างๆ ของเรา พร้อมรายละเอียดและเทคนิคการทำงาน</p>
         </div>
-
-
-
-
         <div class="gallery-grid" id="galleryGrid">
-
-
-
-
-
-            <!-- สติ๊กเกอร์ -->
-            <a href="service_detail/service_detail_main.html">
+            <!-- <a href="service_detail/service_detail_main.html">
                 <div class="gallery-item">
                     <img src="assets/images/491952769_1285203656941484_9153172249648220897_n.jpg" alt="สติ๊กเกอร์ติดรถ"
-                        class="gallery-img"">
-                <div class=" gallery-info">
-                    <h3>Wrap</h3>
+                            class="gallery-img">
+                    <h3 class="gallery-info">Wrap</h3>
                 </div>
+            </a> -->
         </div>
-        </a>
-        <a href="service_detail/service_detail.html">
-            <div class="gallery-item" data-category="sticker">
-                <img src="assets/images/491952769_1285203656941484_9153172249648220897_n.jpg"
-                    alt="สติ๊กเกอร์ปริ้นติดกระจก" class="gallery-img"">
-                <div class=" gallery-info">
-                <h3>ซีทรู</h3>
+        <div class="contact-cta">
+            <h2><i class="fas fa-phone-alt"></i> สนใจสั่งทำป้าย?</h2>
+            <p>ติดต่อเราเพื่อปรึกษาและขอใบเสนอราคาฟรี ทีมงานมืออาชีพพร้อมให้คำแนะนำ</p>
+            <div class="contact-buttons">
+                <a href="https://page.line.me/myw8485r" class="contact-btn line-btn" target="_blank">
+                    <i class="fab fa-line"></i>
+                    ติดต่อผ่าน LINE
+                </a>
+                <a href="https://www.facebook.com/udesignplus" class="contact-btn facebook-btn" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                    ติดต่อผ่าน Facebook
+                </a>
+                <a href="tel:088-7542440" class="contact-btn">
+                    <i class="fas fa-phone"></i>
+                    โทรหาเรา
+                </a>
             </div>
-    </div>
-    </a>
-    <a href="service_detail/service_detail.html">
-        <div class="gallery-item" data-category="sticker">
-            <img src="assets/images/491952769_1285203656941484_9153172249648220897_n.jpg" alt="สติ๊กเกอร์ปริ้นติดกระจก"
-                class="gallery-img"">
-                <div class=" gallery-info">
-            <h3>ซีทรู</h3>
-        </div>
-        </div>
-    </a>
-    <a href="service_detail/service_detail.html">
-        <div class="gallery-item" data-category="sticker">
-            <img src="assets/images/491952769_1285203656941484_9153172249648220897_n.jpg" alt="สติ๊กเกอร์ปริ้นติดกระจก"
-                class="gallery-img"">
-                <div class=" gallery-info">
-            <h3>ซีทรู</h3>
-        </div>
-        </div>
-    </a>
-    <a href="service_detail/service_detail.html">
-        <div class="gallery-item" data-category="sticker">
-            <img src="assets/images/491952769_1285203656941484_9153172249648220897_n.jpg" alt="สติ๊กเกอร์ปริ้นติดกระจก"
-                class="gallery-img"">
-                <div class=" gallery-info">
-            <h3>ซีทรู</h3>
-        </div>
-        </div>
-    </a>
-    <a href="service_detail/service_detail.html">
-        <div class="gallery-item" data-category="sticker">
-            <img src="assets/images/491952769_1285203656941484_9153172249648220897_n.jpg" alt="สติ๊กเกอร์ปริ้นติดกระจก"
-                class="gallery-img"">
-                <div class=" gallery-info">
-            <h3>ซีทรู</h3>
-        </div>
-        </div>
-    </a>
-
-    </div>
-
-    <div class="contact-cta">
-        <h2><i class="fas fa-phone-alt"></i> สนใจสั่งทำป้าย?</h2>
-        <p>ติดต่อเราเพื่อปรึกษาและขอใบเสนอราคาฟรี ทีมงานมืออาชีพพร้อมให้คำแนะนำ</p>
-        <div class="contact-buttons">
-            <a href="https://page.line.me/myw8485r" class="contact-btn line-btn" target="_blank">
-                <i class="fab fa-line"></i>
-                ติดต่อผ่าน LINE
-            </a>
-            <a href="https://www.facebook.com/udesignplus" class="contact-btn facebook-btn" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-                ติดต่อผ่าน Facebook
-            </a>
-            <a href="tel:088-7542440" class="contact-btn">
-                <i class="fas fa-phone"></i>
-                โทรหาเรา
-            </a>
         </div>
     </div>
     </div>

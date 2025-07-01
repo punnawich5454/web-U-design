@@ -4,9 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
@@ -23,6 +20,9 @@
 <body>
     <header id="header-con">
         <div class="left-container">
+            <div id="loader">
+                <div id="progressBar"></div>
+            </div>
             <div class="logo">
                 <img src="\assets\images\logo.png" alt="logo">
             </div>
@@ -48,9 +48,9 @@
                 </form>
             </div>
         </div>
-        <div class="block-nav" >
-            <div id="block-about" class="line" >
-                <span >เกี่ยวกับ</span>
+        <div class="block-nav">
+            <div id="block-about" class="line">
+                <span>เกี่ยวกับ</span>
             </div>
             <div id="block-service" class="line">
                 <span>บริการ</span>
@@ -76,9 +76,12 @@
                     ยู-ดีไซน์ เพราะเราเป็นมากกว่าป้ายโฆษณา</h2>
             </div>
         </div>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d19423.83900703852!2d99.9556318!3d8.4574205!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x305306ca952c1f3d%3A0x7e78cbb8bf3f7c69!2z4Lii4Li5LeC4lOC4teC5hOC4i-C4meC5jCAoVS1EZXNpZ24p!5e1!3m2!1sth!2sth!4v1750319797724!5m2!1sth!2sth" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d19423.83900703852!2d99.9556318!3d8.4574205!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x305306ca952c1f3d%3A0x7e78cbb8bf3f7c69!2z4Lii4Li5LeC4lOC4teC5hOC4i-C4meC5jCAoVS1EZXNpZ24p!5e1!3m2!1sth!2sth!4v1750319797724!5m2!1sth!2sth"
+            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div class="contact-grid">
-            <div class="contact-info"  data-aos="fade-right"  data-aos-duration="1200">
+            <div class="contact-info" data-aos="fade-right" data-aos-duration="1200">
                 <div class="contact-item">
                     <div class="contact-icon phone-icon"></div>
                     <div class="contact-details">
@@ -110,7 +113,8 @@
                 </a>
                 <div class="contact-item">
                     <div class="contact-icon line-icon">
-                        <i class="fa-brands fa-line" style="font-size: 24px; color: #21c20c; transform: scale(2.3);"></i>
+                        <i class="fa-brands fa-line"
+                            style="font-size: 24px; color: #21c20c; transform: scale(2.3);"></i>
                     </div>
                     <div class="contact-details">
                         <h3>Line ID</h3>

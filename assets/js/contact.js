@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-   const header = document.getElementById('header-con')
+    const header = document.getElementById('header-con')
     let lastScrollTop = 0
     window.addEventListener('scroll', () => {
         // ทำงานเฉพาะหน้าจอเล็ก (มือถือ)
@@ -103,4 +103,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // function line() {
     //     window.open("https://page.line.me/myw8485r", "_blank");
     // }
+
+    const progressBar = document.getElementById('progressBar');
+
+    const apis = [
+        'http://127.0.0.1:3000/api/banners',
+        'http://127.0.0.1:3000/api/visit'
+    ];
+
+    const totalApis = apis.length;
+    let loadedApis = 0;
+
+    function updateProgress() {
+        loadedApis++;
+        const percent = (loadedApis / totalApis) * 100;
+        progressBar.style.width = percent + '%';
+
+        if (loadedApis === totalApis) {
+            progressBar.classList.add('complete');
+            setTimeout(() => {
+                progressBar.style.display = 'none'
+            }, 400);
+        }
+    }
+
+    async function loadAllAPIs() {
+        const promises = apis.map(url =>
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+                    return res.json();
+                })
+                .catch(err => {
+                    console.error('โหลด API ล้มเหลว:', url, err);
+                })
+                .finally(() => {
+                    updateProgress();
+                })
+        );
+
+        await Promise.allSettled(promises);
+    }
+
+    loadAllAPIs();
 })

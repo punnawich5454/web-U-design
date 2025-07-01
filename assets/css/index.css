@@ -276,33 +276,35 @@ header.visible {
     height: 300px;
     z-index: 10;
 }
-  
+
 .banner-wrapper {
     overflow: hidden;
 }
-  
+
 .banner-content {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
-  
+
 .banner-image {
-    flex: 0 0 33.3333%; /* 3 รูปต่อแถว */
+    flex: 0 0 33.3333%;
+    /* 3 รูปต่อแถว */
     height: 300px;
 }
 
 @media (max-width: 768px) {
     .banner-image {
-        flex: 0 0 100%; /* 1 รูปต่อแถวบนมือถือ */
+        flex: 0 0 100%;
+        /* 1 รูปต่อแถวบนมือถือ */
     }
 }
-  
+
 .banner-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-  
+
 /* ปุ่มควบคุม */
 .controls {
     position: absolute;
@@ -315,7 +317,7 @@ header.visible {
     z-index: 2;
     padding: 30px;
 }
-  
+
 .controls .prev,
 .controls .next {
     display: flex;
@@ -323,7 +325,7 @@ header.visible {
     align-items: center;
     cursor: pointer;
     font-size: 24px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 10px;
     border-radius: 50%;
@@ -332,13 +334,14 @@ header.visible {
 }
 
 @media (max-width: 768px) {
+
     .controls .prev,
     .controls .next {
         padding: 8px;
         font-size: 20px;
     }
 }
-  
+
 /* Dots */
 .dots {
     text-align: center;
@@ -347,7 +350,7 @@ header.visible {
     bottom: 10px;
     width: 100%;
 }
-  
+
 .dots span {
     height: 10px;
     width: 10px;
@@ -366,13 +369,14 @@ header.visible {
         margin: 0 3px;
     }
 }
-  
+
 .dots span.active {
     background-color: #333;
 }
 
 .hero-section {
-    min-height: 100vh; /* ให้สูงพอเพื่อเห็น sticky ทำงาน */
+    min-height: 100vh;
+    /* ให้สูงพอเพื่อเห็น sticky ทำงาน */
     display: block;
     text-align: center;
     position: relative;
@@ -424,7 +428,7 @@ header.visible {
     gap: 1.5rem;
     flex-wrap: wrap;
     top: -25px;
-    
+
 }
 
 .btn-primary {
@@ -838,6 +842,7 @@ footer {
     .hero-text .subtitle {
         font-size: 1rem;
     }
+
     .hero-text p {
         font-size: 1rem;
     }
@@ -1061,4 +1066,21 @@ footer {
         height: 200px;
         min-width: 100px;
     }
+}
+
+#loader {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #ffffff;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s;
 }

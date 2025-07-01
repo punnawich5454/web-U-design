@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-   const header = document.getElementById('header-con')
+    const header = document.getElementById('header-con')
     let lastScrollTop = 0
     window.addEventListener('scroll', () => {
         // ทำงานเฉพาะหน้าจอเล็ก (มือถือ)
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         manageShowMoreButton(visibleItems.length, maxItems, filterValue, isShowingAll);
     }
 
-    
+
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-   
+
 
     function closeModal() {
         const modal = document.getElementById('imageModal');
@@ -220,5 +220,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const progressBar = document.getElementById('progressBar');
 
+    const apis = [
+        'http://127.0.0.1:3000/api/categories'
+    ];
+
+    const totalApis = apis.length;
+    let loadedApis = 0;
+
+    function updateProgress() {
+        loadedApis++;
+        const percent = (loadedApis / totalApis) * 100;
+        progressBar.style.width = percent + '%';
+
+        if (loadedApis === totalApis) {
+            progressBar.classList.add('complete');
+            setTimeout(() => {
+                progressBar.style.display = 'none'
+            }, 400);
+        }
+    }
+
+    async function loadAllAPIs() {
+        const promises = apis.map(url =>
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+                    return res.json();
+                })
+                .catch(err => {
+                    console.error('โหลด API ล้มเหลว:', url, err);
+                })
+                .finally(() => {
+                    updateProgress();
+                })
+        );
+
+        await Promise.allSettled(promises);
+    }
+
+    loadAllAPIs();
+
+    async function loadCategory() {
+        const response = await fetch('http://127.0.0.1:3000/api/categories')
+        const data = await response.json()
+
+        const galleryGrid = document.getElementById('galleryGrid')
+        data.categories.forEach(item => {
+            const a = document.createElement('a')
+            a.href = ""
+            const div = document.createElement('div')
+            div.classList.add("gallery-item")
+            const img = document.createElement('img')
+            img.classList.add('gallery-img')
+            img.src = `data:image/jpeg;base64, ${item.imge}`
+            img.alt = item.name
+            const h3 = document.createElement('h3')
+            h3.classList.add('gallery-info')
+            h3.textContent = item.name
+            div.appendChild(img)
+            div.appendChild(h3)
+            a.appendChild(div)
+            galleryGrid.appendChild(a)
+        })
+    }
+
+    loadCategory()
 });

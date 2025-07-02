@@ -106,10 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const progressBar = document.getElementById('progressBar');
 
-    const apis = [
-        'http://127.0.0.1:3000/api/banners',
-        'http://127.0.0.1:3000/api/visit'
-    ];
+    const apis = [];
 
     const totalApis = apis.length;
     let loadedApis = 0;

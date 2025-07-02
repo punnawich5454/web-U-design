@@ -12,6 +12,9 @@
 <body>
     <header id="header-con">
         <div class="left-container">
+             <div id="loader">
+                <div id="progressBar"></div>
+            </div>
             <div class="logo">
                 <img src="\assets\images\logo.png" alt="logo">
             </div>
@@ -60,8 +63,8 @@
     <div class="content-wapper">
         <aside class="sidebar">
             <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="#vinyl">ป้ายไวนิล</a></li>
+                <ul id="sidebar-ul">
+                    <!-- <li><a href="#vinyl">ป้ายไวนิล</a></li>
                     <li><a href="#lightbox">ป้ายไฟ</a></li>
                     <li><a href="#metal">ป้ายอักษรโลหะ</a></li>
                     <li><a href="#panelc">ป้ายแผงตัวซี</a></li>
@@ -78,7 +81,7 @@
                     <li><a href="#pylon">ป้ายไพลอน</a></li>
                     <li><a href="#billboard">ป้ายบิลบอร์ด</a></li>
                     <li><a href="#neonlight">ป้ายไฟนีออนไลท์</a></li>
-                    <li><a href="#steelframe">ป้ายโครงเหล็ก</a></li>
+                    <li><a href="#steelframe">ป้ายโครงเหล็ก</a></li> -->
                 </ul>
             </nav>
         </aside>
@@ -86,19 +89,18 @@
             <div class="category-nav">
                 <div class="category-buttons">
                     <a href="../service.html"><button class="category-btn">ทั้งหมด</button></a>
-                    <a href="/service_detail/service_detail_main.html"><button
-                            class="category-btn">ป้ายโฆษณา</button></a>
-                    <a href="/service_detail/service_detail_2.html"><button class="category-btn active">สติ๊กเกอร์</button></a>
+                    <!-- <a href="/service_detail/service_detail_main.html"><button class="category-btn active">ป้ายโฆษณา</button></a>
+                    <a href="/service_detail/service_detail_2.html"><button class="category-btn">สติ๊กเกอร์</button></a>
                     <a href="/service_detail/service_detail_3.html"><button class="category-btn">งานพิมพ์</button></a>
                     <a href="/service_detail/service_detail_4.html"><button class="category-btn">งานตกแต่ง</button></a>
-                    <a href=""><button class="category-btn">งานอื่นๆ</button></a>
+                    <a href=""><button class="category-btn">งานอื่นๆ</button></a> -->
                 </div>
             </div>
             <div class="main-content">
                 <div class="container">
-                    <h1 class="page-title">บริการป้ายโฆษณา</h1>
-                    <!-- Service Section 1: ป้ายไวนิล -->
-                    <div class="service-section" id="vinyl">
+                    <!-- <h1 class="page-title">บริการป้ายโฆษณา</h1> -->
+             
+                    <!--<div class="service-section" id="vinyl">
                         <div class="service-images">
                             <div class="service-image demo-img-1">
                                 <img src="../assets/images/ไวนิล.jpg" alt="">
@@ -110,7 +112,6 @@
                                 <img src="../assets/images/491952769_1285203656941484_9153172249648220897_n.jpg" alt="">
                             </div>
                         </div>
-
                         <h2 class="service-title">ป้ายไวนิล (Vinyl Signage)</h2>
                         <p class="service-description"></p>
                         ป้ายไวนิล (Vinyl) คือ ป้ายที่มีผ้าใบหรือไวนิลเป็นวัสดุหลัก
@@ -122,10 +123,8 @@
                         รวมทั้งยังใช้เป็นวัสดุหลักของป้ายโฆษณาเกือบทุกประเภท เนื่องจากการติดตั้งและจัดเก็บง่าย สะดวก
                         มีความสวยงาม และราคาไม่แพง
                         </p>
-
                     </div>
 
-                    <!-- Service Section 2: ป้ายไฟ -->
                     <div class="service-section" id="lightbox">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -150,7 +149,6 @@
                         </p>
                     </div>
 
-                    <!-- Service Section 3: ป้ายอักษรโลหะ -->
                     <div class="service-section" id="metal">
                         <div class="service-images">
                             <div class="service-image demo-img-3">
@@ -183,7 +181,7 @@
 
                     </div>
 
-                    <!-- Service Section 4: ป้ายอะคริลิค -->
+                   
                     <div class="service-section" id="panelc">
                         <div class="service-images">
                             <div class="service-image demo-img-1">
@@ -215,7 +213,7 @@
                         </p>
 
                     </div>
-                    <!-- Service Section 5: ป้ายอลูมิเนียมคอมโพสิต -->
+             
                     <div class="service-section" id="composite">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -244,7 +242,7 @@
                         </p>
                     </div>
 
-                    <!-- Service Section 6: ป้ายสติ๊กเกอร์ (Sticker ) -->
+                
                     <div class="service-section" id="sticker">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -271,7 +269,7 @@
                             รถส่งสินค้าของบริษัท รถตู้ รถบรรทุก เพื่อเป็นสื่อโฆษณาส่งเสริมการตลาดได้อีกทางหนึ่งด้วย
                         </p>
                     </div>
-                    <!-- Service Section 7: ป้ายกองโจร (Street Cutout) -->
+                
                     <div class="service-section" id="street">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -300,7 +298,7 @@
                             ป้ายกองโจรมีลักษณะและวัตถุประสงค์การนำไปใช้งานคล้ายกับป้ายคัทเอาท์ แต่มีขนาดต่างกันเท่านั้น
                         </p>
                     </div>
-                    <!-- Service Section 8: ป้ายคัทเอาท์ (Cutout) -->
+              
                     <div class="service-section" id="cutout">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -327,7 +325,7 @@
                             และมีหลากหลายขนาดตามที่ลูกค้าต้องการ
                         </p>
                     </div>
-                    <!-- Service Section 9: ป้ายแบนเนอร์ (Banner) -->
+          
                     <div class="service-section" id="banner">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -353,7 +351,7 @@
                             ป้ายแบนเนอร์สินค้าที่ติดบริเวณหน้าร้านและอาคารพาณิชย์ ส่วนใหญ่จะเรียกว่า ไวนิลเขวนหน้าร้าน
                         </p>
                     </div>
-                    <!-- Service Section 10: ป้ายหน้าอาคาร (Facade) -->
+            
                     <div class="service-section" id="facade">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -380,7 +378,7 @@
                             รวมทั้งต้องดูที่ความต้องการและงบประมาณที่มีด้วย
                         </p>
                     </div>
-                    <!-- Service Section 11: ป้ายโครงการ (Signboard) -->
+              
                     <div class="service-section" id="signboard">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -406,7 +404,7 @@
                             รวมทั้งสามารถสร้างแรงจูงใจให้กับกลุ่มเป้าหมายที่เราต้องการได้มากขึ้นด้วย
                         </p>
                     </div>
-                    <!-- Service Section 12: ป้ายอะคริลิค (Acrylic Signage) -->
+                
                     <div class="service-section" id="acrylic">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -431,7 +429,7 @@
                             แล้วนำไปใช้งานได้เช่นเดียวกัน เราเรียกว่า ตัวอักษรอะคริลิค
                         </p>
                     </div>
-                    <!-- Service Section 13: ป้ายกัดกรด (Acid Etching Sign) -->
+                  
                     <div class="service-section" id="acid">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -456,7 +454,7 @@
                         <p class="service-description">ป้ายทองเหลืองกัดกรด</p>
                         </p>
                     </div>
-                    <!-- Service Section 14: พิมพ์ป้ายไวนิล/สติ๊กเกอร์/อิงค์เจ็ท -->
+                 
                     <div class="service-section" id="inkjet">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -506,7 +504,7 @@
                         </p>
                         </p>
                     </div>
-                    <!-- Service Section 15: ป้ายไพลอน  (Pylon Sign) -->
+             
                     <div class="service-section" id="pylon">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -534,7 +532,7 @@
                             ที่มีความรู้ความชำนาญเช่นเดียวกับป้ายบิลบอร์ด
                         </p>
                     </div>
-                    <!-- Service Section 16: ป้ายบิลบอร์ด (Billboard) -->
+           
                     <div class="service-section" id="billboard">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -566,7 +564,7 @@
                             โดยไม่มีข้อจำกัดเรื่องการหมดสัญญาเช่าด้วย
                         </p>
                     </div>
-                    <!-- Service Section 17: ป้ายไฟนีออนไลท์ (neonlight) -->
+
                     <div class="service-section" id="neonlight">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -591,7 +589,7 @@
                             และสามารถพบเห็นได้ทั่วไปยามค่ำคืน
                         </p>
                     </div>
-                    <!-- Service Section 18: ป้ายโครงเหล็ก -->
+
                     <div class="service-section" id="steelframe">
                         <div class="service-images">
                             <div class="service-image demo-img-2">
@@ -612,7 +610,7 @@
                             บางที่เราก็อาจจะพบเห็นป้ายโครงเหล็กหุ้มตึกเลยก็มี โดยป้ายชนิดนี้จะติดตั้งด้วยแผ่นไวนิล
                             เนื่องจากการจัดเก็บง่าย เหมาะสำหรับสินค้าที่มีการเปลี่ยนโปรโมชั่นบ่อยๆ
                         </p>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

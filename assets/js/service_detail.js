@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Category button functionality
-  const categoryButtons = document.querySelectorAll('.category-btn');
-  const serviceSections = document.querySelectorAll('.service-section');
-
   const menuButton = document.querySelector('.tree-keed')
   const navBlock = document.querySelector('.block-nav')
   const searchInput = document.getElementById('search-input')
@@ -44,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  window.addEventListener('scroll', function () {
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelector('.hero-section');
-    const speed = scrolled * 0.5;
-    parallax.style.transform = `translateY(${speed}px)`;
-  });
+  // window.addEventListener('scroll', function () {
+  //   const scrolled = window.pageYOffset;
+  //   const parallax = document.querySelector('.hero-section');
+  //   const speed = scrolled * 0.5;
+  //   parallax.style.transform = `translateY(${speed}px)`;
+  // });
 
   function search() {
     const keyword = searchInput.value.trim()
@@ -73,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     searchInput.addEventListener('blur', () => {
-      // Add a small delay to allow clicking on search results
       setTimeout(() => {
         resultFrame.style.display = 'none'
       }, 200)
@@ -110,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location = '/service.html'
   })
 
-  // Smooth scrolling for better UX
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -120,21 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Smooth scroll for sidebar links
   document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         window.scrollTo({
-          top: target.offsetTop - 80, // ปรับ offset ตาม header
+          top: target.offsetTop - 80,
           behavior: 'smooth'
         });
       }
     });
   });
 
-  // Highlight active link on scroll
   const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
   const sections = Array.from(sidebarLinks).map(link => document.querySelector(link.getAttribute('href')));
   window.addEventListener('scroll', () => {
@@ -145,6 +137,138 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarLinks[idx].classList.add('active');
       }
     });
+  });
+
+  const progressBar = document.getElementById('progressBar');
+  const params = new URLSearchParams(window.location.search)
+  const catId = params.get('cat')
+
+  const apis = [
+    'http://127.0.0.1:3000/api/categories',
+    `http://127.0.0.1:3000/api/category/${catId}`,
+    `http://127.0.0.1:3000/api/products/category/${catId}`
+
+  ];
+
+  const totalApis = apis.length;
+  let loadedApis = 0;
+
+  function updateProgress() {
+    loadedApis++;
+    const percent = (loadedApis / totalApis) * 100;
+    progressBar.style.width = percent + '%';
+
+    if (loadedApis === totalApis) {
+      progressBar.classList.add('complete');
+      setTimeout(() => {
+        progressBar.style.display = 'none'
+      }, 400);
+    }
+  }
+
+  async function loadAllAPIs() {
+    const promises = apis.map(url =>
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+          return res.json();
+        })
+        .catch(err => {
+          console.error('โหลด API ล้มเหลว:', url, err);
+        })
+        .finally(() => {
+          updateProgress();
+        })
+    );
+
+    await Promise.allSettled(promises);
+  }
+
+  loadAllAPIs();
+
+  async function loadCategory() {
+    const response = await fetch('http://127.0.0.1:3000/api/categories');
+    const data = await response.json();
+
+    const categoryButton = document.querySelector('.category-buttons');
+    data.categories.forEach(item => {
+      const a = document.createElement('a');
+      a.href = `/page/service_detail.html?cat=${item._id}`;
+      const button = document.createElement('button')
+      button.classList.add('category-btn')
+      button.textContent = item.name
+      a.appendChild(button)
+      categoryButton.appendChild(a);
+    })
+  }
+
+  loadCategory()
+
+
+  async function loadCategoryById() {
+    const params = new URLSearchParams(window.location.search)
+    const catId = params.get('cat')
+
+    const respones1 = await fetch(`http://127.0.0.1:3000/api/category/${catId}`)
+    const data1 = await respones1.json()
+
+    const container = document.querySelector('.container')
+    const h1 = document.createElement('h1')
+    h1.className = 'page-title'
+    h1.textContent = data1.name
+    container.appendChild(h1)
+
+    const respones = await fetch(`http://127.0.0.1:3000/api/products/category/${catId}`)
+    const data = await respones.json()
+    const sidebarUl = document.getElementById('sidebar-ul')
+    data.products.forEach(item => {
+      const li = document.createElement('li')
+      const a = document.createElement('a')
+      a.href = `#${item.name}`
+      a.textContent = item.name
+      li.appendChild(a)
+      sidebarUl.appendChild(li)
+
+      const serviceSections = document.createElement('div')
+      serviceSections.classList.add('service-section')
+      const divServiceImages = document.createElement('div')
+      divServiceImages.classList.add('service-images')
+      serviceSections.id = item.name
+      for (let i = 0; i < 3; i++) {
+        const divServiceImage = document.createElement('div')
+        divServiceImage.classList.add('service-image')
+        const img = document.createElement('img')
+        img.src = `data:image/jpeg;base64, ${item.image[i]}`
+        divServiceImage.appendChild(img)
+        divServiceImages.appendChild(divServiceImage)
+      }
+      serviceSections.appendChild(divServiceImages)
+
+      const h2 = document.createElement('h2')
+      h2.classList.add('service-title')
+      h2.textContent = item.name
+      const p = document.createElement('p')
+      p.className = 'service-description'
+      p.textContent = item.description
+      serviceSections.appendChild(h2)
+      serviceSections.appendChild(p)
+
+      container.appendChild(serviceSections)
+    })
+  }
+
+  function scrollToHash() {
+    const hash = decodeURIComponent(location.hash.substring(1));
+    if (hash) {
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  loadCategoryById().then(() => {
+    scrollToHash();
   });
 
 

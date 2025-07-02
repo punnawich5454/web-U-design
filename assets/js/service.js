@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const galleryGrid = document.getElementById('galleryGrid')
         data.categories.forEach(item => {
             const a = document.createElement('a')
-            a.href = ""
+            a.href = `/page/service_detail.html?cat=${encodeURIComponent(item._id)}`
             const div = document.createElement('div')
             div.classList.add("gallery-item")
             const img = document.createElement('img')

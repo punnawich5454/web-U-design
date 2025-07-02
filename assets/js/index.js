@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.querySelector('.tree-keed')
     const navBlock = document.querySelector('.block-nav')
-    const searchInput = document.getElementById('search-input')
-    const resultFrame = document.getElementById('iframe-search')
     const header = document.getElementById('header-con')
     let lastScrollTop = 0
 
@@ -33,26 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    // Scroll event listener for header visibility and smooth scrolling
-    // window.addEventListener('scroll', () => {
-    //     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    //     // Show/hide header based on scroll direction
-    //     if (currentScroll > lastScrollTop && currentScroll > 100) {
-    //         // Scrolling down
-    //         header.style.transform = 'translateY(-100%)';
-    //         navBlock.style.display = 'none';
-    //         resultFrame.style.display = 'none';
-    //         searchInput.blur();
-    //     } else {
-    //         // Scrolling up
-    //         header.style.transform = 'translateY(0)';
-    //     }
-
-    //     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    // })
-
-    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -382,6 +360,28 @@ document.addEventListener('DOMContentLoaded', () => {
             productItem.appendChild(a)
         })
     }
+
+    const searchInput = document.getElementById('search-input');
+    const iframeSearch = document.getElementById('iframe-search');
+
+    async function loadeSearch() {
+        const searchValue = searchInput.value.trim();
+        if (searchValue === "") {
+            iframeSearch.style.display = 'none';
+        } else {
+            iframeSearch.src = `/components/search.html?query=${encodeURIComponent(searchValue)}`;
+            iframeSearch.style.display = 'block';
+        }
+    }
+
+
+    searchInput.addEventListener('input', () => {
+        loadeSearch();
+    });
+
+    searchInput.addEventListener('keydown', () => {
+        
+    })
 
     loadCategory()
 

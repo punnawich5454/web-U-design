@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; frame-src 'self' https:;">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <title>U-Dsign</title>
     <style>
@@ -60,57 +58,61 @@
     </div>
 </body>
 <script>
-    function searchProducts(query) {
-        const searchResults = document.getElementById('search-results');
-        const products = db.getAllProducts();
-        
-        searchResults.innerHTML = '';
-        
-        if (!query) {
-            return;
-        }
+    async function searchProducts(query) {
+        if (!query) return;
 
-        const filteredProducts = products.filter(product => 
-            product.name.toLowerCase().startsWith(query.toLowerCase())
+        const response = await fetch(`http://127.0.0.1:3000/api/products/search?search=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        const products = data.products || [];
+
+        const searchResults = document.getElementById('search-results');
+        if (!searchResults) return;
+
+        searchResults.replaceChildren()
+
+        const filteredProducts = products.filter(product =>
+            product.name?.toLowerCase().startsWith(query.toLowerCase())
         );
 
         if (filteredProducts.length === 0) {
-            searchResults.innerHTML = '<div class="no-results">ไม่พบผลการค้นหา</div>';
+            const divResult = document.createElement('div')
+            divResult.textContent = 'ไม่พบผลการค้นหา'
+            searchResults.appendChild(divResult)
             return;
         }
 
         filteredProducts.forEach(product => {
             const div = document.createElement('a');
-            div.href = `/page/product.html?id=${product.id}`;
+            div.href = `/page/service_detail.html?cat=${product.category_id}`;
             div.className = 'item-name';
-            div.innerHTML = `
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span>${product.name}</span>
-            `;
+
+            const i = document.createElement('i');
+            i.classList.add('fa-solid', 'fa-magnifying-glass');
+
+            const span = document.createElement('span');
+            span.textContent = product.name;
+
+            div.appendChild(i);
+            div.appendChild(span);
+
             div.addEventListener('click', (e) => {
                 e.preventDefault();
-                window.parent.location.href = `/page/product.html?id=${product.id}`;
+                window.parent.location.href = `/page/service_detail.html?cat=${product.category_id}#${encodeURIComponent(product.name)}`;
             });
+
             searchResults.appendChild(div);
         });
     }
 
     const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('query');
-    
-    if (query) {
-        searchProducts(query);
+    const queryFromUrl = urlParams.get('query');
+    if (queryFromUrl) {
+        searchProducts(queryFromUrl);
     }
 
-    // Add event listener for Enter key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const searchInput = document.querySelector('input[name="search"]');
-            if (searchInput && searchInput.value.trim()) {
-                window.location.href = `/page/product.html?id=${encodeURIComponent(searchInput.value.trim())}`;
-            }
-        }
-    });
+    
+
 </script>
 
 </html>

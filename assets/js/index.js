@@ -290,6 +290,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadeVisitor()
 
+        async function loadCategory() {
+        const response = await fetch('http://127.0.0.1:3000/api/categories')
+        const data = await response.json()
+
+        const productItem = document.getElementById('product-item')
+        data.categories.forEach(item => {
+            const a = document.createElement('a')
+            a.href = "/service.html"
+            a.classList.add("product-item-con")
+            a.setAttribute("data-aos", "fade-up")
+            const div = document.createElement('div')
+            div.classList.add('product-item-con-image')
+            const img = document.createElement('img')
+            img.src = `data:image/jpeg;base64, ${item.image}`
+            img.alt = item.name
+            const div1 = document.createElement('div')
+            div1.classList.add("product-item-con-text")
+            const h3 = document.createElement('h3')
+            h3.textContent = item.name
+            div1.appendChild(h3)
+            div.appendChild(img)
+            a.appendChild(div)
+            a.appendChild(div1)
+            productItem.appendChild(a)
+        })
+    }
+
+    const searchInput = document.getElementById('search-input');
+    const iframeSearch = document.getElementById('iframe-search');
+
+    async function loadeSearch() {
+        const searchValue = searchInput.value.trim();
+        if (searchValue === "") {
+            iframeSearch.style.display = 'none';
+        } else {
+            iframeSearch.src = `/components/search.html?query=${encodeURIComponent(searchValue)}`;
+            iframeSearch.style.display = 'block';
+        }
+    }
+
+
+    searchInput.addEventListener('input', () => {
+        loadeSearch();
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
+        }
+    })
+
+    loadCategory()
+
     const progressBar = document.getElementById('progressBar');
 
     const apis = [
@@ -333,57 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadAllAPIs();
-
-    async function loadCategory() {
-        const response = await fetch('http://127.0.0.1:3000/api/categories')
-        const data = await response.json()
-
-        const productItem = document.getElementById('product-item')
-        data.categories.forEach(item => {
-            const a = document.createElement('a')
-            a.href = "/service.html"
-            a.classList.add("product-item-con")
-            a.setAttribute("data-aos", "fade-up")
-            const div = document.createElement('div')
-            div.classList.add('product-item-con-image')
-            const img = document.createElement('img')
-            img.src = `data:image/jpeg:base64, ${item.image}`
-            img.alt = item.name
-            const div1 = document.createElement('div')
-            div1.classList.add("product-item-con-text")
-            const h3 = document.createElement('h3')
-            h3.textContent = item.name
-            div1.appendChild(h3)
-            div.appendChild(img)
-            a.appendChild(div)
-            a.appendChild(div1)
-            productItem.appendChild(a)
-        })
-    }
-
-    const searchInput = document.getElementById('search-input');
-    const iframeSearch = document.getElementById('iframe-search');
-
-    async function loadeSearch() {
-        const searchValue = searchInput.value.trim();
-        if (searchValue === "") {
-            iframeSearch.style.display = 'none';
-        } else {
-            iframeSearch.src = `/components/search.html?query=${encodeURIComponent(searchValue)}`;
-            iframeSearch.style.display = 'block';
-        }
-    }
-
-
-    searchInput.addEventListener('input', () => {
-        loadeSearch();
-    });
-
-    searchInput.addEventListener('keydown', () => {
-        
-    })
-
-    loadCategory()
 
 })
 

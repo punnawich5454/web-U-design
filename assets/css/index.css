@@ -902,6 +902,11 @@ footer {
 }
 
 @media (max-width: 564px) {
+
+    .product-item-con-text h3 {
+        font-size: 1rem;
+    }
+
     .search-con input {
         width: 270px;
     }

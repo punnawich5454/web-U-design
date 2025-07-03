@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    window.addEventListener('scroll', function () {
-        const scrolled = window.pageYOffset;
-        const parallax = document.querySelector('.hero-section');
-        const speed = scrolled * 0.5;
-        parallax.style.transform = `translateY(${speed}px)`;
-    });
+    // window.addEventListener('scroll', function () {
+    //     const scrolled = window.pageYOffset;
+    //     const parallax = document.querySelector('.hero-section');
+    //     const speed = scrolled * 0.5;
+    //     parallax.style.transform = `translateY(${speed}px)`;
+    // });
 
     function search() {
         const keyword = searchInput.value.trim()
@@ -220,6 +220,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    
+    async function loadCategory() {
+        const response = await fetch('http://127.0.0.1:3000/api/categories')
+        const data = await response.json()
+
+        const galleryGrid = document.getElementById('galleryGrid')
+        data.categories.forEach(item => {
+            const a = document.createElement('a')
+            a.href = `/page/service_detail.html?cat=${encodeURIComponent(item._id)}`
+            const div = document.createElement('div')
+            div.classList.add("gallery-item")
+            const img = document.createElement('img')
+            img.classList.add('gallery-img')
+            img.src = `data:image/jpeg;base64, ${item.image}`
+            img.alt = item.name
+            const h3 = document.createElement('h3')
+            h3.classList.add('gallery-info')
+            h3.textContent = item.name
+            div.appendChild(img)
+            div.appendChild(h3)
+            a.appendChild(div)
+            galleryGrid.appendChild(a)
+        })
+    }
+
+    loadCategory()
+
     const progressBar = document.getElementById('progressBar');
 
     const apis = [
@@ -262,29 +289,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadAllAPIs();
 
-    async function loadCategory() {
-        const response = await fetch('http://127.0.0.1:3000/api/categories')
-        const data = await response.json()
-
-        const galleryGrid = document.getElementById('galleryGrid')
-        data.categories.forEach(item => {
-            const a = document.createElement('a')
-            a.href = `/page/service_detail.html?cat=${encodeURIComponent(item._id)}`
-            const div = document.createElement('div')
-            div.classList.add("gallery-item")
-            const img = document.createElement('img')
-            img.classList.add('gallery-img')
-            img.src = `data:image/jpeg;base64, ${item.imge}`
-            img.alt = item.name
-            const h3 = document.createElement('h3')
-            h3.classList.add('gallery-info')
-            h3.textContent = item.name
-            div.appendChild(img)
-            div.appendChild(h3)
-            a.appendChild(div)
-            galleryGrid.appendChild(a)
-        })
-    }
-
-    loadCategory()
 });

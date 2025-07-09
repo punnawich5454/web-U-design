@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-input')
   const resultFrame = document.getElementById('iframe-search')
 
+  const API = 'http://127.0.0.1:3000'
+
   menuButton.addEventListener('click', () => {
     if (navBlock.style.display === 'block') {
       navBlock.style.display = 'none';
@@ -144,9 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const catId = params.get('cat')
 
   const apis = [
-    'http://127.0.0.1:3000/api/categories',
-    `http://127.0.0.1:3000/api/category/${catId}`,
-    `http://127.0.0.1:3000/api/products/category/${catId}`
+    API + '/api/categories',
+    API + `/api/category/${catId}`,
+    API + `/api/products/category/${catId}`
 
   ];
 
@@ -187,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadAllAPIs();
 
   async function loadCategory() {
-    const response = await fetch('http://127.0.0.1:3000/api/categories');
+    const response = await fetch(API + '/api/categories');
     const data = await response.json();
 
     const categoryButton = document.querySelector('.category-buttons');
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search)
     const catId = params.get('cat')
 
-    const respones1 = await fetch(`http://127.0.0.1:3000/api/category/${catId}`)
+    const respones1 = await fetch(API + `/api/category/${catId}`)
     const data1 = await respones1.json()
 
     const container = document.querySelector('.container')
@@ -218,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     h1.textContent = data1.name
     container.appendChild(h1)
 
-    const respones = await fetch(`http://127.0.0.1:3000/api/products/category/${catId}`)
+    const respones = await fetch(API + `/api/products/category/${catId}`)
     const data = await respones.json()
     const sidebarUl = document.getElementById('sidebar-ul')
     data.products.forEach(item => {

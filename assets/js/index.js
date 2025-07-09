@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header-con')
     let lastScrollTop = 0
 
+    const API = 'http://127.0.0.1:3000'
+
     document.documentElement.style.scrollBehavior = 'smooth';
 
     const hasHeaderAOSPlayed = sessionStorage.getItem('hasHeaderAOSPlayed');
@@ -145,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoSlideTimeout;
 
     async function loadBanner() {
-        const response = await fetch('http://127.0.0.1:3000/api/banners');
+        const response = await fetch(API + '/api/banners');
         const data = await response.json();
 
         bannerContent.innerHTML = ''; // เคลียร์ก่อนโหลดใหม่
@@ -281,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadBanner();
 
     async function loadeVisitor() {
-        const response = await fetch('http://127.0.0.1:3000/api/visit')
+        const response = await fetch(API + '/api/visit')
         const data = await response.json()
 
         const counterNumber = document.querySelector('.counter-number')
@@ -291,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadeVisitor()
 
         async function loadCategory() {
-        const response = await fetch('http://127.0.0.1:3000/api/categories')
+        const response = await fetch(API + '/api/categories')
         const data = await response.json()
 
         const productItem = document.getElementById('product-item')
@@ -346,9 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progressBar');
 
     const apis = [
-        'http://127.0.0.1:3000/api/banners',
-        'http://127.0.0.1:3000/api/visit',
-        'http://127.0.0.1:3000/api/categories'
+        API + '/api/banners',
+        API +'/api/visit',
+        API +'/api/categories'
     ];
 
     const totalApis = apis.length;

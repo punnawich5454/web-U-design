@@ -45,9 +45,11 @@
     <script>
         const fill = document.getElementById('fill');
 
+        const API = 'http://127.0.0.1:3000'
+
         const apis = [
-            'http://127.0.0.1:3000/api/banners',
-            'http://127.0.0.1:3000/api/visit'
+            API + '/api/banners',
+            API + '/api/visit'
         ];
 
         const totalApis = apis.length;

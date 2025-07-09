@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
 
+    const API = 'http://127.0.0.1:3000'
+
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {
             navBlock.style.display = 'none';
@@ -222,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     async function loadCategory() {
-        const response = await fetch('http://127.0.0.1:3000/api/categories')
+        const response = await fetch(API + '/api/categories')
         const data = await response.json()
 
         const galleryGrid = document.getElementById('galleryGrid')
@@ -250,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progressBar');
 
     const apis = [
-        'http://127.0.0.1:3000/api/categories'
+        API + '/api/categories'
     ];
 
     const totalApis = apis.length;

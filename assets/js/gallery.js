@@ -5,6 +5,7 @@ const navBlock = document.querySelector('.block-nav')
 const searchInput = document.getElementById('search-input')
 const resultFrame = document.getElementById('iframe-search')
 
+
 menuButton.addEventListener('click', () => {
     if (navBlock.style.display === 'block') {
         navBlock.style.display = 'none';

@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(API + '/api/banners');
         const data = await response.json();
 
-        bannerContent.innerHTML = ''; // เคลียร์ก่อนโหลดใหม่
+        bannerContent.innerHTML = '';
         data.banners.forEach(item => {
             const div = document.createElement('div');
             div.classList.add('banner-image');
@@ -163,11 +163,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSlider();
     }
 
+    let sliderEventBound = false;
     function setupSlider() {
-        const slides = document.querySelectorAll('.banner-image');
-        const slideCount = slides.length;
-
-        cloneSlides(slides);
+        // Remove all cloned slides if exist (keep only original slides)
+        const allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
+        const slideCount = allSlides.length;
+        // Remove old clones (clones are always at the end)
+        const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
+        while (bannerContent.children.length > slideCount) {
+            bannerContent.removeChild(bannerContent.lastChild);
+        }
+        // Clone slides (only if not already cloned)
+        for (let i = 0; i < slidesToClone; i++) {
+            const clone = allSlides[i % slideCount].cloneNode(true);
+            bannerContent.appendChild(clone);
+        }
 
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slideCount; i++) {
@@ -183,12 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
             dots[index % slideCount].classList.add('active');
         }
 
-        function slideTo(index) {
+        function slideTo(index, withTransition = true) {
             const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
-            bannerContent.style.transition = 'transform 0.5s ease-in-out';
+            bannerContent.style.transition = withTransition ? 'transform 0.5s ease-in-out' : 'none';
             bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
             currentIndex = index;
-            updateDots(index);
+            updateDots(index % slideCount);
         }
 
         function nextSlide() {
@@ -196,10 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             slideTo(currentIndex);
             if (currentIndex >= slideCount) {
                 setTimeout(() => {
-                    bannerContent.style.transition = 'none';
-                    bannerContent.style.transform = 'translateX(0)';
-                    currentIndex = 0;
-                    updateDots(currentIndex);
+                    slideTo(0, false);
                 }, 500);
             }
         }
@@ -211,9 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bannerContent.style.transform = `translateX(-${slideCount * slideWidth}%)`;
                 currentIndex = slideCount;
                 setTimeout(() => {
-                    bannerContent.style.transition = 'transform 0.5s ease-in-out';
-                    currentIndex--;
-                    slideTo(currentIndex);
+                    slideTo(currentIndex - 1);
                 }, 20);
             } else {
                 currentIndex--;
@@ -237,48 +242,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5000);
         }
 
-        document.querySelector('.next').addEventListener('click', () => {
-            nextSlide();
-            resetAutoSlideDelay();
-        });
-
-        document.querySelector('.prev').addEventListener('click', () => {
-            prevSlide();
-            resetAutoSlideDelay();
-        });
-
-        dotsContainer.addEventListener('click', (e) => {
-            if (e.target.tagName === 'SPAN') {
-                const index = Array.from(dotsContainer.children).indexOf(e.target);
-                slideTo(index);
+        // Bind events only once
+        if (!sliderEventBound) {
+            document.querySelector('.next').addEventListener('click', () => {
+                nextSlide();
                 resetAutoSlideDelay();
-            }
-        });
+            });
 
-        document.querySelector('.banner-section').addEventListener('mouseenter', () => {
-            stopAutoSlide();
-            clearTimeout(autoSlideTimeout);
-        });
+            document.querySelector('.prev').addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlideDelay();
+            });
 
-        document.querySelector('.banner-section').addEventListener('mouseleave', () => {
-            resetAutoSlideDelay();
-        });
+            dotsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'SPAN') {
+                    const index = Array.from(dotsContainer.children).indexOf(e.target);
+                    slideTo(index);
+                    resetAutoSlideDelay();
+                }
+            });
 
-        window.addEventListener('resize', () => {
-            loadBanner();
-        });
+            document.querySelector('.banner-section').addEventListener('mouseenter', () => {
+                stopAutoSlide();
+                clearTimeout(autoSlideTimeout);
+            });
 
-        slideTo(0);
+            document.querySelector('.banner-section').addEventListener('mouseleave', () => {
+                resetAutoSlideDelay();
+            });
+
+            window.addEventListener('resize', () => {
+                // รีเซ็ต index และโหลดใหม่
+                currentIndex = 0;
+                loadBanner();
+            });
+            sliderEventBound = true;
+        }
+
+        currentIndex = 0;
+        slideTo(0, false);
         startAutoSlide();
     }
 
-    function cloneSlides(slides) {
-        const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
-        for (let i = 0; i < slidesToClone; i++) {
-            const clone = slides[i].cloneNode(true);
-            bannerContent.appendChild(clone);
-        }
-    }
+    // ไม่ต้องใช้ฟังก์ชัน cloneSlides แยกอีกต่อไป (ย้าย logic ไปใน setupSlider)
 
     loadBanner();
 

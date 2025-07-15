@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
 
-    const API = 'http://127.0.0.1:3000'
+    const API = 'https://wed-u-design-backend-production-65e0.up.railway.app'
 
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {

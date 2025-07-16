@@ -11,12 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const hasHeaderAOSPlayed = sessionStorage.getItem('hasHeaderAOSPlayed');
     const headerElements = header.querySelectorAll('[data-aos]');
 
-    if (hasHeaderAOSPlayed) {
+    // ปิด data-aos บนมือถือ
+    if (window.innerWidth <= 768) {
         headerElements.forEach(element => {
             element.removeAttribute('data-aos');
         });
     } else {
-        sessionStorage.setItem('hasHeaderAOSPlayed', 'true');
+        if (hasHeaderAOSPlayed) {
+            headerElements.forEach(element => {
+                element.removeAttribute('data-aos');
+            });
+        } else {
+            sessionStorage.setItem('hasHeaderAOSPlayed', 'true');
+        }
     }
 
     menuButton.addEventListener('click', () => {
@@ -165,19 +172,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sliderEventBound = false;
     function setupSlider() {
-        // Remove all cloned slides if exist (keep only original slides)
-        const allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
-        const slideCount = allSlides.length;
-        // Remove old clones (clones are always at the end)
+        // Remove all cloned slides (keep only originals)
+        let allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
+        // Remove all clones (dataset.clone === 'true')
+        allSlides.filter(slide => slide.dataset.clone === 'true').forEach(clone => bannerContent.removeChild(clone));
+        allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
+        let slideCount = allSlides.length;
+
+        // Clone for infinite loop effect (mobile: 1, desktop: 3)
         const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
-        while (bannerContent.children.length > slideCount) {
-            bannerContent.removeChild(bannerContent.lastChild);
-        }
-        // Clone slides (only if not already cloned)
         for (let i = 0; i < slidesToClone; i++) {
             const clone = allSlides[i % slideCount].cloneNode(true);
+            clone.dataset.clone = 'true';
             bannerContent.appendChild(clone);
         }
+
+        // Update allSlides and slideCount after cloning
+        allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
+        slideCount = allSlides.length - slidesToClone;
 
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slideCount; i++) {
@@ -195,19 +207,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function slideTo(index, withTransition = true) {
             const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
-            bannerContent.style.transition = withTransition ? 'transform 0.5s ease-in-out' : 'none';
+            if (!withTransition) {
+                bannerContent.style.transition = 'none';
+            } else {
+                // ป้องกัน transition ซ้อน
+                bannerContent.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+            }
             bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
             currentIndex = index;
             updateDots(index % slideCount);
         }
 
         function nextSlide() {
-            currentIndex++;
-            slideTo(currentIndex);
-            if (currentIndex >= slideCount) {
-                setTimeout(() => {
-                    slideTo(0, false);
-                }, 500);
+            if (currentIndex < slideCount) {
+                currentIndex++;
+                slideTo(currentIndex);
+                if (currentIndex === slideCount) {
+                    setTimeout(() => {
+                        slideTo(0, false);
+                    }, 500);
+                }
             }
         }
 
@@ -216,9 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
                 bannerContent.style.transition = 'none';
                 bannerContent.style.transform = `translateX(-${slideCount * slideWidth}%)`;
-                currentIndex = slideCount;
                 setTimeout(() => {
-                    slideTo(currentIndex - 1);
+                    currentIndex = slideCount - 1;
+                    slideTo(currentIndex);
                 }, 20);
             } else {
                 currentIndex--;
@@ -272,9 +291,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             window.addEventListener('resize', () => {
-                // รีเซ็ต index และโหลดใหม่
+                // รีเซ็ต index, ลบ clone เดิม, และ setupSlider ใหม่ (ป้องกันซ้อน)
+                if (autoSlideInterval) clearInterval(autoSlideInterval);
+                if (autoSlideTimeout) clearTimeout(autoSlideTimeout);
                 currentIndex = 0;
-                loadBanner();
+                // Remove all clones
+                let originals = Array.from(bannerContent.querySelectorAll('.banner-image'));
+                originals.filter(slide => slide.dataset.clone === 'true').forEach(clone => bannerContent.removeChild(clone));
+                // Reset transition
+                bannerContent.style.transition = 'none';
+                bannerContent.style.transform = 'translateX(0)';
+                setupSlider();
             });
             sliderEventBound = true;
         }
@@ -337,7 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
             iframeSearch.style.display = 'block';
         }
     }
-
 
     searchInput.addEventListener('input', () => {
         loadeSearch();

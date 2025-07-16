@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bannerContent = document.querySelector('.banner-content');
     const dotsContainer = document.querySelector('.dots');
-    const visibleSlides = window.innerWidth <= 768 ? 1 : 3;
     let currentIndex = 0;
     let autoSlideInterval;
     let autoSlideTimeout;
@@ -165,19 +164,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sliderEventBound = false;
     function setupSlider() {
-        // Remove all cloned slides if exist (keep only original slides)
-        const allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
-        const slideCount = allSlides.length;
+        // คำนวณ visibleSlides ใหม่ทุกครั้ง
+        const visibleSlides = window.innerWidth <= 768 ? 1 : 3;
+        // Remove all cloned slides (keep only original slides)
+        let allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
         // Remove old clones (clones are always at the end)
-        const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
-        while (bannerContent.children.length > slideCount) {
+        while (bannerContent.children.length > allSlides.length) {
             bannerContent.removeChild(bannerContent.lastChild);
         }
-        // Clone slides (only if not already cloned)
-        for (let i = 0; i < slidesToClone; i++) {
-            const clone = allSlides[i % slideCount].cloneNode(true);
-            bannerContent.appendChild(clone);
+        // อัปเดต allSlides หลังลบ clone
+        allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
+        let slideCount = allSlides.length;
+
+        // ถ้ามี slide เดียวหรือ slideCount <= visibleSlides ไม่ต้อง clone
+        if (slideCount > 1 && slideCount < visibleSlides + 1) {
+            // clone ให้ครบ visibleSlides
+            for (let i = 0; i < visibleSlides - slideCount + 1; i++) {
+                const clone = allSlides[i % slideCount].cloneNode(true);
+                bannerContent.appendChild(clone);
+            }
+            slideCount = Array.from(bannerContent.querySelectorAll('.banner-image')).length;
+        } else if (slideCount > 1) {
+            // clone เท่ากับ visibleSlides
+            for (let i = 0; i < visibleSlides; i++) {
+                const clone = allSlides[i % slideCount].cloneNode(true);
+                bannerContent.appendChild(clone);
+            }
         }
+
+        // update slideCount อีกครั้งหลัง clone
+        slideCount = Array.from(bannerContent.querySelectorAll('.banner-image')).length - (slideCount > 1 ? visibleSlides : 0);
 
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slideCount; i++) {
@@ -190,10 +206,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateDots(index) {
             dots.forEach(dot => dot.classList.remove('active'));
-            dots[index % slideCount].classList.add('active');
+            if (slideCount > 0) dots[index % slideCount].classList.add('active');
         }
 
         function slideTo(index, withTransition = true) {
+            if (slideCount <= 1) return; // ไม่เลื่อนถ้ามี slide เดียว
             const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
             bannerContent.style.transition = withTransition ? 'transform 0.5s ease-in-out' : 'none';
             bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
@@ -202,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function nextSlide() {
+            if (slideCount <= 1) return;
             currentIndex++;
             slideTo(currentIndex);
             if (currentIndex >= slideCount) {
@@ -212,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function prevSlide() {
+            if (slideCount <= 1) return;
             if (currentIndex === 0) {
                 const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
                 bannerContent.style.transition = 'none';
@@ -227,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function startAutoSlide() {
+            if (slideCount <= 1) return;
             autoSlideInterval = setInterval(nextSlide, 3000);
         }
 
@@ -237,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function resetAutoSlideDelay() {
             stopAutoSlide();
             clearTimeout(autoSlideTimeout);
+            if (slideCount <= 1) return;
             autoSlideTimeout = setTimeout(() => {
                 startAutoSlide();
             }, 5000);
@@ -271,17 +292,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 resetAutoSlideDelay();
             });
 
+            // ใช้ debounce resize เพื่อป้องกัน event ซ้อน
+            let resizeTimeout;
             window.addEventListener('resize', () => {
-                // รีเซ็ต index และโหลดใหม่
-                currentIndex = 0;
-                loadBanner();
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    currentIndex = 0;
+                    loadBanner();
+                }, 200);
             });
             sliderEventBound = true;
         }
 
         currentIndex = 0;
-        slideTo(0, false);
-        startAutoSlide();
+        if (slideCount > 1) {
+            slideTo(0, false);
+            startAutoSlide();
+        } else {
+            bannerContent.style.transition = 'none';
+            bannerContent.style.transform = 'translateX(0)';
+        }
     }
 
     // ไม่ต้องใช้ฟังก์ชัน cloneSlides แยกอีกต่อไป (ย้าย logic ไปใน setupSlider)

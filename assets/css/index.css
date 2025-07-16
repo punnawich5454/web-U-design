@@ -297,6 +297,20 @@ header.visible {
         flex: 0 0 100%;
         /* 1 รูปต่อแถวบนมือถือ */
     }
+    .banner-section {
+        width: 100vw;
+        min-width: 0;
+    }
+    .banner-content {
+        width: 100vw;
+        min-width: 0;
+    }
+    .banner-image {
+        min-width: 0;
+    }
+    .controls {
+        padding: 0 5px;
+    }
 }
 
 .banner-image img {

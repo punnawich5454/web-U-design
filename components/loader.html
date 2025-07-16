@@ -20,7 +20,9 @@
             position: relative;
             width: 200px;
             height: 200px;
-            background: url('/assets/images/logoNoColor.png') no-repeat center/contain;
+            /* background: url('/assets/images/logoNoColor.png') no-repeat center/contain; */
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         .fill {
@@ -30,8 +32,10 @@
             width: 100%;
             height: 0%;
             background-color: #a3d400;
+            opacity: 0.85;
+            border-radius: 20px 20px 20px 20px;
             clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
-            z-index: -1;
+            z-index: 0;
             transition: ease 0.3s;
         }
     </style>
@@ -40,15 +44,19 @@
 <body>
     <div class="loader">
         <div class="fill" id="fill"></div>
+        <img src="/assets/images/logoNoColor.png" alt="logo"
+            style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;pointer-events:none;user-select:none;"
+            draggable="false">
     </div>
 
     <script>
         const fill = document.getElementById('fill');
 
-        const API = 'https://sprightly-babka-889b49.netlify.app'
+        const API = 'https://wed-u-design-backend-production-65e0.up.railway.app'
 
         const apis = [
             API + '/api/banners',
+            API + '/api/categories',
             API + '/api/visit'
         ];
 
@@ -69,7 +77,9 @@
             return fetch(url, { signal }).finally(() => clearTimeout(timer));
         }
 
-        async function loadAllAPIs() {
+
+        async function loadAllAPIsWithTimeout() {
+            let finished = false;
             const promises = apis.map(url =>
                 fetchWithTimeout(url)
                     .then(res => {
@@ -85,13 +95,23 @@
                     })
             );
 
-            await Promise.allSettled(promises);
+            // ตั้ง timeout รวม 8 วินาที
+            const overallTimeout = setTimeout(() => {
+                if (!finished) {
+                    finished = true;
+                    parent.postMessage({ type: 'loaderFinished', reason: 'timeout' }, '*');
+                }
+            }, 8000);
 
-            // แจ้ง parent ว่าโหลดเสร็จ
-            parent.postMessage({ type: 'loaderFinished' }, '*');
+            await Promise.allSettled(promises);
+            if (!finished) {
+                finished = true;
+                clearTimeout(overallTimeout);
+                parent.postMessage({ type: 'loaderFinished', reason: 'allAPIs' }, '*');
+            }
         }
 
-        loadAllAPIs();
+        loadAllAPIsWithTimeout();
 
 
 

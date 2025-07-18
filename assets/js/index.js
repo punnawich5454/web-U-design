@@ -171,14 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sliderEventBound = false;
     function setupSlider() {
-        // Remove all cloned slides (keep only originals)
         let allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
-        // Remove all clones (dataset.clone === 'true')
         allSlides.filter(slide => slide.dataset.clone === 'true').forEach(clone => bannerContent.removeChild(clone));
         allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
         let slideCount = allSlides.length;
 
-        // Clone for infinite loop effect (mobile: 1, desktop: 3)
         const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
         for (let i = 0; i < slidesToClone; i++) {
             const clone = allSlides[i % slideCount].cloneNode(true);
@@ -186,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
             bannerContent.appendChild(clone);
         }
 
-        // Update allSlides and slideCount after cloning
         allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
         slideCount = allSlides.length - slidesToClone;
 
@@ -264,7 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5000);
         }
 
-        // Bind events only once
         if (!sliderEventBound) {
             document.querySelector('.next').addEventListener('click', () => {
                 nextSlide();
@@ -293,17 +288,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 resetAutoSlideDelay();
             });
 
-            // ใช้ debounce resize เพื่อป้องกัน event ซ้อน
             let resizeTimeout;
             window.addEventListener('resize', () => {
-                // รีเซ็ต index, ลบ clone เดิม, และ setupSlider ใหม่ (ป้องกันซ้อน)
                 if (autoSlideInterval) clearInterval(autoSlideInterval);
                 if (autoSlideTimeout) clearTimeout(autoSlideTimeout);
                 currentIndex = 0;
-                // Remove all clones
                 let originals = Array.from(bannerContent.querySelectorAll('.banner-image'));
                 originals.filter(slide => slide.dataset.clone === 'true').forEach(clone => bannerContent.removeChild(clone));
-                // Reset transition
                 bannerContent.style.transition = 'none';
                 bannerContent.style.transform = 'translateX(0)';
                 setupSlider();
@@ -321,19 +312,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ไม่ต้องใช้ฟังก์ชัน cloneSlides แยกอีกต่อไป (ย้าย logic ไปใน setupSlider)
-
     loadBanner();
 
-    async function loadeVisitor() {
-        const response = await fetch(API + '/api/visit')
-        const data = await response.json()
 
-        const counterNumber = document.querySelector('.counter-number')
-        counterNumber.textContent = data.uniqueCount
+    async function loadVisitor() {
+        const response = await fetch(API + '/api/visit');
+        const data = await response.json();
+        const counterNumber = document.querySelector('.counter-number');
+        counterNumber.textContent = data.uniqueCount;
     }
 
-    loadeVisitor()
+    loadVisitor();
 
         async function loadCategory() {
         const response = await fetch(API + '/api/categories')

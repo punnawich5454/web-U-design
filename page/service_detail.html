@@ -32,11 +32,13 @@
         </div>
         <div class="right-container">
             <div class="search-con">
-                <form action="">
-                    <input id="search-input" type="text" name="search" placeholder="ค้นหาสินค้า">
-                    <button id="button-1" type="submit">
-                        <img id="search" src="/assets/images/search-interface-symbol.png" alt="search-icon">
-                    </button>
+                <form id="form-input" action="" autocomplete="off" role="search">
+                    <div class="search-input-wrapper">
+                        <input id="search-input" type="text" name="search" placeholder="ค้นหาสินค้า" aria-label="ค้นหาสินค้า" autocomplete="off">
+                        <button id="button-1" type="submit" aria-label="ค้นหา">
+                            <img src="/assets/images/search-interface-symbol.png" alt="search-icon">
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

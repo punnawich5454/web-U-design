@@ -523,9 +523,12 @@ footer {
   padding: 0 50px;
 }
 
+
 .machine-image-1 {
-  width: 1100px;
+  width: 100%;
+  max-width: 1100px;
   height: 500px;
+  margin: 0 auto;
 }
 
 .machine-image-1 img {
@@ -537,7 +540,45 @@ footer {
 
 .mchine-text-item {
   text-align: center;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .machine-image-1 {
+    max-width: 700px;
+    height: 350px;
+  }
+  .mchine-text-item {
+    max-width: 700px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 769px) {
+  .machine-image-1 {
+    max-width: 100%;
+    height: 220px;
+  }
+  .mchine-text-item {
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .machine-image-1 {
+    max-width: 100%;
+    height: 140px;
+  }
+  .mchine-text-item {
+    max-width: 100%;
+    font-size: 0.9rem;
+    padding: 0 5px;
+  }
 }
 
 /* Responsive Design */

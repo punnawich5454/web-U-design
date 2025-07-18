@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input')
     const resultFrame = document.getElementById('iframe-search')
 
-    const API = 'https://wed-u-design-backend-production-65e0.up.railway.app'
+    const API = 'https://wed-u-design-backend-1.onrender.com'
 
     menuButton.addEventListener('click', () => {
         if (navBlock.style.display === 'block') {

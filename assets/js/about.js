@@ -100,47 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location = '/service.html'
     })
 
-    const progressBar = document.getElementById('progressBar');
-
-    const apis = [
-        'http://127.0.0.1:3000/api/banners',
-        'http://127.0.0.1:3000/api/visit'
-    ];
-
-    const totalApis = apis.length;
-    let loadedApis = 0;
-
-    function updateProgress() {
-        loadedApis++;
-        const percent = (loadedApis / totalApis) * 100;
-        progressBar.style.width = percent + '%';
-
-        if (loadedApis === totalApis) {
-            progressBar.classList.add('complete');
-            setTimeout(() => {
-                progressBar.style.display = 'none'
-            }, 400);
-        }
-    }
-
-    async function loadAllAPIs() {
-        const promises = apis.map(url =>
-            fetch(url)
-                .then(res => {
-                    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-                    return res.json();
-                })
-                .catch(err => {
-                    console.error('โหลด API ล้มเหลว:', url, err);
-                })
-                .finally(() => {
-                    updateProgress();
-                })
-        );
-
-        await Promise.allSettled(promises);
-    }
-
-    loadAllAPIs();
-
 })

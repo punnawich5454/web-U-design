@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header-con')
     let lastScrollTop = 0
 
-    const API = 'https://wed-u-design-backend-production-65e0.up.railway.app'
+    const API = 'https://wed-u-design-backend-1.onrender.com'
 
     document.documentElement.style.scrollBehavior = 'smooth';
 

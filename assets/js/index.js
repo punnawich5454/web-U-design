@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let autoSlideInterval;
     let autoSlideTimeout;
+    let visibleSlides = window.innerWidth <= 768 ? 1 : 3;
 
     async function loadBanner() {
         const response = await fetch(API + '/api/banners');
@@ -171,12 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sliderEventBound = false;
     function setupSlider() {
+        visibleSlides = window.innerWidth <= 768 ? 1 : 3;
+
         let allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
         allSlides.filter(slide => slide.dataset.clone === 'true').forEach(clone => bannerContent.removeChild(clone));
         allSlides = Array.from(bannerContent.querySelectorAll('.banner-image'));
         let slideCount = allSlides.length;
 
-        const slidesToClone = window.innerWidth <= 768 ? 1 : 3;
+        const slidesToClone = visibleSlides;
         for (let i = 0; i < slidesToClone; i++) {
             const clone = allSlides[i % slideCount].cloneNode(true);
             clone.dataset.clone = 'true';
@@ -201,14 +204,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function slideTo(index, withTransition = true) {
-            if (slideCount <= 1) return; // ไม่เลื่อนถ้ามี slide เดียว
-            const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
-            if (!withTransition) {
-                bannerContent.style.transition = 'none';
-            } else {
-                // ป้องกัน transition ซ้อน
-                bannerContent.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-            }
+            if (slideCount <= 1) return;
+            const slideWidth = 100 / visibleSlides;
+            bannerContent.style.transition = withTransition ? 'transform 0.5s ease' : 'none';
             bannerContent.style.transform = `translateX(-${index * slideWidth}%)`;
             currentIndex = index;
             updateDots(index % slideCount);
@@ -229,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function prevSlide() {
             if (slideCount <= 1) return;
             if (currentIndex === 0) {
-                const slideWidth = window.innerWidth <= 768 ? 100 : (100 / visibleSlides);
+                const slideWidth = 100 / visibleSlides;
                 bannerContent.style.transition = 'none';
                 bannerContent.style.transform = `translateX(-${slideCount * slideWidth}%)`;
                 setTimeout(() => {
@@ -255,9 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stopAutoSlide();
             clearTimeout(autoSlideTimeout);
             if (slideCount <= 1) return;
-            autoSlideTimeout = setTimeout(() => {
-                startAutoSlide();
-            }, 5000);
+            autoSlideTimeout = setTimeout(startAutoSlide, 5000);
         }
 
         if (!sliderEventBound) {
@@ -288,10 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 resetAutoSlideDelay();
             });
 
-            let resizeTimeout;
             window.addEventListener('resize', () => {
-                if (autoSlideInterval) clearInterval(autoSlideInterval);
-                if (autoSlideTimeout) clearTimeout(autoSlideTimeout);
+                clearInterval(autoSlideInterval);
+                clearTimeout(autoSlideTimeout);
                 currentIndex = 0;
                 let originals = Array.from(bannerContent.querySelectorAll('.banner-image'));
                 originals.filter(slide => slide.dataset.clone === 'true').forEach(clone => bannerContent.removeChild(clone));
@@ -299,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bannerContent.style.transform = 'translateX(0)';
                 setupSlider();
             });
+
             sliderEventBound = true;
         }
 
@@ -314,7 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadBanner();
 
-
     async function loadVisitor() {
         const response = await fetch(API + '/api/visit');
         const data = await response.json();
@@ -324,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadVisitor();
 
-        async function loadCategory() {
+    async function loadCategory() {
         const response = await fetch(API + '/api/categories')
         const data = await response.json()
 
@@ -380,8 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const apis = [
         API + '/api/banners',
-        API +'/api/visit',
-        API +'/api/categories'
+        API + '/api/visit',
+        API + '/api/categories'
     ];
 
     const totalApis = apis.length;

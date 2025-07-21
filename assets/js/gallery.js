@@ -105,125 +105,6 @@ blockService.addEventListener('click', () => {
     window.location = '/service.html'
 })
 
-// function toggleCategories() {
-//   const extra = document.getElementById("extraCategories");
-//   const btn = document.querySelector(".toggle-btn");
-
-//   if (showingCategories) {
-//     extra.classList.remove("show");
-//     btn.textContent = "ดูเพิ่มเติม +";
-//   } else {
-//     extra.classList.add("show");
-//     btn.textContent = "ซ่อน -";
-//   }
-//   showingCategories = !showingCategories;
-// }
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const navLinks = document.querySelectorAll(".nav-menu a");
-//   const items = document.querySelectorAll(".item");
-
-//   navLinks.forEach((link) => {
-//     link.addEventListener("click", function (e) {
-//       e.preventDefault();
-//       const category = this.getAttribute("data-category");
-
-//       navLinks.forEach((l) => l.classList.remove("active"));
-//       this.classList.add("active");
-
-//       items.forEach((item) => {
-//         const itemCategory = item.getAttribute("data-category");
-//         item.style.display =
-//           category === "all" || itemCategory === category ? "block" : "none";
-//       });
-//     });
-//   });
-// });
-
-// Function to load products from database
-// function loadProducts() {
-//   const servicesContainer = document.getElementById('services-container');
-//   servicesContainer.innerHTML = ''; // Clear existing content
-
-//   // Loop through products in database
-//   database.products.forEach(product => {
-//     const item = document.createElement('div');
-//     item.className = 'item';
-//     item.setAttribute('data-category', getCategoryForProduct(product.id));
-
-//     const link = document.createElement('a');
-//     link.href = `/page/product.html?id=${product.id}`;
-
-//     const img = document.createElement('img');
-//     img.src = product.images[0];
-//     img.alt = product.name;
-
-//     const detailDiv = document.createElement('div');
-//     detailDiv.className = 'detail-item';
-
-//     const nameP = document.createElement('p');
-//     nameP.className = 'main-detail-text';
-//     nameP.textContent = product.name;
-
-//     detailDiv.appendChild(nameP);
-//     link.appendChild(img);
-//     link.appendChild(detailDiv);
-//     item.appendChild(link);
-//     servicesContainer.appendChild(item);
-//   });
-// }
-
-// // Helper function to get category for a product
-// function getCategoryForProduct(productId) {
-//   for (const category of database.categories) {
-//     if (category.products.includes(productId)) {
-//       return category.name.toLowerCase();
-//     }
-//   }
-//   return 'other';
-// }
-
-// // Function to filter products by category
-// function filterProducts(category) {
-//   const items = document.querySelectorAll('.item');
-//   items.forEach(item => {
-//     if (category === 'all' || item.getAttribute('data-category') === category) {
-//       item.style.display = 'block';
-//     } else {
-//       item.style.display = 'none';
-//     }
-//   });
-// }
-
-// // Add event listeners for category filtering
-// document.addEventListener('DOMContentLoaded', () => {
-//   loadProducts();
-
-//   // Add click handlers for category links
-//   const categoryLinks = document.querySelectorAll('.nav-menu a');
-//   categoryLinks.forEach(link => {
-//     link.addEventListener('click', (e) => {
-//       e.preventDefault();
-//       const category = link.getAttribute('data-category');
-
-//       // Update active state
-//       categoryLinks.forEach(l => l.classList.remove('active'));
-//       link.classList.add('active');
-
-//       filterProducts(category);
-//     });
-//   });
-// });
-
-// Image Modal Functionality
-let currentImageIndex = 0;
-let images = [];
-let currentZoom = 1;
-let isDragging = false;
-let startX, startY, translateX = 0, translateY = 0;
-let lastTranslateX = 0, lastTranslateY = 0;
-let dragSensitivity = 0.5; // ปรับความเร็วการลาก (0.1 = ช้ามาก, 1.0 = ปกติ)
-
 AOS.init({
     duration: 1000,
     easing: 'ease-in-out',
@@ -233,6 +114,15 @@ AOS.init({
     offset: 100,
     delay: 100,
 });
+
+
+let currentImageIndex = 0;
+let images = [];
+let currentZoom = 1;
+let isDragging = false;
+let startX, startY, translateX = 0, translateY = 0;
+let lastTranslateX = 0, lastTranslateY = 0;
+let dragSensitivity = 0.5;
 
 // Initialize modal functionality
 document.addEventListener('DOMContentLoaded', function () {
@@ -246,31 +136,41 @@ document.addEventListener('DOMContentLoaded', function () {
     const zoomOutBtn = document.getElementById('zoomOutBtn');
     const resetZoomBtn = document.getElementById('resetZoomBtn');
 
-    // Get all images from the gallery
-    images = Array.from(document.querySelectorAll('.row-image img'));
+    const API = 'https://wed-u-design-backend-1.onrender.com'
 
-    // Add click event to all images
-    images.forEach((img, index) => {
-        img.addEventListener('click', function () {
-            openModal(index);
-        });
-    });
+    async function loadGalleryImages() {
+        try {
+            const response = await fetch(API + '/api/galleries')
+            const data = await response.json()
 
-    // Close modal
+            const galleryContainer = document.querySelector('.row-image');
+            images = [];
+
+            data.galleries.forEach((item, index) => {
+                const img = document.createElement('img');
+                img.src = `data:image/jpeg;base64, ${item.image}`;
+                img.alt = item._id;
+                img.dataset.index = index
+                img.addEventListener('click', () => openModal(index))
+                galleryContainer.appendChild(img);
+                images.push(img)
+            })
+        } catch (error) {
+            console.error('Error loading gallery images:', error);
+        }
+    }
+
     closeBtn.addEventListener('click', closeModal);
 
-    // Close modal when clicking outside the image
     modal.addEventListener('click', function (e) {
         if (e.target === modal) {
             closeModal();
         }
     });
 
-    // Navigation buttons
     prevBtn.addEventListener('click', showPrevImage);
     nextBtn.addEventListener('click', showNextImage);
 
-    // Zoom controls
     zoomInBtn.addEventListener('click', zoomIn);
     zoomOutBtn.addEventListener('click', zoomOut);
     resetZoomBtn.addEventListener('click', resetZoom);
@@ -285,17 +185,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Improved mouse drag events
     modalImg.addEventListener('mousedown', startDrag);
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', stopDrag);
 
-    // Touch events for mobile
     modalImg.addEventListener('touchstart', startDragTouch, { passive: false });
     modalImg.addEventListener('touchmove', dragTouch, { passive: false });
     modalImg.addEventListener('touchend', stopDrag);
 
-    // Keyboard navigation
     document.addEventListener('keydown', function (e) {
         if (modal.style.display === 'block') {
             switch (e.key) {
@@ -338,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
         resetZoom();
-        stopDrag(); // Ensure drag state is reset
+        stopDrag();
     }
 
     function showPrevImage() {
@@ -361,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function () {
         imageCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
     }
 
-    // Zoom functions
     function zoomIn() {
         if (currentZoom < 5) {
             currentZoom *= 1.2;
@@ -387,11 +283,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function applyZoom() {
-        // Calculate boundaries based on zoom level
         const maxTranslateX = Math.max(0, (currentZoom - 1) * 100);
         const maxTranslateY = Math.max(0, (currentZoom - 1) * 100);
 
-        // Constrain translation within boundaries
+
         translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, translateX));
         translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, translateY));
 
@@ -410,7 +305,6 @@ document.addEventListener('DOMContentLoaded', function () {
         zoomOutBtn.disabled = currentZoom <= 0.5;
     }
 
-    // Improved drag functions with sensitivity control
     function startDrag(e) {
         if (currentZoom > 1) {
             e.preventDefault();
@@ -460,8 +354,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    const API = 'https://wed-u-design-backend-1.onrender.com'
-
     const progressBar = document.getElementById('progressBar');
 
     const apis = [
@@ -500,23 +392,6 @@ document.addEventListener('DOMContentLoaded', function () {
         );
 
         await Promise.allSettled(promises);
-    }
-
-    async function loadGalleryImages() {
-        try {
-            const response = await fetch(API + '/api/galleries')
-            const data = await response.json()
-
-            const galleryContainer = document.querySelector('.row-image');
-            data.galleries.forEach(item => {
-                const img = document.createElement('img');
-                img.src = `data:image/jpeg;base64, ${item.image}`;
-                img.alt = item._id;
-                galleryContainer.appendChild(img);
-            })
-        } catch (error) {
-            console.error('Error loading gallery images:', error);
-        }
     }
 
     loadAllAPIs().then(() => {

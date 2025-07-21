@@ -123,7 +123,8 @@ header {
     max-width: 25px;
     max-height: 25px;
     position: relative;
-    right: 8%;
+    right: 12%;
+    top: 7px;
     border: none;
     border-radius: 50%;
     cursor: pointer;

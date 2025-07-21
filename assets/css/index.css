@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -397,6 +396,7 @@ header.visible {
     position: relative;
     background: var(--gradient-primary);
     padding: 100px;
+    z-index: -1;
 }
 
 .hero-content {
@@ -800,7 +800,15 @@ footer {
     font-weight: 700;
     color: var(--text-primary);
 }
-
+.particles {
+    position: fixed; /* ให้ลอยอยู่หลังสุด */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* อยู่ข้างหลัง */
+    pointer-events: none; /* ไม่บังปุ่ม คลิกผ่านได้ */
+}
 @media (max-width: 1800px) {
 
     #section-2,
@@ -1085,6 +1093,40 @@ footer {
         width: 320px;
         height: 200px;
         min-width: 100px;
+    }
+}
+
+/* โลโก้ตรงกลาง ดูดีทุกขนาดหน้าจอ */
+.img-logo {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 24px 0;
+    position: relative;
+    z-index: 1500000;
+}
+
+.img-logo img {
+    position: relative;
+    max-width: 440px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 18px;
+    
+}
+
+/* Responsive: โลโก้เล็กลงบนจอเล็ก */
+@media (max-width: 600px) {
+    .img-logo img {
+        max-width: 390px;
+        border-radius: 12px;
+    }
+    .img-logo {
+        margin: 16px 0;
     }
 }
 

@@ -366,8 +366,7 @@ header {
 
 .qr-code {
     width: clamp(200px, 25vw, 300px);
-    height: clamp(200px, 25vw, 300px);
-    background: white;
+    height: clamp(300px, 35vw, 400px);
     border-radius: 12px;
     padding: 10px;
     display: flex;

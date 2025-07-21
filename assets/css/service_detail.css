@@ -565,11 +565,43 @@ footer {
     }
 
     .service-section {
-        padding: 20px;
+        padding: 12px;
+        max-width: 100vw;
+        min-width: unset;
+        box-sizing: border-box;
+        margin: 10px auto 20px auto;
     }
 
     .service-images {
         grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .service-image {
+        height: 180px;
+        max-width: 100vw;
+        border-radius: 8px;
+    }
+
+    .service-image img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
+
+    .service-title {
+        font-size: 1.2em;
+        margin-bottom: 8px;
+        word-break: break-word;
+    }
+
+    .service-description {
+        font-size: 1em;
+        line-height: 1.5;
+        word-break: break-word;
+        text-align: left;
+        margin-bottom: 10px;
     }
 
     .subcategories {

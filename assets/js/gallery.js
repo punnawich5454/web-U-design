@@ -460,11 +460,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    const API = 'https://wed-u-design-backend-1.onrender.com'
+
     const progressBar = document.getElementById('progressBar');
 
     const apis = [
-        'http://127.0.0.1:3000/api/banners',
-        'http://127.0.0.1:3000/api/visit'
+        API + '/api/banners',
     ];
 
     const totalApis = apis.length;
@@ -501,5 +502,26 @@ document.addEventListener('DOMContentLoaded', function () {
         await Promise.allSettled(promises);
     }
 
-    loadAllAPIs();
+    async function loadGalleryImages() {
+        try {
+            const response = await fetch(API + '/api/galleries')
+            const data = await response.json()
+
+            const galleryContainer = document.querySelector('.row-image');
+            data.galleries.forEach(item => {
+                const img = document.createElement('img');
+                img.src = `data:image/jpeg;base64, ${item.image}`;
+                img.alt = item._id;
+                galleryContainer.appendChild(img);
+            })
+        } catch (error) {
+            console.error('Error loading gallery images:', error);
+        }
+    }
+
+    loadAllAPIs().then(() => {
+        loadGalleryImages();
+    }).catch(error => {
+        console.error('Error loading gallery images:', error);
+    })
 });
